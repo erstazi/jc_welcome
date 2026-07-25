@@ -1,0 +1,12 @@
+=== JUST-CRAFT SERVER RULES ===\n\n=== REGLAS DEL SERVIDOR JUST-CRAFT ===\n\n
+You have 120 seconds to accept.\n=Tenés 120 segundos para aceptar.\n
+Closing this window = 2 minute penalty.=Cerrar esta ventana = penalización de 2 minutos.
+I ACCEPT=ACEPTO
+SERVER RULES - MANDATORY=REGLAS DEL SERVIDOR - OBLIGATORIO
+You are temporarily penalized. Wait @1 seconds.=Estás penalizado temporalmente. Esperá @1 segundos.
+You closed the rules window. Penalized 2 minutes.=Cerraste la ventana de reglas. Penalización de 2 minutos.
+You did not accept the rules. Penalized 2 minutes.=No aceptaste las reglas. Penalización de 2 minutos.
+Player not found.=Jugador no encontrado.
+Usage: /rule <player>=Uso: /rule <jugador>
+Rules sent to @1=Reglas enviadas a @1
+@1 accepted the rules.=@1 aceptó las reglas.

@@ -1,0 +1,16 @@
+SERVER RULES - MANDATORY=REGLAS DEL SERVIDOR - OBLIGATORIO
+I ACCEPT=ACEPTO
+Usage: /rule <player>=Uso: /rule <jugador>
+Player not found.=Jugador no encontrado.
+Rules sent to @1=Reglas enviadas a @1
+@1 accepted the rules.=@1 aceptó las reglas.
+You are temporarily penalized. Wait @1 seconds.=Estás penalizado temporalmente. Esperá @1 segundos.
+You closed the rules window. Penalized 2 minutes.=Cerraste la ventana de reglas. Penalización de 2 minutos.
+You did not accept the rules. Penalized 2 minutes.=No aceptaste las reglas. Penalización de 2 minutos.
+
+View panel OR register sanction report=Ver panel o registrar sanción
+Usage: /sanction <player> <reason> <time> <type>=Uso: /sanction <jugador> <razón> <tiempo> <tipo>
+Sanction report registered (no punishment applied).=Reporte registrado (sin castigo aplicado)
+View global sanction history=Ver historial global de sanciones
+No sanction history found.=No hay historial de sanciones
+Global Sanction History:=Historial Global de Sanciones:
