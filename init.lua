@@ -35,8 +35,7 @@ minetest.register_on_joinplayer(function(player)
       local def = ranks.get_def(rank)
       if def and def.prefix then
         local colour = def.colour or "#ffffff"
-        return minetest.colorize(colour,
-          "[" .. def.prefix:upper() .. "]") .. name
+        return minetest.colorize(colour, "[" .. def.prefix:upper() .. "]") .. " " .. name
       end
       return name
     end
