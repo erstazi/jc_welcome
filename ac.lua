@@ -57,7 +57,7 @@ minetest.register_on_joinplayer(function(player)
     if pfile then
       local content = pfile:read("*all")
       pfile:close()
-      local t = content:match( "first_login%s*=%s*(%d+)" )s
+      local t = content:match( "first_login%s*=%s*(%d+)" )
       if t then first = tonumber(t) end
     end
 
