@@ -8,8 +8,8 @@ local player_activity = {}
 --------------------------------------------------------
 -- Session time + activity
 --------------------------------------------------------
-minetest.register_globalstep(function(dtime)
-  for _, player in ipairs(minetest.get_connected_players()) do
+core.register_globalstep(function(dtime)
+  for _, player in ipairs(core.get_connected_players()) do
     local name = player:get_player_name()
 
     if session_times[name] then
@@ -26,13 +26,13 @@ minetest.register_globalstep(function(dtime)
   end
 end)
 
-minetest.register_on_joinplayer(function(player)
+core.register_on_joinplayer(function(player)
   local pname = player:get_player_name()
   session_times[pname] = 0
   player_activity[pname] = 0
 end)
 
-minetest.register_on_leaveplayer(function(player)
+core.register_on_leaveplayer(function(player)
   local pname = player:get_player_name()
   session_times[pname] = nil
   player_activity[pname] = nil
@@ -43,9 +43,9 @@ end)
 --------------------------------------------------------
 local function get_status(name)
   if (player_activity[name] or 0) > 80 then
-    return minetest.colorize("#ff5555","AFK")
+    return core.colorize("#ff5555","AFK")
   else
-    return minetest.colorize("#55ff55","Active")
+    return core.colorize("#55ff55","Active")
   end
 end
 
@@ -62,7 +62,7 @@ local function get_rank_display(name)
 
   if def and def.prefix then
     local colour = def.colour or "#ffffff"
-    return minetest.colorize( colour, "["..def.prefix:upper().."] " ) .. name
+    return core.colorize( colour, "["..def.prefix:upper().."] " ) .. name
   end
 
   return name
@@ -72,7 +72,7 @@ end
 -- Server time
 --------------------------------------------------------
 local function get_server_time()
-  local time = minetest.get_timeofday()*24
+  local time = core.get_timeofday()*24
   local hour = math.floor(time)
   local minute = math.floor((time-hour)*60)
   return string.format("%02d:%02d",hour,minute)
@@ -82,7 +82,7 @@ end
 -- World age
 --------------------------------------------------------
 local function get_world_age()
-  local total = minetest.get_gametime()
+  local total = core.get_gametime()
   local days = math.floor(total/86400)
   local years = math.floor(days/365)
   return days, years
@@ -91,7 +91,7 @@ end
 --------------------------------------------------------
 -- Command /if
 --------------------------------------------------------
-minetest.register_chatcommand("if", {
+core.register_chatcommand("if", {
   func = function(name)
 
     ----------------------------------------------------
@@ -133,7 +133,7 @@ minetest.register_chatcommand("if", {
     local online = {}
 
     for pname,time in pairs(session_times) do
-      if minetest.get_player_by_name(pname) then
+      if core.get_player_by_name(pname) then
         table.insert(online,{ name=pname, time=time })
       end
     end
@@ -150,7 +150,7 @@ minetest.register_chatcommand("if", {
     for _,p in ipairs(online) do
       local minutes = math.floor(p.time/60)
       local seconds = math.floor(p.time%60)
-      local player_obj = minetest.get_player_by_name(p.name)
+      local player_obj = core.get_player_by_name(p.name)
 
       ------------------------------------------------
       -- Skin FIX (no aplastada)
@@ -187,7 +187,7 @@ minetest.register_chatcommand("if", {
         ..string.format(
           "label[1.3,%.2f;%s]",
           y+0.1,
-          minetest.formspec_escape(
+          core.formspec_escape(
             display_name
           )
         )
@@ -214,7 +214,7 @@ minetest.register_chatcommand("if", {
     ----------------------------------------------------
     -- Show
     ----------------------------------------------------
-    minetest.show_formspec(name, "if:panel", formspec )
+    core.show_formspec(name, "if:panel", formspec )
 
     return true
   end

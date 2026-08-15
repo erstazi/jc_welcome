@@ -5,12 +5,54 @@ local frozen_players = {}
 local timeout_seconds = 120
 local penalty_seconds = 120
 
+local rules_text =
+  "=== JUST-CRAFT SERVER RULES ===\n\n" ..
+  "1) Do NOT steal from other players.\n" ..
+  "2) Do NOT place lava or water on other players' areas.\n" ..
+  "3) Do NOT build on someone else's claimed area.\n" ..
+  "4) Do NOT steal protected areas or land.\n" ..
+  "5) Do NOT use modified or hacked clients.\n" ..
+  "6) No insults, swearing, or offensive language.\n" ..
+  "7) Do NOT advertise other servers.\n" ..
+  "8) Respect all players, especially Moderators and Staff.\n" ..
+  "9) Do NOT ask for privileges or ranks (Moderator, Staff, Guardian).\n" ..
+  "10) Moderator and Staff ranks are only given when applications are officially opened.\n" ..
+  "11) Do NOT place lava or water at spawn.\n" ..
+  "12) Dating or looking for relationships inside the server is strictly forbidden.\n" ..
+  "13) Do NOT provoke fights or unnecessary arguments.\n" ..
+  "14) Do NOT harass or annoy other players repeatedly.\n" ..
+  "15) Do NOT spam in chat.\n" ..
+  "16) Do NOT write everything in ALL CAPS.\n" ..
+  "17) Do NOT spread false information to confuse others.\n" ..
+  "18) Do NOT build inappropriate or offensive structures.\n" ..
+  "19) Do NOT destroy abandoned constructions without staff permission.\n" ..
+  "20) Do NOT make traps that harm other players unfairly.\n" ..
+  "21) Do NOT create lag machines or mechanisms that affect server performance.\n" ..
+  "22) Keep spawn and claimed areas tidy and aesthetically organized.\n" ..
+  "23) Do NOT exploit server bugs.\n" ..
+  "24) Do NOT duplicate items under any circumstances.\n" ..
+  "25) Report bugs to Staff instead of exploiting them.\n" ..
+  "26) Do NOT scam other players in trades.\n" ..
+  "27) Owner decisions are final.\n" ..
+  "28) Do NOT publicly argue against punishments in chat.\n" ..
+  "29) Report Staff issues to the Owner.\n" ..
+  "30) Impersonating Staff will result in immediate punishment.\n" ..
+  "31) Do NOT share your account with others.\n" ..
+  "32) Do NOT ask for others' passwords.\n" ..
+  "33) Each player is responsible for their account security.\n" ..
+  "34) Keep a friendly and safe environment for everyone.\n" ..
+  "35) Do NOT post +18 or inappropriate content.\n" ..
+  "36) Romantic or inappropriate roleplay is forbidden."
 
+local mandatory_rules_text =
+  rules_text ..
+  "\n\nYou have 120 seconds to accept.\n" ..
+  "Closing this window = 2 minute penalty."
 ---
 
 -- SISTEMA DE PENALIZACIÓN PERSISTENTE
 
-local penalty_file = minetest.get_worldpath() .. "/rule_penalties.txt"
+local penalty_file = core.get_worldpath() .. "/rule_penalties.txt"
 
 local function load_penalties()
   local t = {}
@@ -41,9 +83,9 @@ local temp_penalties = load_penalties()
 
 -- Freeze system
 
-minetest.register_globalstep(function()
+core.register_globalstep(function()
   for name,_ in pairs(frozen_players) do
-    local player = minetest.get_player_by_name(name)
+    local player = core.get_player_by_name(name)
     if player then
       player:set_physics_override({
         speed = 0,
@@ -56,7 +98,7 @@ end)
 
 
 -- Block chat
-minetest.register_on_chat_message(function(name)
+core.register_on_chat_message(function(name)
   if frozen_players[name] then
     return true
   end
@@ -65,7 +107,7 @@ end)
 
 -- Block login if penalized
 
-minetest.register_on_prejoinplayer(function(name)
+core.register_on_prejoinplayer(function(name)
   local expire = temp_penalties[name]
   if expire then
     if os.time() < expire then
@@ -81,7 +123,7 @@ end)
 
 
 -- Command
-minetest.register_chatcommand("rule", {
+core.register_chatcommand("rule", {
   params = "<player>",
   description = "Force player to accept rules",
   privs = { ban = true },
@@ -91,7 +133,7 @@ minetest.register_chatcommand("rule", {
       return false, "Usage: /rule <player>"
     end
 
-    local target = minetest.get_player_by_name(param)
+    local target = core.get_player_by_name(param)
     if not target then
       return false, "Player not found."
     end
@@ -103,57 +145,16 @@ minetest.register_chatcommand("rule", {
 
     frozen_players[param] = true
 
-    local rules_text =
-      "=== JUST-CRAFT SERVER RULES ===\n\n" ..
-      "1) Do NOT steal from other players.\n" ..
-      "2) Do NOT place lava or water on other players' areas.\n" ..
-      "3) Do NOT build on someone else's claimed area.\n" ..
-      "4) Do NOT steal protected areas or land.\n" ..
-      "5) Do NOT use modified or hacked clients.\n" ..
-      "6) No insults, swearing, or offensive language.\n" ..
-      "7) Do NOT advertise other servers.\n" ..
-      "8) Respect all players, especially Moderators and Staff.\n" ..
-      "9) Do NOT ask for privileges or ranks (Moderator, Staff, Guardian).\n" ..
-      "10) Moderator and Staff ranks are only given when applications are officially opened.\n" ..
-      "11) Do NOT place lava or water at spawn.\n" ..
-      "12) Dating or looking for relationships inside the server is strictly forbidden.\n" ..
-      "13) Do NOT provoke fights or unnecessary arguments.\n" ..
-      "14) Do NOT harass or annoy other players repeatedly.\n" ..
-      "15) Do NOT spam in chat.\n" ..
-      "16) Do NOT write everything in ALL CAPS.\n" ..
-      "17) Do NOT spread false information to confuse others.\n" ..
-      "18) Do NOT build inappropriate or offensive structures.\n" ..
-      "19) Do NOT destroy abandoned constructions without staff permission.\n" ..
-      "20) Do NOT make traps that harm other players unfairly.\n" ..
-      "21) Do NOT create lag machines or mechanisms that affect server performance.\n" ..
-      "22) Keep spawn and claimed areas tidy and aesthetically organized.\n" ..
-      "23) Do NOT exploit server bugs.\n" ..
-      "24) Do NOT duplicate items under any circumstances.\n" ..
-      "25) Report bugs to Staff instead of exploiting them.\n" ..
-      "26) Do NOT scam other players in trades.\n" ..
-      "27) Owner decisions are final.\n" ..
-      "28) Do NOT publicly argue against punishments in chat.\n" ..
-      "29) Report Staff issues to the Owner.\n" ..
-      "30) Impersonating Staff will result in immediate punishment.\n" ..
-      "31) Do NOT share your account with others.\n" ..
-      "32) Do NOT ask for others' passwords.\n" ..
-      "33) Each player is responsible for their account security.\n" ..
-      "34) Keep a friendly and safe environment for everyone.\n" ..
-      "35) Do NOT post +18 or inappropriate content.\n" ..
-      "36) Romantic or inappropriate roleplay is forbidden.\n\n" ..
-      "You have 190 seconds to accept.\n" ..
-      "Closing this window = 2 minute penalty."
-
     local formspec =
       "formspec_version[4]" ..
       "size[10,8]" ..
       "label[0.5,0.3;SERVER RULES - MANDATORY]" ..
       "textarea[0.5,1;9,5.5;rules;;" ..
-      minetest.formspec_escape(rules_text) ..
+      core.formspec_escape(mandatory_rules_text) ..
       "]" ..
       "button[3.5,6.8;3,1;accept;I ACCEPT]"
 
-    minetest.show_formspec(param, "rules:confirm", formspec)
+    core.show_formspec(param, "rules:confirm", formspec)
 
     return true, "Rules sent to " .. param
   end
@@ -162,7 +163,7 @@ minetest.register_chatcommand("rule", {
 
 -- Form handler
 
-minetest.register_on_player_receive_fields(function(player, formname, fields)
+core.register_on_player_receive_fields(function(player, formname, fields)
   if formname ~= "rules:confirm" then return end
 
   local name = player:get_player_name()
@@ -171,7 +172,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
   if fields.quit and pending_rules[name] then
     temp_penalties[name] = os.time() + penalty_seconds
     save_penalties(temp_penalties)
-    minetest.kick_player(name, "You closed the rules window. Penalized 2 minutes.")
+    core.kick_player(name, "You closed the rules window. Penalized 2 minutes.")
     pending_rules[name] = nil
     frozen_players[name] = nil
     return
@@ -182,9 +183,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     local mod_name = pending_rules[name].moderator
     frozen_players[name] = nil
     player:set_physics_override({ speed = 1, jump = 1 })
-    minetest.close_formspec(name, "rules:confirm")
+    core.close_formspec(name, "rules:confirm")
 
-    minetest.chat_send_player(mod_name, name .. " accepted the rules.")
+    core.chat_send_player(mod_name, name .. " accepted the rules.")
     pending_rules[name] = nil
   end
 end)
@@ -194,12 +195,12 @@ end)
 
 -- Timeout auto kick
 
-minetest.register_globalstep(function()
+core.register_globalstep(function()
   for name,data in pairs(pending_rules) do
     if os.time() - data.time > timeout_seconds then
       temp_penalties[name] = os.time() + penalty_seconds
       save_penalties(temp_penalties)
-      minetest.kick_player(name, "You did not accept the rules. Penalized 2 minutes.")
+      core.kick_player(name, "You did not accept the rules. Penalized 2 minutes.")
 
       pending_rules[name] = nil
       frozen_players[name] = nil
@@ -207,13 +208,13 @@ minetest.register_globalstep(function()
   end
 end)
 
-local storage = minetest.get_mod_storage()
+local storage = core.get_mod_storage()
 
 -- =========================
 -- /sanction
 -- =========================
 
-minetest.register_chatcommand("sanction", {
+core.register_chatcommand("sanction", {
   params = "[player reason time type]",
   description = "View panel OR register sanction report",
   privs = {ban = true},
@@ -250,7 +251,7 @@ minetest.register_chatcommand("sanction", {
         "- Exploits / Duplication\n" ..
         "]"
 
-      minetest.show_formspec(name,       "justcraft:sanction_panel", formspec)
+      core.show_formspec(name,       "justcraft:sanction_panel", formspec)
       return true
     end
 
@@ -280,12 +281,12 @@ minetest.register_chatcommand("sanction", {
     local history = {}
 
     if data ~= "" then
-      history = minetest.deserialize(data) or {}
+      history = core.deserialize(data) or {}
     end
 
     table.insert(history, entry)
 
-    storage:set_string("history_global", minetest.serialize(history))
+    storage:set_string("history_global", core.serialize(history))
 
     return true, "Sanction report registered (no punishment applied)."
   end,
@@ -295,7 +296,7 @@ minetest.register_chatcommand("sanction", {
 -- /h (historial)
 -- =========================
 
-minetest.register_chatcommand("h", {
+core.register_chatcommand("h", {
   description = "View global sanction history",
   privs = {ban = true},
   func = function(name)
@@ -305,15 +306,15 @@ minetest.register_chatcommand("h", {
       return false, "No sanction history found."
     end
 
-    local history = minetest.deserialize(data) or {}
+    local history = core.deserialize(data) or {}
 
     local text = table.concat(history, "\n")
 
-    minetest.show_formspec(name, "justcraft:history",
+    core.show_formspec(name, "justcraft:history",
       "formspec_version[4]" ..
       "size[12,9]" ..
       "textarea[0.5,0.5;11,8;;Global Sanction History:;" ..
-      minetest.formspec_escape(text) .. "]"
+      core.formspec_escape(text) .. "]"
     )
 
     return true
@@ -321,47 +322,9 @@ minetest.register_chatcommand("h", {
 })
 
 -----Rules
-minetest.register_chatcommand("rules", {
+core.register_chatcommand("rules", {
   description = "Show rules",
   func = function(name)
-    local rules_text =
-      "1) Do NOT steal from other players.\n" ..
-      "2) Do NOT place lava or water on other players' areas.\n" ..
-      "3) Do NOT build on someone else's claimed area.\n" ..
-      "4) Do NOT steal protected areas or land.\n" ..
-      "5) Do NOT use modified or hacked clients.\n" ..
-      "6) No insults, swearing, or offensive language.\n" ..
-      "7) Do NOT advertise other servers.\n" ..
-      "8) Respect all players, especially Moderators and Staff.\n" ..
-      "9) Do NOT ask for privileges or ranks (Moderator, Staff, Guardian).\n" ..
-      "10) Moderator and Staff ranks are only given when applications are officially opened.\n" ..
-      "11) Do NOT place lava or water at spawn.\n" ..
-      "12) Dating or looking for relationships inside the server is strictly forbidden.\n\n" ..
-      "13) Do NOT provoke fights or unnecessary arguments.\n" ..
-      "14) Do NOT harass or annoy other players repeatedly.\n" ..
-      "15) Do NOT spam in chat.\n" ..
-      "16) Do NOT write everything in ALL CAPS.\n" ..
-      "17) Do NOT spread false information to confuse others.\n" ..
-      "18) Do NOT build inappropriate or offensive structures.\n" ..
-      "19) Do NOT destroy abandoned constructions without staff permission.\n" ..
-      "20) Do NOT make traps that harm other players unfairly.\n" ..
-      "21) Do NOT create lag machines or mechanisms that affect server performance.\n" ..
-      "22) Keep spawn and claimed areas tidy and aesthetically organized.\n" ..
-      "23) Do NOT exploit server bugs.\n" ..
-      "24) Do NOT duplicate items under any circumstances.\n" ..
-      "25) Report bugs to Staff instead of exploiting them.\n" ..
-      "26) Do NOT scam other players in trades.\n" ..
-      "27) Owner decisions are final.\n" ..
-      "28) Do NOT publicly argue against punishments in chat.\n" ..
-      "29) Report Staff issues to the Owner.\n" ..
-      "30) Impersonating Staff will result in immediate punishment.\n" ..
-      "31) Do NOT share your account with others.\n" ..
-      "32) Do NOT ask for others' passwords.\n" ..
-      "33) Each player is responsible for their account security.\n" ..
-      "34) Keep a friendly and safe environment for everyone.\n" ..
-      "35) Do NOT post +18 or inappropriate content.\n" ..
-      "36) Romantic or inappropriate roleplay is forbidden.\n"
-
     local formspec =
       "formspec_version[4]" ..
       "size[10,8]" ..
@@ -369,20 +332,20 @@ minetest.register_chatcommand("rules", {
 
       -- TEXTAREA CORREGIDO
       "textarea[0.5,0.5;9,6;rules;;" ..
-      minetest.formspec_escape(rules_text) ..
+      core.formspec_escape(rules_text) ..
       "]" ..
 
-      "button_exit[3.5,7;3,1;exit;Cerrar]"
+      "button_exit[3.5,7;3,1;exit;Close/Cerrar]"
 
-    minetest.show_formspec(name, "rules:show", formspec)
+    core.show_formspec(name, "rules:show", formspec)
   end
 })
 
 
-minetest.register_on_joinplayer(function(player)
+core.register_on_joinplayer(function(player)
   local name = player:get_player_name()
   local message = "Use /rules to view the server rules"
   -- lo manda 1 vez
-  minetest.chat_send_player(name, message)
+  core.chat_send_player(name, message)
   -- lo vuelve a mandar cada 20s (3 veces total = 1 minuto aprox)
 end)

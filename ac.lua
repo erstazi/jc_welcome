@@ -3,13 +3,13 @@
 -- Persistencia + Estadísticas + Historial + Rank Tops
 
 local active_players = {}
-local storage_file = minetest.get_worldpath() .. "/ac_data.mt"
+local storage_file = core.get_worldpath() .. "/ac_data.mt"
 
 -- Cargar datos guardados
 local function load_data()
   local file = io.open(storage_file, "r")
   if not file then return {} end
-  local data = minetest.deserialize(file:read("*all"))
+  local data = core.deserialize(file:read("*all"))
   file:close()
   return data or {}
 end
@@ -19,7 +19,7 @@ end
 local function save_data(data)
   local file = io.open(storage_file, "w")
   if file then
-    file:write(minetest.serialize(data))
+    file:write(core.serialize(data))
     file:close()
   end
 end
@@ -28,7 +28,7 @@ local persistent = load_data()
 
 -- Edad real server
 local function get_server_age_days()
-  local meta = io.open(minetest.get_worldpath() .. "/map_meta.txt", "r")
+  local meta = io.open(core.get_worldpath() .. "/map_meta.txt", "r")
 
   if not meta then
     return 0
@@ -46,11 +46,11 @@ end
 
 
 -- Join
-minetest.register_on_joinplayer(function(player)
+core.register_on_joinplayer(function(player)
   local name = player:get_player_name()
 
   if not persistent[name] then
-    local pfile = io.open(minetest.get_worldpath() .. "/players/" .. name, "r")
+    local pfile = io.open(core.get_worldpath() .. "/players/" .. name, "r")
 
     local first = os.time()
 
@@ -81,7 +81,7 @@ end)
 
 -- Leave
 
-minetest.register_on_leaveplayer(function(player)
+core.register_on_leaveplayer(function(player)
   local name = player:get_player_name()
 
   if active_players[name] then
@@ -96,10 +96,10 @@ end)
 
 -- Globalstep
 
-minetest.register_globalstep(function(dtime)
+core.register_globalstep(function(dtime)
   for name, data in pairs(active_players) do
     data.session_time = data.session_time + dtime
-    local player = minetest.get_player_by_name(name)
+    local player = core.get_player_by_name(name)
     if player then
       local pos = player:get_pos()
       if vector.distance(pos, data.last_pos) < 0.1 then
@@ -123,7 +123,7 @@ local function get_rank_display(name)
   local def = ranks.get_def(rank)
 
   if def and def.prefix then
-    return minetest.colorize(def.colour or "#fff", "[" .. def.prefix:upper() .. "] ") .. name
+    return core.colorize(def.colour or "#fff", "[" .. def.prefix:upper() .. "] ") .. name
   end
 
   return name
@@ -204,10 +204,10 @@ end
 
 -- COMANDO /ac
 
-minetest.register_chatcommand("ac", {
+core.register_chatcommand("ac", {
   description = "Active Players Panel v3",
   func = function(name)
-    if not minetest.check_player_privs(name, {server=true}) then
+    if not core.check_player_privs(name, {server=true}) then
       return false, "No permission."
     end
 
@@ -265,7 +265,7 @@ minetest.register_chatcommand("ac", {
       ------------------------------------------------
       local skin = "character.png"
 
-      local player_obj = minetest.get_player_by_name(pname)
+      local player_obj = core.get_player_by_name(pname)
       if player_obj and skins and skins.get_player_skin then
         local s = skins.get_player_skin(player_obj)
         if s then
@@ -283,7 +283,7 @@ minetest.register_chatcommand("ac", {
           .. skin .. "]"
 
           .. "label[1.1,"..y..";"
-          .. minetest.formspec_escape(
+          .. core.formspec_escape(
               get_rank_display(pname)
           ) .. "]"
 
@@ -305,7 +305,7 @@ minetest.register_chatcommand("ac", {
 
     formspec = formspec .. "scroll_container_end[]"
 
-    minetest.show_formspec( name, "ac:panel", formspec )
+    core.show_formspec( name, "ac:panel", formspec )
 
     return true
   end
@@ -316,7 +316,7 @@ minetest.register_chatcommand("ac", {
 --------------------------------------------------------
 -- EVENTOS BOTONES PANEL AC (UNIFICADO)
 --------------------------------------------------------
-minetest.register_on_player_receive_fields(function(player, formname, fields)
+core.register_on_player_receive_fields(function(player, formname, fields)
   if formname ~= "ac:panel" then return end
 
     ----------------------------------------------------
@@ -372,7 +372,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
         "scrollbar[13.2,0.8;0.5,8.8;vertical;scroll;"
         .. content_height .. "]"
 
-      minetest.show_formspec(player:get_player_name(), "ac:ranktops", fs)
+      core.show_formspec(player:get_player_name(), "ac:ranktops", fs)
     end
 
     ----------------------------------------------------
@@ -425,8 +425,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
           -- AUTO ASCENSO
           ------------------------------------------------
           if hours_ok and activity_ok and join_ok and age_ok and days_played >= 60 and rank ~= "guardian" then
-            minetest.chat_send_all("💚 " .. name .. " promoted to Guardian!")
-            minetest.run_server_chatcommand("rank", name .. " guardian")
+            core.chat_send_all("💚 " .. name .. " promoted to Guardian!")
+            core.run_server_chatcommand("rank", name .. " guardian")
           end
 
           table.insert(list, {name = name, hours = total_hours, h = hours_prog, a = activity_prog, j = join_prog, ok =hours_ok and activity_ok and join_ok, days = days_played })
@@ -500,6 +500,6 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
     fs = fs .. "scroll_container_end[]"
 
-    minetest.show_formspec(player:get_player_name(), "ac:guardian", fs)
+    core.show_formspec(player:get_player_name(), "ac:guardian", fs)
   end
 end)

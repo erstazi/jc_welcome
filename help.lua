@@ -1,4 +1,4 @@
-minetest.register_chatcommand("welcome", {
+core.register_chatcommand("guardian", {
   description = "Shows Guardian rank requirements",
   func = function(name)
     local text =
@@ -29,11 +29,11 @@ minetest.register_chatcommand("welcome", {
       "formspec_version[4]" ..
       "size[10,8]" ..
       "textarea[0.5,0.5;9,6.5;info;;" ..
-      minetest.formspec_escape(text) ..
+      core.formspec_escape(text) ..
       "]" ..
       "button_exit[3.5,7.2;3,0.8;exit;Close]"
 
-    minetest.show_formspec(name, "welcome:help", formspec)
+    core.show_formspec(name, "welcome:help", formspec)
 
     return true
   end
