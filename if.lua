@@ -49,6 +49,10 @@ core.register_globalstep(function(dtime)
   end
 end)
 
+core.register_on_chat_message(function(name, message)
+  player_activity[name] = 0
+end)
+
 core.register_on_joinplayer(function(player)
   local pname = player:get_player_name()
   session_times[pname] = 0
@@ -112,133 +116,158 @@ local function get_world_age()
 end
 
 --------------------------------------------------------
--- Command /if
+-- Function for /if panel
+--------------------------------------------------------
+local function show_if_panel(name)
+  ----------------------------------------------------
+  -- Global time
+  ----------------------------------------------------
+  local server_time = get_server_time()
+  local days, years = get_world_age()
+
+  ----------------------------------------------------
+  -- Base formspec
+  ----------------------------------------------------
+  local formspec =
+    "formspec_version[4]"
+    .."size[13,9]"
+    ..default.gui_bg
+    ..default.gui_bg_img
+
+    ------------------------------------------------
+    -- Header
+    ------------------------------------------------
+    .."label[0.4,0.3;IF - Players Online]"
+    .."label[9.5,0.3;Time: "..server_time.."]"
+    .."label[9.5,0.8;Day: "..days.."]"
+    .."label[9.5,1.3;Year: "..years.."]"
+
+    ------------------------------------------------
+    -- Refresh button
+    ------------------------------------------------
+    .."button[5.2,0.25;2.5,0.8;refresh;Refresh]"
+
+    ------------------------------------------------
+    -- Fondo lista
+    ------------------------------------------------
+    .."box[0.3,2.0;12.4,6.7;#00000066]"
+
+    ------------------------------------------------
+    -- Scroll container
+    ------------------------------------------------
+    .."scroll_container[0.4,2.2;12.2,6.3;scroll;vertical]"
+
+  ----------------------------------------------------
+  -- Player list
+  ----------------------------------------------------
+  local online = {}
+
+  for pname,time in pairs(session_times) do
+    if core.get_player_by_name(pname) then
+      table.insert(online,{ name=pname, time=time })
+    end
+  end
+
+  table.sort(online,function(a,b)
+    return a.time > b.time
+  end)
+
+  ----------------------------------------------------
+  -- Draw list
+  ----------------------------------------------------
+  local y = 0.2
+
+  for _,p in ipairs(online) do
+    local minutes = math.floor(p.time/60)
+    local seconds = math.floor(p.time%60)
+    local player_obj = core.get_player_by_name(p.name)
+
+    ------------------------------------------------
+    -- Skin FIX
+    ------------------------------------------------
+    local head_texture = "character.png"
+
+    if player_obj and skins and skins.get_player_skin then
+      local skin_obj = skins.get_player_skin(player_obj)
+
+      if skin_obj then
+        head_texture = (skin_obj:get_preview() or head_texture) .. "^[resize:32x32"
+      end
+    end
+
+    ------------------------------------------------
+    -- Name + rank
+    ------------------------------------------------
+    local display_name = get_rank_display(p.name)
+
+    ------------------------------------------------
+    -- Status
+    ------------------------------------------------
+    local status = get_status(p.name)
+
+    ------------------------------------------------
+    -- Row draw
+    ------------------------------------------------
+    formspec = formspec
+      ..string.format(
+        "image[0.3,%.2f;0.8,0.8;%s]",
+        y,
+        head_texture
+      )
+      ..string.format(
+        "label[1.3,%.2f;%s]",
+        y+0.1,
+        core.formspec_escape(display_name)
+      )
+      ..string.format(
+        "label[7.0,%.2f;%dm %ds]",
+        y+0.1,
+        minutes,
+        seconds
+      )
+      ..string.format(
+        "label[9.5,%.2f;%s]",
+        y+0.1,
+        status
+      )
+
+    y = y + 0.9
+  end
+
+  ----------------------------------------------------
+  -- Close scroll
+  ----------------------------------------------------
+  formspec = formspec .. "scroll_container_end[]"
+
+  ----------------------------------------------------
+  -- Show
+  ----------------------------------------------------
+  core.show_formspec(name, "if:panel", formspec)
+end
+
+
+--------------------------------------------------------
+-- /if
 --------------------------------------------------------
 core.register_chatcommand("if", {
   func = function(name)
-
-    ----------------------------------------------------
-    -- Global time
-    ----------------------------------------------------
-    local server_time = get_server_time()
-    local days, years = get_world_age()
-
-    ----------------------------------------------------
-    -- Base formspec
-    ----------------------------------------------------
-    local formspec =
-      "formspec_version[4]"
-      .."size[13,9]"
-      ..default.gui_bg
-      ..default.gui_bg_img
-
-      ------------------------------------------------
-      -- Header
-      ------------------------------------------------
-      .."label[0.4,0.3;IF - Players Online]"
-      .."label[9.5,0.3;Time: "..server_time.."]"
-      .."label[9.5,0.8;Day: "..days.."]"
-      .."label[9.5,1.3;Year: "..years.."]"
-
-      ------------------------------------------------
-      -- Fondo lista
-      ------------------------------------------------
-      .."box[0.3,2.0;12.4,6.7;#00000066]"
-
-      ------------------------------------------------
-      -- Scroll container
-      ------------------------------------------------
-      .."scroll_container[0.4,2.2;12.2,6.3;scroll;vertical]"
-
-    ----------------------------------------------------
-    -- Player list
-    ----------------------------------------------------
-    local online = {}
-
-    for pname,time in pairs(session_times) do
-      if core.get_player_by_name(pname) then
-        table.insert(online,{ name=pname, time=time })
-      end
-    end
-
-    table.sort(online,function(a,b)
-      return a.time > b.time
-    end)
-
-    ----------------------------------------------------
-    -- Draw list
-    ----------------------------------------------------
-    local y = 0.2
-
-    for _,p in ipairs(online) do
-      local minutes = math.floor(p.time/60)
-      local seconds = math.floor(p.time%60)
-      local player_obj = core.get_player_by_name(p.name)
-
-      ------------------------------------------------
-      -- Skin FIX (no aplastada)
-      ------------------------------------------------
-      local head_texture = "character.png"
-
-      if player_obj and skins and skins.get_player_skin then
-        local skin_obj = skins.get_player_skin(player_obj)
-
-        if skin_obj then
-          head_texture = (skin_obj:get_preview() or head_texture) .. "^[resize:32x32"
-        end
-      end
-
-      ------------------------------------------------
-      -- Name + rank
-      ------------------------------------------------
-      local display_name = get_rank_display(p.name)
-
-      ------------------------------------------------
-      -- Status
-      ------------------------------------------------
-      local status = get_status(p.name)
-
-      ------------------------------------------------
-      -- Row draw
-      ------------------------------------------------
-      formspec = formspec
-        ..string.format(
-          "image[0.3,%.2f;0.8,0.8;%s]",
-          y,
-          head_texture
-        )
-        ..string.format(
-          "label[1.3,%.2f;%s]",
-          y+0.1,
-          core.formspec_escape(
-            display_name
-          )
-        )
-        ..string.format(
-          "label[7.0,%.2f;%dm %ds]",
-          y+0.1,
-          minutes,
-          seconds
-        )
-        ..string.format(
-          "label[9.5,%.2f;%s]",
-          y+0.1,
-          status
-        )
-
-      y = y + 0.9
-    end
-
-    ----------------------------------------------------
-    -- Close scroll
-    ----------------------------------------------------
-    formspec = formspec .. "scroll_container_end[]"
-
-    ----------------------------------------------------
-    -- Show
-    ----------------------------------------------------
-    core.show_formspec(name, "if:panel", formspec )
-
+    show_if_panel(name)
     return true
   end
 })
+
+
+--------------------------------------------------------
+-- Formspec buttons
+--------------------------------------------------------
+core.register_on_player_receive_fields(function(player, formname, fields)
+  if formname ~= "if:panel" then
+    return
+  end
+
+  local name = player:get_player_name()
+
+  if fields.refresh then
+    show_if_panel(name)
+  end
+end)
