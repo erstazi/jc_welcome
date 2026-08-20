@@ -25,7 +25,7 @@ msgid "Before starting, please read the rules with the /rules command."
 msgstr "Antes de empezar, lee las reglas con el comando /rules."
 
 msgid "Welcome back, @1!"
-msgstr "¡Bienvenido de nuevo, @1!"
+msgstr "¡Bienvenido/a de nuevo, @1!"
 
 msgid "You first joined on @1"
 msgstr "Te uniste por primera vez el @1"
@@ -178,7 +178,7 @@ msgid "Keep spawn and claimed areas tidy and aesthetically organized."
 msgstr "Mantén el spawn y las zonas reclamadas limpios y organizados estéticamente."
 
 msgid "Do NOT exploit server bugs."
-msgstr "No aproveches los errores del servidor."
+msgstr "No aproveches los errores (bugs) del servidor."
 
 msgid "Do NOT duplicate items under any circumstances."
 msgstr "No dupliques objetos bajo ninguna circunstancia."
@@ -217,4 +217,4 @@ msgid "Do NOT post +18 or inappropriate content."
 msgstr "No publiques contenido +18 o inapropiado."
 
 msgid "Romantic or inappropriate roleplay is forbidden."
-msgstr "Está prohibido el roleplay romántico o inapropiado."
+msgstr "El juego de rol romántico o inapropiado está prohibido."
