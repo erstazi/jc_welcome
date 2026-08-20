@@ -1,3 +1,6 @@
+local S = core.get_translator(core.get_current_modname())
+local modpath = core.get_modpath(core.get_current_modname())
+
 --------------------------------------------------------
 -- IF Active Players Panel v1.6 (Scroll + UI + Skins Fix)
 --------------------------------------------------------
@@ -18,7 +21,27 @@ core.register_globalstep(function(dtime)
 
     local ctrl = player:get_player_control()
 
+    --[[
+    get_player_control(): returns table with player input
+
+    - The table contains the following boolean fields representing the pressed keys: up, down, left, right, jump, aux1, sneak, dig, place, LMB, RMB and zoom.
+    - The fields LMB and RMB are equal to dig and place respectively, and exist only to preserve backwards compatibility.
+    - The table also contains the fields movement_x and movement_y.
+      - They represent the movement of the player. Values are numbers in the range [-1.0, +1.0].
+      - They take both keyboard and joystick input into account.
+      - You should prefer them over up, down, left and right to support different input methods correctly.
+    - Returns an empty table {} if the object is not a player.
+    OLD:
     if ctrl.up or ctrl.down or ctrl.left or ctrl.right or ctrl.jump or ctrl.LMB or ctrl.RMB then
+    ]]
+    if ctrl.movement_x ~= 0
+        or ctrl.movement_y ~= 0
+        or ctrl.jump
+        or ctrl.aux1
+        or ctrl.sneak
+        or ctrl.dig
+        or ctrl.place
+        or ctrl.zoom then
       player_activity[name] = 0
     else
       player_activity[name] = (player_activity[name] or 0) + dtime

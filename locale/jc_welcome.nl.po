@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jc_welcome\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Join Discord"
+msgstr "Deelnemen aan Discord"
+
+msgid "Visit Website"
+msgstr "Website bezoeken"
+
+msgid "Visit Forum"
+msgstr "Forum bezoeken"
+
+msgid "Let's Play!"
+msgstr "Laten we spelen!"
+
+msgid "Greetings, @1!"
+msgstr "Hallo, @1!"
+
+msgid "Before starting, please read the rules with the /rules command."
+msgstr "Lees voordat je begint de regels met het commando /rules."
+
+msgid "Welcome back, @1!"
+msgstr "Welkom terug, @1!"
+
+msgid "You first joined on @1"
+msgstr "Je bent voor het eerst toegetreden op @1"
+
+msgid "Local Time: @1"
+msgstr "Lokale tijd: @1"
+
+msgid "@1 Players Online"
+msgstr "@1 spelers online"
+
+msgid "Owner Section: Here you can monitor server activity"
+msgstr "Eigenaarsectie: hier kun je de serveractiviteit controleren"
+
+msgid "General Section: Enjoy the server!"
+msgstr "Algemene sectie: veel plezier op de server!"
+
+msgid "For a complete list of available commands, type /help into chat."
+msgstr "Typ /help in de chat voor een volledige lijst met beschikbare commando's."
+
+msgid "Show the welcome screen again"
+msgstr "Welkomstscherm opnieuw tonen"
+
+msgid "Player not found."
+msgstr "Speler niet gevonden."
+
+msgid "SERVER RULES"
+msgstr "SERVERREGELS"
+
+msgid "You have @1 seconds to accept."
+msgstr "Je hebt @1 seconden om te accepteren."
+
+msgid "If you close this window without accepting, then you will have a @1 minute penalty."
+msgstr "Als je dit venster sluit zonder te accepteren, krijg je een straf van @1 minuut."
+
+msgid "You are temporarily penalized. Wait @1 seconds."
+msgstr "Je bent tijdelijk gestraft. Wacht @1 seconden."
+
+msgid "Force player to accept rules"
+msgstr "Speler dwingen de regels te accepteren"
+
+msgid "Usage: /rule <player>"
+msgstr "Gebruik: /rule <player>"
+
+msgid "I Accept"
+msgstr "Ik accepteer"
+
+msgid "Rules sent to @1"
+msgstr "Regels verzonden naar @1"
+
+msgid "You closed the rules window. You are penalized for @1 minutes."
+msgstr "Je hebt het regelvenster gesloten. Je krijgt een straf van @1 minuten."
+
+msgid "@1 accepted the rules."
+msgstr "@1 heeft de regels geaccepteerd."
+
+msgid "You did not accept the rules. You are penalized for @1 minutes."
+msgstr "Je hebt de regels niet geaccepteerd. Je krijgt een straf van @1 minuten."
+
+msgid "View panel or register sanction report"
+msgstr "Paneel bekijken of sanctierapport registreren"
+
+msgid "Usage: /sanction <player> <reason> <time> <type>"
+msgstr "Gebruik: /sanction <player> <reason> <time> <type>"
+
+msgid "Sanction report registered (no punishment applied)."
+msgstr "Sanctierapport geregistreerd (geen straf toegepast)."
+
+msgid "View global sanction history"
+msgstr "Globale sanctiegeschiedenis bekijken"
+
+msgid "No sanction history found."
+msgstr "Geen sanctiegeschiedenis gevonden."
+
+msgid "Global Sanction History"
+msgstr "Globale sanctiegeschiedenis"
+
+msgid "Show rules"
+msgstr "Regels tonen"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "Use /rules to view the server rules"
+msgstr "Gebruik /rules om de serverregels te bekijken"
+
+msgid "Do NOT steal from other players."
+msgstr "STEEL NIET van andere spelers."
+
+msgid "Do NOT place lava or water on other players' areas."
+msgstr "Plaats GEEN lava of water in gebieden van andere spelers."
+
+msgid "Do NOT build on someone else's claimed area."
+msgstr "Bouw NIET op het geclaimde gebied van iemand anders."
+
+msgid "Do NOT steal protected areas or land."
+msgstr "Steel GEEN beschermde gebieden of land."
+
+msgid "Do NOT use modified or hacked clients."
+msgstr "Gebruik GEEN aangepaste of gehackte clients."
+
+msgid "No insults, swearing, or offensive language."
+msgstr "Geen beledigingen, scheldwoorden of aanstootgevende taal."
+
+msgid "Do NOT advertise other servers."
+msgstr "Maak GEEN reclame voor andere servers."
+
+msgid "Respect all players, especially Moderators and Staff."
+msgstr "Respecteer alle spelers, vooral Moderators en Staff."
+
+msgid "Do NOT ask for privileges or ranks (Moderator, Staff, Guardian)."
+msgstr "Vraag NIET om privileges of rangen (Moderator, Staff, Guardian)."
+
+msgid "Moderator and Staff ranks are only given when applications are officially opened."
+msgstr "Moderator- en Staff-rangen worden alleen gegeven wanneer sollicitaties officieel geopend zijn."
+
+msgid "Do NOT place lava or water at spawn."
+msgstr "Plaats GEEN lava of water bij de spawn."
+
+msgid "Dating or looking for relationships inside the server is strictly forbidden."
+msgstr "Daten of het zoeken naar relaties binnen de server is strikt verboden."
+
+msgid "Do NOT provoke fights or unnecessary arguments."
+msgstr "Lok GEEN gevechten of onnodige ruzies uit."
+
+msgid "Do NOT harass or annoy other players repeatedly."
+msgstr "Val andere spelers NIET herhaaldelijk lastig en erger hen niet."
+
+msgid "Do NOT spam in chat."
+msgstr "Spam NIET in de chat."
+
+msgid "Do NOT write everything in ALL CAPS."
+msgstr "Schrijf NIET alles in HOOFDLETTERS."
+
+msgid "Do NOT spread false information to confuse others."
+msgstr "Verspreid GEEN valse informatie om anderen in verwarring te brengen."
+
+msgid "Do NOT build inappropriate or offensive structures."
+msgstr "Bouw GEEN ongepaste of aanstootgevende bouwwerken."
+
+msgid "Do NOT destroy abandoned constructions without staff permission."
+msgstr "Vernietig GEEN verlaten bouwwerken zonder toestemming van Staff."
+
+msgid "Do NOT make traps that harm other players unfairly."
+msgstr "Maak GEEN vallen die andere spelers op oneerlijke wijze schaden."
+
+msgid "Do NOT create lag machines or mechanisms that affect server performance."
+msgstr "Maak GEEN lagmachines of mechanismen die de serverprestaties beïnvloeden."
+
+msgid "Keep spawn and claimed areas tidy and aesthetically organized."
+msgstr "Houd de spawn en geclaimde gebieden netjes en esthetisch georganiseerd."
+
+msgid "Do NOT exploit server bugs."
+msgstr "Maak GEEN misbruik van serverbugs."
+
+msgid "Do NOT duplicate items under any circumstances."
+msgstr "Dupliceer GEEN voorwerpen, onder welke omstandigheden dan ook."
+
+msgid "Report bugs to Staff instead of exploiting them."
+msgstr "Meld bugs aan Staff in plaats van ze te misbruiken."
+
+msgid "Do NOT scam other players in trades."
+msgstr "Bedrieg GEEN andere spelers bij het ruilen."
+
+msgid "Owner decisions are final."
+msgstr "Beslissingen van de eigenaar zijn definitief."
+
+msgid "Do NOT publicly argue against punishments in chat."
+msgstr "Discussieer NIET openbaar in de chat over straffen."
+
+msgid "Report Staff issues to the Owner."
+msgstr "Meld problemen met Staff aan de eigenaar."
+
+msgid "Impersonating Staff will result in immediate punishment."
+msgstr "Je voordoen als Staff leidt tot een onmiddellijke straf."
+
+msgid "Do NOT share your account with others."
+msgstr "Deel je account NIET met anderen."
+
+msgid "Do NOT ask for others' passwords."
+msgstr "Vraag NIET naar de wachtwoorden van anderen."
+
+msgid "Each player is responsible for their account security."
+msgstr "Iedere speler is verantwoordelijk voor de beveiliging van zijn of haar account."
+
+msgid "Keep a friendly and safe environment for everyone."
+msgstr "Houd de omgeving vriendelijk en veilig voor iedereen."
+
+msgid "Do NOT post +18 or inappropriate content."
+msgstr "Plaats GEEN +18- of ongepaste inhoud."
+
+msgid "Romantic or inappropriate roleplay is forbidden."
+msgstr "Romantische of ongepaste roleplay is verboden."

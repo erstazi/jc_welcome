@@ -1,3 +1,5 @@
+local S = core.get_translator(core.get_current_modname())
+local modpath = core.get_modpath(core.get_current_modname())
 --------------------------------------------------------
 -- Luanti :: Welcome Splash Screen Mod v2.1
 --------------------------------------------------------
@@ -132,13 +134,13 @@ local function show_welcome(player)
 
     .. "image[11.9,0.2;0.9,0.9;discord_logo.png]"
 
-    .. "button_url[12.6,0.2;3.8,0.9;discord_link;Join Discord;https://discord.gg/C8Ev9td5k]"
+    .. "button_url[12.6,0.2;3.8,0.9;discord_link;" .. core.formspec_escape(S("Join Discord")) .. ";https://discord.gg/C8Ev9td5k]"
 
-    .. "button_url[12.6,1.2;3.8,0.9;web_link;Visit Website;https://just-craft.servegame.com/]"
+    .. "button_url[12.6,1.2;3.8,0.9;web_link;" .. core.formspec_escape(S("Visit Website")) .. ";https://just-craft.servegame.com/]"
 
-    .. "button_url[12.6,2.2;3.8,0.9;forum_link;Visit Forum;https://forum.luanti.org/viewtopic.php?t=32339]"
+    .. "button_url[12.6,2.2;3.8,0.9;forum_link;" .. core.formspec_escape(S("Visit Forum")) .. ";https://forum.luanti.org/viewtopic.php?t=32339]"
 
-    .. "button_exit[0.5,8.5;3,1;close;Let's Play!]"
+    .. "button_exit[0.5,8.5;3,1;close;" .. core.formspec_escape(S("Let's Play!")) .. "]"
 
   --------------------------------------------------
   -- TEXTS AND AVATAR
@@ -163,16 +165,17 @@ local function show_welcome(player)
 
     formspec = formspec
       .. string.format(
-        "label[%f,%f;Greetings, %s!]",
+        "label[%f,%f;%s]",
         text_x,
         text_y_start,
-        core.formspec_escape(pname)
+        core.formspec_escape(S("Greetings, @1!", pname))
       )
 
       .. string.format(
-        "label[%f,%f;Before starting, please read the rules with the /rules command.]",
+        "label[%f,%f;%s",
         text_x,
-        text_y_start + line_spacing
+        text_y_start + line_spacing,
+        core.formspec_escape(S("Before starting, please read the rules with the /rules command."))
       )
 
       .. string.format(
@@ -188,24 +191,24 @@ local function show_welcome(player)
 
     formspec = formspec
       .. string.format(
-        "label[%f,%f;Welcome back, %s!]",
+        "label[%f,%f;%s]",
         text_x,
         text_y_start,
-        core.formspec_escape(pname)
+        core.formspec_escape(S("Welcome back, @1!", pname))
       )
 
       .. string.format(
-        "label[%f,%f;You first joined on %s]",
+        "label[%f,%f;%s]",
         text_x,
         text_y_start + line_spacing,
-        os.date("%A, %B %d, %Y", ptime)
+        core.formspec_escape( S("You first joined on @1", os.date("%A, %B %d, %Y", ptime) ) )
       )
 
       .. string.format(
-        "label[%f,%f;Local Time: %s]",
+        "label[%f,%f;%s]",
         text_x,
         text_y_start + 2 * line_spacing,
-        local_time
+        core.formspec_escape(S("Local Time: @1", local_time))
       )
 
       .. string.format(
@@ -238,10 +241,10 @@ local function show_welcome(player)
     )
 
     .. string.format(
-      "label[%f,%f;%d Players Online]",
+      "label[%f,%f;%s]",
       list_x,
       list_y - 0.5,
-      #player_list
+      core.formspec_escape(S("@1 Players Online", #player_list))
     )
 
     .. string.format(
@@ -274,7 +277,7 @@ local function show_welcome(player)
 
   if player_rank == "owner" then
     formspec = formspec
-      .. "label[0.0,6.0;Owner Section: Here you can monitor server activity]"
+      .. "label[0.0,6.0;" .. core.formspec_escape(S("Owner Section: Here you can monitor server activity")) .. "]"
   end
 
   --------------------------------------------------
@@ -282,14 +285,14 @@ local function show_welcome(player)
   --------------------------------------------------
 
   formspec = formspec
-    .. "label[0.0,8.1;General Section: Enjoy the server!]"
+    .. "label[0.0,8.1;" .. core.formspec_escape(S("General Section: Enjoy the server!")) .. "]"
 
   --------------------------------------------------
   -- FOOTER
   --------------------------------------------------
 
   formspec = formspec
-    .. "label[0.0,9.2;For a complete list of available commands, type /help into chat.]"
+    .. "label[0.0,9.2;" .. core.formspec_escape(S("For a complete list of available commands, type /help into chat.")) .. "]"
 
   --------------------------------------------------
   -- SHOW
@@ -320,13 +323,13 @@ end)
 --------------------------------------------------------
 
 core.register_chatcommand("welcome", {
-  description = "Show the welcome screen again",
+  description = S("Show the welcome screen again"),
 
   func = function(name)
     local player = core.get_player_by_name(name)
 
     if not player then
-      return false, "Player not found."
+      return false, S("Player not found.")
     end
 
     show_welcome(player)

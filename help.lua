@@ -1,5 +1,10 @@
+-- help.lua
+
+local S = core.get_translator(core.get_current_modname())
+local modpath = core.get_modpath(core.get_current_modname())
+
 core.register_chatcommand("guardian", {
-  description = "Shows Guardian rank requirements",
+  description = S("Shows Guardian rank requirements"),
   func = function(name)
     local text =
       "=== JUST-CRAFT RANK SYSTEM ===\n\n" ..
@@ -31,7 +36,7 @@ core.register_chatcommand("guardian", {
       "textarea[0.5,0.5;9,6.5;info;;" ..
       core.formspec_escape(text) ..
       "]" ..
-      "button_exit[3.5,7.2;3,0.8;exit;Close]"
+      "button_exit[3.5,7.2;3,0.8;exit;" .. S("Close") .. "]"
 
     core.show_formspec(name, "welcome:help", formspec)
 

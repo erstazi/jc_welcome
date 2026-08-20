@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jc_welcome\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Join Discord"
+msgstr "Приєднатися до Discord"
+
+msgid "Visit Website"
+msgstr "Відвідати вебсайт"
+
+msgid "Visit Forum"
+msgstr "Відвідати форум"
+
+msgid "Let's Play!"
+msgstr "Гайда грати!"
+
+msgid "Greetings, @1!"
+msgstr "Вітаємо, @1!"
+
+msgid "Before starting, please read the rules with the /rules command."
+msgstr "Перед початком, будь ласка, ознайомтеся з правилами за допомогою команди /rules."
+
+msgid "Welcome back, @1!"
+msgstr "З поверненням, @1!"
+
+msgid "You first joined on @1"
+msgstr "Ви вперше приєдналися: @1"
+
+msgid "Local Time: @1"
+msgstr "Місцевий час: @1"
+
+msgid "@1 Players Online"
+msgstr "@1 гравців онлайн"
+
+msgid "Owner Section: Here you can monitor server activity"
+msgstr "Розділ власника: тут ви можете стежити за активністю сервера"
+
+msgid "General Section: Enjoy the server!"
+msgstr "Загальний розділ: насолоджуйтеся грою на сервері!"
+
+msgid "For a complete list of available commands, type /help into chat."
+msgstr "Щоб переглянути повний список доступних команд, введіть /help у чаті."
+
+msgid "Show the welcome screen again"
+msgstr "Знову показати вітальний екран"
+
+msgid "Player not found."
+msgstr "Гравця не знайдено."
+
+msgid "SERVER RULES"
+msgstr "ПРАВИЛА СЕРВЕРА"
+
+msgid "You have @1 seconds to accept."
+msgstr "У вас є @1 секунд для прийняття правил."
+
+msgid "If you close this window without accepting, then you will have a @1 minute penalty."
+msgstr "Якщо ви закриєте це вікно, не прийнявши правила, ви отримаєте покарання на @1 хвилину."
+
+msgid "You are temporarily penalized. Wait @1 seconds."
+msgstr "Ви тимчасово покарані. Зачекайте @1 секунд."
+
+msgid "Force player to accept rules"
+msgstr "Змусити гравця прийняти правила"
+
+msgid "Usage: /rule <player>"
+msgstr "Використання: /rule <player>"
+
+msgid "I Accept"
+msgstr "Я приймаю"
+
+msgid "Rules sent to @1"
+msgstr "Правила надіслано гравцю @1"
+
+msgid "You closed the rules window. You are penalized for @1 minutes."
+msgstr "Ви закрили вікно правил. Вас покарано на @1 хвилин."
+
+msgid "@1 accepted the rules."
+msgstr "@1 прийняв правила."
+
+msgid "You did not accept the rules. You are penalized for @1 minutes."
+msgstr "Ви не прийняли правила. Вас покарано на @1 хвилин."
+
+msgid "View panel or register sanction report"
+msgstr "Переглянути панель або зареєструвати звіт про покарання"
+
+msgid "Usage: /sanction <player> <reason> <time> <type>"
+msgstr "Використання: /sanction <player> <reason> <time> <type>"
+
+msgid "Sanction report registered (no punishment applied)."
+msgstr "Звіт про покарання зареєстровано (покарання не застосовано)."
+
+msgid "View global sanction history"
+msgstr "Переглянути загальну історію покарань"
+
+msgid "No sanction history found."
+msgstr "Історію покарань не знайдено."
+
+msgid "Global Sanction History"
+msgstr "Загальна історія покарань"
+
+msgid "Show rules"
+msgstr "Показати правила"
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "Use /rules to view the server rules"
+msgstr "Використовуйте /rules, щоб переглянути правила сервера"
+
+msgid "Do NOT steal from other players."
+msgstr "НЕ крадіть у інших гравців."
+
+msgid "Do NOT place lava or water on other players' areas."
+msgstr "НЕ розміщуйте лаву або воду на територіях інших гравців."
+
+msgid "Do NOT build on someone else's claimed area."
+msgstr "НЕ будуйте на чужій захищеній території."
+
+msgid "Do NOT steal protected areas or land."
+msgstr "НЕ захоплюйте захищені території або землі."
+
+msgid "Do NOT use modified or hacked clients."
+msgstr "НЕ використовуйте модифіковані або зламані клієнти."
+
+msgid "No insults, swearing, or offensive language."
+msgstr "Заборонені образи, лайка та нецензурні висловлювання."
+
+msgid "Do NOT advertise other servers."
+msgstr "НЕ рекламуйте інші сервери."
+
+msgid "Respect all players, especially Moderators and Staff."
+msgstr "Поважайте всіх гравців, особливо модераторів і персонал."
+
+msgid "Do NOT ask for privileges or ranks (Moderator, Staff, Guardian)."
+msgstr "НЕ просіть привілеїв або рангів (модератор, персонал, хранитель)."
+
+msgid "Moderator and Staff ranks are only given when applications are officially opened."
+msgstr "Ранги модератора та персоналу видаються лише після офіційного відкриття набору заявок."
+
+msgid "Do NOT place lava or water at spawn."
+msgstr "НЕ розміщуйте лаву або воду на спавні."
+
+msgid "Dating or looking for relationships inside the server is strictly forbidden."
+msgstr "Знайомства або пошук стосунків на сервері суворо заборонені."
+
+msgid "Do NOT provoke fights or unnecessary arguments."
+msgstr "НЕ провокуйте бійки або непотрібні суперечки."
+
+msgid "Do NOT harass or annoy other players repeatedly."
+msgstr "НЕ переслідуйте та не дратуйте інших гравців повторно."
+
+msgid "Do NOT spam in chat."
+msgstr "НЕ спамте в чаті."
+
+msgid "Do NOT write everything in ALL CAPS."
+msgstr "НЕ пишіть усе ВЕЛИКИМИ ЛІТЕРАМИ."
+
+msgid "Do NOT spread false information to confuse others."
+msgstr "НЕ поширюйте неправдиву інформацію, щоб вводити інших в оману."
+
+msgid "Do NOT build inappropriate or offensive structures."
+msgstr "НЕ будуйте недоречні або образливі споруди."
+
+msgid "Do NOT destroy abandoned constructions without staff permission."
+msgstr "НЕ руйнуйте покинуті будівлі без дозволу персоналу."
+
+msgid "Do NOT make traps that harm other players unfairly."
+msgstr "НЕ створюйте пастки, які несправедливо шкодять іншим гравцям."
+
+msgid "Do NOT create lag machines or mechanisms that affect server performance."
+msgstr "НЕ створюйте лаг-машини або механізми, що впливають на продуктивність сервера."
+
+msgid "Keep spawn and claimed areas tidy and aesthetically organized."
+msgstr "Підтримуйте спавн і захищені території в чистоті та з охайним виглядом."
+
+msgid "Do NOT exploit server bugs."
+msgstr "НЕ використовуйте помилки сервера у своїх інтересах."
+
+msgid "Do NOT duplicate items under any circumstances."
+msgstr "НЕ дублюйте предмети за жодних обставин."
+
+msgid "Report bugs to Staff instead of exploiting them."
+msgstr "Повідомляйте персонал про помилки замість того, щоб їх використовувати."
+
+msgid "Do NOT scam other players in trades."
+msgstr "НЕ обманюйте інших гравців під час обміну."
+
+msgid "Owner decisions are final."
+msgstr "Рішення власника є остаточними."
+
+msgid "Do NOT publicly argue against punishments in chat."
+msgstr "НЕ сперечайтеся публічно щодо покарань у чаті."
+
+msgid "Report Staff issues to the Owner."
+msgstr "Повідомляйте власнику про проблеми з персоналом."
+
+msgid "Impersonating Staff will result in immediate punishment."
+msgstr "Видача себе за співробітника персоналу призведе до негайного покарання."
+
+msgid "Do NOT share your account with others."
+msgstr "НЕ передавайте свій обліковий запис іншим."
+
+msgid "Do NOT ask for others' passwords."
+msgstr "НЕ запитуйте паролі інших гравців."
+
+msgid "Each player is responsible for their account security."
+msgstr "Кожен гравець відповідає за безпеку свого облікового запису."
+
+msgid "Keep a friendly and safe environment for everyone."
+msgstr "Підтримуйте дружню та безпечну атмосферу для всіх."
+
+msgid "Do NOT post +18 or inappropriate content."
+msgstr "НЕ публікуйте контент +18 або інший недоречний контент."
+
+msgid "Romantic or inappropriate roleplay is forbidden."
+msgstr "Романтичний або недоречний рольовий плей заборонений."

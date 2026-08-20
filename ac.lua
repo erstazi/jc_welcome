@@ -1,3 +1,6 @@
+local S = core.get_translator(core.get_current_modname())
+local modpath = core.get_modpath(core.get_current_modname())
+
 --------------------------------------------------------
 -- Active Players Panel (AC) v3.1 EXPANDED REAL+
 -- Persistencia + Estadísticas + Historial + Rank Tops
@@ -205,10 +208,10 @@ end
 -- COMANDO /ac
 
 core.register_chatcommand("ac", {
-  description = "Active Players Panel v3",
+  description = S("Active Players Panel v3"),
   func = function(name)
     if not core.check_player_privs(name, {server=true}) then
-      return false, "No permission."
+      return false, S("No permission.")
     end
 
     local age = get_server_age_days()

@@ -1,0 +1,221 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jc_welcome\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Join Discord"
+msgstr "Rejoindre Discord"
+
+msgid "Visit Website"
+msgstr "Visiter le site web"
+
+msgid "Visit Forum"
+msgstr "Visiter le forum"
+
+msgid "Let's Play!"
+msgstr "Jouons !"
+
+msgid "Greetings, @1!"
+msgstr "Bonjour, @1 !"
+
+msgid "Before starting, please read the rules with the /rules command."
+msgstr "Avant de commencer, veuillez lire les règles avec la commande /rules."
+
+msgid "Welcome back, @1!"
+msgstr "Bon retour, @1 !"
+
+msgid "You first joined on @1"
+msgstr "Vous avez rejoint le serveur pour la première fois le @1"
+
+msgid "Local Time: @1"
+msgstr "Heure locale : @1"
+
+msgid "@1 Players Online"
+msgstr "@1 joueurs en ligne"
+
+msgid "Owner Section: Here you can monitor server activity"
+msgstr "Section propriétaire : vous pouvez surveiller l'activité du serveur ici"
+
+msgid "General Section: Enjoy the server!"
+msgstr "Section générale : profitez du serveur !"
+
+msgid "For a complete list of available commands, type /help into chat."
+msgstr "Pour obtenir la liste complète des commandes disponibles, tapez /help dans le chat."
+
+msgid "Show the welcome screen again"
+msgstr "Afficher à nouveau l'écran de bienvenue"
+
+msgid "Player not found."
+msgstr "Joueur introuvable."
+
+msgid "SERVER RULES"
+msgstr "RÈGLES DU SERVEUR"
+
+msgid "You have @1 seconds to accept."
+msgstr "Vous avez @1 secondes pour accepter."
+
+msgid "If you close this window without accepting, then you will have a @1 minute penalty."
+msgstr "Si vous fermez cette fenêtre sans accepter, vous serez pénalisé pendant @1 minute."
+
+msgid "You are temporarily penalized. Wait @1 seconds."
+msgstr "Vous êtes temporairement pénalisé. Attendez @1 secondes."
+
+msgid "Force player to accept rules"
+msgstr "Forcer un joueur à accepter les règles"
+
+msgid "Usage: /rule <player>"
+msgstr "Utilisation : /rule <player>"
+
+msgid "I Accept"
+msgstr "J'accepte"
+
+msgid "Rules sent to @1"
+msgstr "Règles envoyées à @1"
+
+msgid "You closed the rules window. You are penalized for @1 minutes."
+msgstr "Vous avez fermé la fenêtre des règles. Vous êtes pénalisé pendant @1 minutes."
+
+msgid "@1 accepted the rules."
+msgstr "@1 a accepté les règles."
+
+msgid "You did not accept the rules. You are penalized for @1 minutes."
+msgstr "Vous n'avez pas accepté les règles. Vous êtes pénalisé pendant @1 minutes."
+
+msgid "View panel or register sanction report"
+msgstr "Afficher le panneau ou enregistrer un rapport de sanction"
+
+msgid "Usage: /sanction <player> <reason> <time> <type>"
+msgstr "Utilisation : /sanction <player> <reason> <time> <type>"
+
+msgid "Sanction report registered (no punishment applied)."
+msgstr "Rapport de sanction enregistré (aucune sanction appliquée)."
+
+msgid "View global sanction history"
+msgstr "Afficher l'historique global des sanctions"
+
+msgid "No sanction history found."
+msgstr "Aucun historique de sanctions trouvé."
+
+msgid "Global Sanction History"
+msgstr "Historique global des sanctions"
+
+msgid "Show rules"
+msgstr "Afficher les règles"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Use /rules to view the server rules"
+msgstr "Utilisez /rules pour voir les règles du serveur"
+
+msgid "Do NOT steal from other players."
+msgstr "NE VOLEZ PAS les autres joueurs."
+
+msgid "Do NOT place lava or water on other players' areas."
+msgstr "NE PLACEZ PAS de lave ou d'eau dans les zones des autres joueurs."
+
+msgid "Do NOT build on someone else's claimed area."
+msgstr "NE CONSTRUISEZ PAS sur la zone revendiquée de quelqu'un d'autre."
+
+msgid "Do NOT steal protected areas or land."
+msgstr "NE VOLEZ PAS les zones ou terrains protégés."
+
+msgid "Do NOT use modified or hacked clients."
+msgstr "N'UTILISEZ PAS de clients modifiés ou piratés."
+
+msgid "No insults, swearing, or offensive language."
+msgstr "Aucune insulte, grossièreté ou langage offensant."
+
+msgid "Do NOT advertise other servers."
+msgstr "NE FAITES PAS de publicité pour d'autres serveurs."
+
+msgid "Respect all players, especially Moderators and Staff."
+msgstr "Respectez tous les joueurs, en particulier les modérateurs et le personnel."
+
+msgid "Do NOT ask for privileges or ranks (Moderator, Staff, Guardian)."
+msgstr "NE DEMANDEZ PAS de privilèges ou de rangs (Modérateur, Staff, Gardien)."
+
+msgid "Moderator and Staff ranks are only given when applications are officially opened."
+msgstr "Les rangs de Modérateur et de Staff ne sont attribués que lorsque les candidatures sont officiellement ouvertes."
+
+msgid "Do NOT place lava or water at spawn."
+msgstr "NE PLACEZ PAS de lave ou d'eau au spawn."
+
+msgid "Dating or looking for relationships inside the server is strictly forbidden."
+msgstr "Les rencontres amoureuses ou la recherche de relations sur le serveur sont strictement interdites."
+
+msgid "Do NOT provoke fights or unnecessary arguments."
+msgstr "NE PROVOQUEZ PAS de combats ou de disputes inutiles."
+
+msgid "Do NOT harass or annoy other players repeatedly."
+msgstr "NE HARCÈLEZ PAS et n'ennuyez pas les autres joueurs de façon répétée."
+
+msgid "Do NOT spam in chat."
+msgstr "NE SPAMMEZ PAS dans le chat."
+
+msgid "Do NOT write everything in ALL CAPS."
+msgstr "N'ÉCRIVEZ PAS tout en LETTRES MAJUSCULES."
+
+msgid "Do NOT spread false information to confuse others."
+msgstr "NE DIFFUSEZ PAS de fausses informations pour semer la confusion."
+
+msgid "Do NOT build inappropriate or offensive structures."
+msgstr "NE CONSTRUISEZ PAS de structures inappropriées ou offensantes."
+
+msgid "Do NOT destroy abandoned constructions without staff permission."
+msgstr "NE DÉTRUISEZ PAS les constructions abandonnées sans autorisation du Staff."
+
+msgid "Do NOT make traps that harm other players unfairly."
+msgstr "NE CRÉEZ PAS de pièges qui nuisent injustement aux autres joueurs."
+
+msgid "Do NOT create lag machines or mechanisms that affect server performance."
+msgstr "NE CRÉEZ PAS de machines à lag ou de mécanismes qui affectent les performances du serveur."
+
+msgid "Keep spawn and claimed areas tidy and aesthetically organized."
+msgstr "Gardez le spawn et les zones revendiquées propres et bien organisés."
+
+msgid "Do NOT exploit server bugs."
+msgstr "N'EXPLOITEZ PAS les bugs du serveur."
+
+msgid "Do NOT duplicate items under any circumstances."
+msgstr "NE DUPLIQUEZ PAS d'objets, quelles que soient les circonstances."
+
+msgid "Report bugs to Staff instead of exploiting them."
+msgstr "Signalez les bugs au Staff au lieu de les exploiter."
+
+msgid "Do NOT scam other players in trades."
+msgstr "N'ARNAQUEZ PAS les autres joueurs lors des échanges."
+
+msgid "Owner decisions are final."
+msgstr "Les décisions du propriétaire sont définitives."
+
+msgid "Do NOT publicly argue against punishments in chat."
+msgstr "NE CONTESTEZ PAS publiquement les sanctions dans le chat."
+
+msgid "Report Staff issues to the Owner."
+msgstr "Signalez les problèmes concernant le Staff au propriétaire."
+
+msgid "Impersonating Staff will result in immediate punishment."
+msgstr "Se faire passer pour un membre du Staff entraînera une sanction immédiate."
+
+msgid "Do NOT share your account with others."
+msgstr "NE PARTAGEZ PAS votre compte avec d'autres personnes."
+
+msgid "Do NOT ask for others' passwords."
+msgstr "NE DEMANDEZ PAS les mots de passe des autres."
+
+msgid "Each player is responsible for their account security."
+msgstr "Chaque joueur est responsable de la sécurité de son compte."
+
+msgid "Keep a friendly and safe environment for everyone."
+msgstr "Maintenez un environnement convivial et sûr pour tous."
+
+msgid "Do NOT post +18 or inappropriate content."
+msgstr "NE PUBLIEZ PAS de contenu +18 ou inapproprié."
+
+msgid "Romantic or inappropriate roleplay is forbidden."
+msgstr "Les jeux de rôle romantiques ou inappropriés sont interdits."
+
