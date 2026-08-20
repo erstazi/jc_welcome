@@ -7,6 +7,7 @@ local storage = core.get_mod_storage()
 -- Persistencia + Estadísticas + Historial + Rank Tops
 
 local active_players = {}
+local persistent = {}
 
 --------------------------------------------------------
 -- MOD STORAGE
@@ -34,6 +35,10 @@ local function save_player_data(name, data)
 end
 
 local function save_player_list()
+  if type(persistent) ~= "table" then
+    persistent = {}
+  end
+
   local players = {}
 
   for name in pairs(persistent) do
@@ -155,26 +160,17 @@ local function load_data()
 
   local players_raw = storage:get_string("players")
 
-  if players_raw == "" then
-    return data
-  end
+  if players_raw ~= "" then
+    local players = core.deserialize(players_raw)
 
-  local players = core.deserialize(players_raw)
+    if type(players) == "table" then
+      for _, name in ipairs(players) do
+        local player_data = load_player_data(name)
 
-  if type(players) ~= "table" then
-    core.log(
-      "error",
-      "[jc_welcome] Invalid player index in ModStorage."
-    )
-
-    return data
-  end
-
-  for _, name in ipairs(players) do
-    local player_data = load_player_data(name)
-
-    if player_data then
-      data[name] = player_data
+        if player_data then
+          data[name] = player_data
+        end
+      end
     end
   end
 
@@ -187,7 +183,11 @@ end
 
 migrate_old_data()
 
-local persistent = load_data()
+persistent = load_data()
+
+if type(persistent) ~= "table" then
+  persistent = {}
+end
 
 -- Edad real server
 local function get_server_age_days()
@@ -245,14 +245,14 @@ end)
 core.register_on_leaveplayer(function(player)
   local name = player:get_player_name()
 
-  if active_players[name] then
+  if active_players[name] and persistent[name] then
     local hours = active_players[name].session_time / 3600
 
     persistent[name].total_hours =
-      persistent[name].total_hours + hours
+      (persistent[name].total_hours or 0) + hours
 
     persistent[name].afk_time =
-      persistent[name].afk_time + active_players[name].afk_timer
+      (persistent[name].afk_time or 0) + active_players[name].afk_timer
 
     save_player_data(name, persistent[name])
 
@@ -436,10 +436,8 @@ local function show_ac_panel(name)
     ------------------------------------------------
     -- Bottom buttons
     ------------------------------------------------
-    .. "button[8.5,9.2;3,0.8;ranktops;" ..
-      core.formspec_escape(S("RANK TOPS")) .. "]"
-    .. "button[11.8,9.2;3,0.8;guardian;" ..
-      core.formspec_escape(S("GUARDIAN")) .. "]"
+    .. "button[8.5,9.2;3,0.8;ranktops;" .. core.formspec_escape(S("RANK TOPS")) .. "]"
+    .. "button[11.8,9.2;3,0.8;guardian;" .. core.formspec_escape(S("GUARDIAN")) .. "]"
 
   core.show_formspec(name, "ac:panel", formspec)
 end
@@ -637,70 +635,78 @@ core.register_on_player_receive_fields(function(player, formname, fields)
     ------------------------------------------------
     -- FORMSPEC
     ------------------------------------------------
-    ------------------------------------------------
-    -- FORMSPEC LOG NUMÉRICO
-    ------------------------------------------------
     local fs =
       "formspec_version[4]"
       .. "size[14,10]"
       .. default.gui_bg
       .. default.gui_bg_img
 
-      -- Título más abajo
+      -- Title
       .. "label[0.3,0.5;" .. core.formspec_escape(S("Guardian Progress Panel")) .. "]"
 
-      -- Cabecera tabla
+      -- Header background
       .. "box[0.3,1.0;13.4,0.8;#00000088]"
+
+      -- Header
       .. "label[0.5,1.2;" .. core.formspec_escape(S("Player")) .. "]"
-      .. "label[4.0,1.2;" .. core.formspec_escape(S("Hours")) .. "]"
-      .. "label[6.5,1.2;" .. core.formspec_escape(S("Activity %")) .. "]"
-      .. "label[9.5,1.2;" .. core.formspec_escape(S("Join Ratio")) .. "]"
-      .. "label[11.0,1.2;" .. core.formspec_escape(S("Days")) .. "]"
-      .. "label[12.0,1.2;" .. core.formspec_escape(S("Status")) .. "]"
+      .. "label[3.5,1.2;" .. core.formspec_escape(S("Hours")) .. "]"
+      .. "label[5.3,1.2;" .. core.formspec_escape(S("Activity %")) .. "]"
+      .. "label[7.1,1.2;" .. core.formspec_escape(S("Join Ratio")) .. "]"
+      .. "label[8.9,1.2;" .. core.formspec_escape(S("Days")) .. "]"
+      .. "label[10.9,1.2;" .. core.formspec_escape(S("Status")) .. "]"
 
+      -- Column separators
+      .. "box[3.2,1.0;0.02,7.5;#ffffff22]"
+      .. "box[5.0,1.0;0.02,7.5;#ffffff22]"
+      .. "box[6.8,1.0;0.02,7.5;#ffffff22]"
+      .. "box[8.6,1.0;0.02,7.5;#ffffff22]"
+      .. "box[10.6,1.0;0.02,7.5;#ffffff22]"
 
-      -- Scroll más abajo
+      -- Scroll area
       .. "scroll_container[0.3,2.0;13.4,7.5;scroll;vertical]"
 
     local y = 0.2
 
     for _, p in ipairs(list) do
-      local status = "❌ " .. S("NOT READY")
+      local status = S("NOT READY")
+
       if p.ok then
-        status = "💚 " .. S("READY")
+        status = S("READY")
       end
 
+      -- Row separator
       fs = fs ..
-        -- Fondo fila
-        "box[0.0," .. y .. ";13.0,0.6;#11111166]"
+        "box[0.0," .. (y + 0.6) .. ";13.4,0.02;#ffffff22]"
 
-        -- Nombre
+        -- Player
         .. "label[0.2," .. y .. ";" .. core.formspec_escape(p.name) .. "]"
 
-        -- Horas reales (no %)
-        .. "label[4.0," .. y .. ";" .. core.formspec_escape(math.floor(p.hours) .. "/90") .. "]"
+        -- Hours
+        .. "label[3.2," .. y .. ";" .. core.formspec_escape(math.floor(p.hours) .. "/90") .. "]"
 
-        -- Actividad %
-        .. "label[6.5," .. y .. ";" .. core.formspec_escape(math.floor(p.a) .. "%") .. "]"
+        -- Activity
+        .. "label[5.0," .. y .. ";" .. core.formspec_escape(math.floor(p.a) .. "%") .. "]"
 
-        -- Join ratio %
-        .. "label[9.5," .. y .. ";" .. core.formspec_escape(math.floor(p.j) .. "%") .. "]"
+        -- Join Ratio
+        .. "label[6.8," .. y .. ";" .. core.formspec_escape(math.floor(p.j) .. "%") .. "]"
 
-        -- Días jugados
-        .. "label[11.0," .. y .. ";" .. core.formspec_escape(p.days) .. "]"
+        -- Days
+        .. "label[8.6," .. y .. ";" .. core.formspec_escape(p.days) .. "]"
 
-        -- Estado
-        .. "label[12.0," .. y .. ";" .. core.formspec_escape(status) .. "]"
+        -- Status
+        .. "label[10.8," .. y .. ";" .. core.formspec_escape(status) .. "]"
 
       y = y + 0.7
     end
 
     fs = fs ..
       "scroll_container_end[]" ..
-      "button[5.0,9.0;4.0,0.8;back;" ..
-      core.formspec_escape(S("BACK")) .. "]"
+
+      -- Back button
+      "button[5.0,9.0;4.0,0.8;back;" .. core.formspec_escape(S("BACK")) .. "]"
 
     core.show_formspec(player:get_player_name(), "ac:guardian", fs)
+
     return
   end
 end)
