@@ -191,7 +191,7 @@ local function show_if_panel(name)
       local skin_obj = skins.get_player_skin(player_obj)
 
       if skin_obj then
-        head_texture = (skin_obj:get_preview() or head_texture) .. "^[resize:32x32"
+        head_texture = (skin_obj:get_preview() or head_texture) .. "^[resize:16x32"
       end
     end
 
