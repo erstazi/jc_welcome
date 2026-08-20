@@ -191,20 +191,24 @@ local persistent = load_data()
 
 -- Edad real server
 local function get_server_age_days()
-  local meta = io.open(core.get_worldpath() .. "/map_meta.txt", "r")
+  local created = storage:get_int("server_created")
 
-  if not meta then
-    return 0
+  if created == 0 then
+    -- Server creation: 2026-02-09 04:23:00
+    created = os.time({
+      year = 2026,
+      month = 2,
+      day = 9,
+      hour = 4,
+      min = 23,
+      sec = 0
+    })
+
+    storage:set_int("server_created", created)
+    storage:set_string("server_created_date", "2026-02-09 04:23:00")
   end
 
-  local content = meta:read("*all")
-  meta:close()
-
-  local created = content:match("created%s*=%s*(%d+)")
-
-  if not created then return 0 end
-
-  return math.floor( (os.time() - tonumber(created)) / 86400 )
+  return math.floor((os.time() - created) / 86400)
 end
 
 
