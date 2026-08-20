@@ -218,3 +218,84 @@ msgstr "НЕ публикуйте контент +18 или другой неп�
 
 msgid "Romantic or inappropriate roleplay is forbidden."
 msgstr "Романтический или неприемлемый ролевой отыгрыш запрещён."
+
+msgid "Active Players Panel"
+msgstr "Панель активных игроков"
+
+msgid "Server Age: @1 days"
+msgstr "Возраст сервера: @1 дней"
+
+msgid "Players: @1"
+msgstr "Игроков: @1"
+
+msgid "Total Hours: @1"
+msgstr "Всего часов: @1"
+
+msgid "Most Active: @1"
+msgstr "Самый активный: @1"
+
+msgid "RANK TOPS"
+msgstr "ЛУЧШИЕ ПО РАНГАМ"
+
+msgid "GUARDIAN"
+msgstr "ХРАНИТЕЛЬ"
+
+msgid "Active Players Panel v3"
+msgstr "Панель активных игроков v3"
+
+msgid "No permission."
+msgstr "Нет разрешения."
+
+msgid "Rank Tops Panel"
+msgstr "Панель лучших по рангам"
+
+msgid "OWNER"
+msgstr "ВЛАДЕЛЕЦ"
+
+msgid "MODERATOR"
+msgstr "МОДЕРАТОР"
+
+msgid "STAFF"
+msgstr "ПЕРСОНАЛ"
+
+msgid "GUARDIAN"
+msgstr "ХРАНИТЕЛЬ"
+
+msgid "BUILDER"
+msgstr "СТРОИТЕЛЬ"
+
+msgid "PLAYER"
+msgstr "ИГРОК"
+
+msgid "BACK"
+msgstr "НАЗАД"
+
+msgid "Guardian Progress Panel"
+msgstr "Панель прогресса Хранителя"
+
+msgid "Player"
+msgstr "Игрок"
+
+msgid "Hours"
+msgstr "Часы"
+
+msgid "Activity %"
+msgstr "Активность %"
+
+msgid "Join Ratio"
+msgstr "Соотношение входов"
+
+msgid "Days"
+msgstr "Дни"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "READY"
+msgstr "ГОТОВ"
+
+msgid "NOT READY"
+msgstr "НЕ ГОТОВ"
+
+msgid "promoted to Guardian!"
+msgstr "получил повышение до Хранителя!"

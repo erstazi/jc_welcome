@@ -218,3 +218,84 @@ msgstr "Plaats GEEN +18- of ongepaste inhoud."
 
 msgid "Romantic or inappropriate roleplay is forbidden."
 msgstr "Romantische of ongepaste roleplay is verboden."
+
+msgid "Active Players Panel"
+msgstr "Paneel actieve spelers"
+
+msgid "Server Age: @1 days"
+msgstr "Serverleeftijd: @1 dagen"
+
+msgid "Players: @1"
+msgstr "Spelers: @1"
+
+msgid "Total Hours: @1"
+msgstr "Totale uren: @1"
+
+msgid "Most Active: @1"
+msgstr "Meest actief: @1"
+
+msgid "RANK TOPS"
+msgstr "RANGTOPPERS"
+
+msgid "GUARDIAN"
+msgstr "BESCHERMER"
+
+msgid "Active Players Panel v3"
+msgstr "Paneel actieve spelers v3"
+
+msgid "No permission."
+msgstr "Geen toestemming."
+
+msgid "Rank Tops Panel"
+msgstr "Ranglijstpaneel"
+
+msgid "OWNER"
+msgstr "EIGENAAR"
+
+msgid "MODERATOR"
+msgstr "MODERATOR"
+
+msgid "STAFF"
+msgstr "TEAM"
+
+msgid "GUARDIAN"
+msgstr "BESCHERMER"
+
+msgid "BUILDER"
+msgstr "BOUWER"
+
+msgid "PLAYER"
+msgstr "SPELER"
+
+msgid "BACK"
+msgstr "TERUG"
+
+msgid "Guardian Progress Panel"
+msgstr "Voortgangspaneel beschermer"
+
+msgid "Player"
+msgstr "Speler"
+
+msgid "Hours"
+msgstr "Uren"
+
+msgid "Activity %"
+msgstr "Activiteit %"
+
+msgid "Join Ratio"
+msgstr "Deelnameverhouding"
+
+msgid "Days"
+msgstr "Dagen"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "READY"
+msgstr "GEREED"
+
+msgid "NOT READY"
+msgstr "NIET GEREED"
+
+msgid "promoted to Guardian!"
+msgstr "gepromoveerd tot Beschermer!"

@@ -219,3 +219,83 @@ msgstr "Veröffentliche KEINE +18- oder unangemessenen Inhalte."
 msgid "Romantic or inappropriate roleplay is forbidden."
 msgstr "Romantisches oder unangemessenes Rollenspiel ist verboten."
 
+msgid "Active Players Panel"
+msgstr "Aktive-Spieler-Panel"
+
+msgid "Server Age: @1 days"
+msgstr "Serveralter: @1 Tage"
+
+msgid "Players: @1"
+msgstr "Spieler: @1"
+
+msgid "Total Hours: @1"
+msgstr "Gesamtstunden: @1"
+
+msgid "Most Active: @1"
+msgstr "Am aktivsten: @1"
+
+msgid "RANK TOPS"
+msgstr "RANG-TOPS"
+
+msgid "GUARDIAN"
+msgstr "WÄCHTER"
+
+msgid "Active Players Panel v3"
+msgstr "Aktive-Spieler-Panel v3"
+
+msgid "No permission."
+msgstr "Keine Berechtigung."
+
+msgid "Rank Tops Panel"
+msgstr "Ranglisten-Panel"
+
+msgid "OWNER"
+msgstr "BESITZER"
+
+msgid "MODERATOR"
+msgstr "MODERATOR"
+
+msgid "STAFF"
+msgstr "TEAM"
+
+msgid "GUARDIAN"
+msgstr "WÄCHTER"
+
+msgid "BUILDER"
+msgstr "BAUER"
+
+msgid "PLAYER"
+msgstr "SPIELER"
+
+msgid "BACK"
+msgstr "ZURÜCK"
+
+msgid "Guardian Progress Panel"
+msgstr "Wächter-Fortschrittsanzeige"
+
+msgid "Player"
+msgstr "Spieler"
+
+msgid "Hours"
+msgstr "Stunden"
+
+msgid "Activity %"
+msgstr "Aktivität %"
+
+msgid "Join Ratio"
+msgstr "Beitrittsquote"
+
+msgid "Days"
+msgstr "Tage"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "READY"
+msgstr "BEREIT"
+
+msgid "NOT READY"
+msgstr "NICHT BEREIT"
+
+msgid "promoted to Guardian!"
+msgstr "wurde zum Wächter befördert!"

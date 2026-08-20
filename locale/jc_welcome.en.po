@@ -219,3 +219,83 @@ msgstr "Do NOT post +18 or inappropriate content."
 msgid "Romantic or inappropriate roleplay is forbidden."
 msgstr "Romantic or inappropriate roleplay is forbidden."
 
+msgid "Active Players Panel"
+msgstr "Active Players Panel"
+
+msgid "Server Age: @1 days"
+msgstr "Server Age: @1 days"
+
+msgid "Players: @1"
+msgstr "Players: @1"
+
+msgid "Total Hours: @1"
+msgstr "Total Hours: @1"
+
+msgid "Most Active: @1"
+msgstr "Most Active: @1"
+
+msgid "RANK TOPS"
+msgstr "RANK TOPS"
+
+msgid "GUARDIAN"
+msgstr "GUARDIAN"
+
+msgid "Active Players Panel v3"
+msgstr "Active Players Panel v3"
+
+msgid "No permission."
+msgstr "No permission."
+
+msgid "Rank Tops Panel"
+msgstr "Rank Tops Panel"
+
+msgid "OWNER"
+msgstr "OWNER"
+
+msgid "MODERATOR"
+msgstr "MODERATOR"
+
+msgid "STAFF"
+msgstr "STAFF"
+
+msgid "GUARDIAN"
+msgstr "GUARDIAN"
+
+msgid "BUILDER"
+msgstr "BUILDER"
+
+msgid "PLAYER"
+msgstr "PLAYER"
+
+msgid "BACK"
+msgstr "BACK"
+
+msgid "Guardian Progress Panel"
+msgstr "Guardian Progress Panel"
+
+msgid "Player"
+msgstr "Player"
+
+msgid "Hours"
+msgstr "Hours"
+
+msgid "Activity %"
+msgstr "Activity %"
+
+msgid "Join Ratio"
+msgstr "Join Ratio"
+
+msgid "Days"
+msgstr "Days"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "READY"
+msgstr "READY"
+
+msgid "NOT READY"
+msgstr "NOT READY"
+
+msgid "promoted to Guardian!"
+msgstr "promoted to Guardian!"

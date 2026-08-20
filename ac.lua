@@ -1,31 +1,191 @@
 local S = core.get_translator(core.get_current_modname())
 local modpath = core.get_modpath(core.get_current_modname())
+local storage = core.get_mod_storage()
 
 --------------------------------------------------------
 -- Active Players Panel (AC) v3.1 EXPANDED REAL+
 -- Persistencia + Estadísticas + Historial + Rank Tops
 
 local active_players = {}
-local storage_file = core.get_worldpath() .. "/ac_data.mt"
 
--- Cargar datos guardados
-local function load_data()
-  local file = io.open(storage_file, "r")
-  if not file then return {} end
-  local data = core.deserialize(file:read("*all"))
-  file:close()
-  return data or {}
+--------------------------------------------------------
+-- MOD STORAGE
+--------------------------------------------------------
+
+local function get_storage_key(name)
+  return "player:" .. name
 end
 
--- Guardar datos
+local function load_player_data(name)
+  local value = storage:get_string(get_storage_key(name))
 
-local function save_data(data)
-  local file = io.open(storage_file, "w")
-  if file then
-    file:write(core.serialize(data))
-    file:close()
+  if value == "" then
+    return nil
   end
+
+  return core.deserialize(value)
 end
+
+local function save_player_data(name, data)
+  storage:set_string(
+    get_storage_key(name),
+    core.serialize(data)
+  )
+end
+
+local function save_player_list()
+  local players = {}
+
+  for name in pairs(persistent) do
+    table.insert(players, name)
+  end
+
+  table.sort(players)
+
+  storage:set_string(
+    "players",
+    core.serialize(players)
+  )
+end
+
+--------------------------------------------------------
+-- MIGRATE OLD ac_data.mt
+--------------------------------------------------------
+
+local function migrate_old_data()
+  local old_file = core.get_worldpath() .. "/ac_data.mt"
+  local migrated_file = core.get_worldpath() .. "/ac_data.mt.migrated"
+
+  -- Check whether ModStorage already contains players.
+  local players_raw = storage:get_string("players")
+
+  if players_raw ~= "" then
+    return false
+  end
+
+  -- Check for old data file.
+  local file = io.open(old_file, "r")
+
+  if not file then
+    return false
+  end
+
+  core.log("action", "[jc_welcome] Migrating ac_data.mt to ModStorage...")
+
+  local content = file:read("*all")
+  file:close()
+
+  if not content or content == "" then
+    core.log("warning", "[jc_welcome] ac_data.mt is empty. Migration skipped.")
+    return false
+  end
+
+  local old_data = core.deserialize(content)
+
+  if type(old_data) ~= "table" then
+    core.log("error", "[jc_welcome] Could not deserialize ac_data.mt. Migration aborted.")
+    return false
+  end
+
+  local count = 0
+
+  for name, data in pairs(old_data) do
+    if type(name) == "string" and type(data) == "table" then
+      save_player_data(name, data)
+      count = count + 1
+    end
+  end
+
+  -- Create player index.
+  local players = {}
+
+  for name in pairs(old_data) do
+    table.insert(players, name)
+  end
+
+  table.sort(players)
+
+  storage:set_string(
+    "players",
+    core.serialize(players)
+  )
+
+  -- Verify that ModStorage now contains the data.
+  local verify = storage:get_string("players")
+
+  if verify == "" then
+    core.log(
+      "error",
+      "[jc_welcome] ModStorage verification failed. Original ac_data.mt was NOT changed."
+    )
+
+    return false
+  end
+
+  -- Keep a backup of the original file.
+  local renamed = os.rename(old_file, migrated_file)
+
+  if renamed then
+    core.log(
+      "action",
+      "[jc_welcome] Migration complete: " ..
+      count .. " players moved to ModStorage."
+    )
+
+    core.log(
+      "action",
+      "[jc_welcome] Original data saved as ac_data.mt.migrated."
+    )
+  else
+    core.log(
+      "warning",
+      "[jc_welcome] Data migrated successfully, but ac_data.mt could not be renamed."
+    )
+  end
+
+  return true
+end
+
+--------------------------------------------------------
+-- LOAD DATA FROM MOD STORAGE
+--------------------------------------------------------
+
+local function load_data()
+  local data = {}
+
+  local players_raw = storage:get_string("players")
+
+  if players_raw == "" then
+    return data
+  end
+
+  local players = core.deserialize(players_raw)
+
+  if type(players) ~= "table" then
+    core.log(
+      "error",
+      "[jc_welcome] Invalid player index in ModStorage."
+    )
+
+    return data
+  end
+
+  for _, name in ipairs(players) do
+    local player_data = load_player_data(name)
+
+    if player_data then
+      data[name] = player_data
+    end
+  end
+
+  return data
+end
+
+--------------------------------------------------------
+-- MIGRATE THEN LOAD
+--------------------------------------------------------
+
+migrate_old_data()
 
 local persistent = load_data()
 
@@ -53,26 +213,20 @@ core.register_on_joinplayer(function(player)
   local name = player:get_player_name()
 
   if not persistent[name] then
-    local pfile = io.open(core.get_worldpath() .. "/players/" .. name, "r")
-
-    local first = os.time()
-
-    if pfile then
-      local content = pfile:read("*all")
-      pfile:close()
-      local t = content:match( "first_login%s*=%s*(%d+)" )
-      if t then first = tonumber(t) end
-    end
-
     persistent[name] = {
-      first_join = first,
+      first_join = os.time(),
       total_hours = 0,
       sessions = 0,
       afk_time = 0
     }
+
+    save_player_list()
   end
 
-  persistent[name].sessions = persistent[name].sessions + 1
+  persistent[name].sessions =
+    persistent[name].sessions + 1
+
+  save_player_data(name, persistent[name])
 
   active_players[name] = {
     session_time = 0,
@@ -89,9 +243,15 @@ core.register_on_leaveplayer(function(player)
 
   if active_players[name] then
     local hours = active_players[name].session_time / 3600
-    persistent[name].total_hours = persistent[name].total_hours + hours
-    persistent[name].afk_time = persistent[name].afk_time + active_players[name].afk_timer
-    save_data(persistent)
+
+    persistent[name].total_hours =
+      persistent[name].total_hours + hours
+
+    persistent[name].afk_time =
+      persistent[name].afk_time + active_players[name].afk_timer
+
+    save_player_data(name, persistent[name])
+
     active_players[name] = nil
   end
 end)
@@ -204,111 +364,92 @@ local function build_rank_tops()
   return groups
 end
 
+-- Function for Command /ac
+local function show_ac_panel(name)
+  local age = get_server_age_days()
+  local stats = get_global_stats()
 
--- COMANDO /ac
+  local formspec =
+    "formspec_version[4]"
+    .. "size[15,10]"
+    .. default.gui_bg
+    .. default.gui_bg_img
 
+    .. "label[0.3,0.2;" ..
+      core.formspec_escape(S("Active Players Panel")) .. "]"
+    .. "label[11,0.2;" ..
+      core.formspec_escape(S("Server Age: @1 days", age)) .. "]"
+
+    .. "box[0.2,0.7;14.6,1.2;#00000088]"
+
+    .. "label[0.4,0.9;" ..
+      core.formspec_escape(S("Players: @1", stats.players)) .. "]"
+
+    .. "label[3.0,0.9;" ..
+      core.formspec_escape(S("Total Hours: @1", stats.hours)) .. "]"
+
+    .. "label[7.0,0.9;" ..
+      core.formspec_escape(S("Most Active: @1", stats.top)) .. "]"
+
+    .. "box[0.2,2.0;14.6,6.8;#00000066]"
+
+    .. "scroll_container[0.3,2.2;14.4,7.2;scroll;vertical]"
+
+  local y = 0.2
+
+  for pname, sdata in pairs(active_players) do
+    local pdata = persistent[pname]
+
+    local skin = "character.png"
+
+    local player_obj = core.get_player_by_name(pname)
+    if player_obj and skins and skins.get_player_skin then
+      local s = skins.get_player_skin(player_obj)
+
+      if s then
+        skin = (s:get_preview() or skin) .. "^[resize:16x32"
+      end
+    end
+
+    formspec =
+      formspec
+      .. "image[0.3," .. y .. ";0.7,0.7;" .. skin .. "]"
+      .. "label[1.1," .. y .. ";" ..
+        core.formspec_escape(get_rank_display(pname)) .. "]"
+      .. "label[6.2," .. y .. ";S:" ..
+        math.floor(sdata.session_time / 3600) .. "h]"
+      .. "label[8.0," .. y .. ";T:" ..
+        math.floor(pdata.total_hours) .. "h]"
+      .. "label[9.8," .. y .. ";J:" ..
+        pdata.sessions .. "]"
+
+    y = y + 0.8
+  end
+
+  formspec = formspec
+    .. "scroll_container_end[]"
+
+    ------------------------------------------------
+    -- Bottom buttons
+    ------------------------------------------------
+    .. "button[8.5,9.2;3,0.8;ranktops;" ..
+      core.formspec_escape(S("RANK TOPS")) .. "]"
+    .. "button[11.8,9.2;3,0.8;guardian;" ..
+      core.formspec_escape(S("GUARDIAN")) .. "]"
+
+  core.show_formspec(name, "ac:panel", formspec)
+end
+
+-- For Command /ac
 core.register_chatcommand("ac", {
   description = S("Active Players Panel v3"),
+
   func = function(name)
     if not core.check_player_privs(name, {server=true}) then
       return false, S("No permission.")
     end
 
-    local age = get_server_age_days()
-    local stats = get_global_stats()
-
-    local formspec =
-        "formspec_version[4]"
-        .. "size[15,10]"
-        .. default.gui_bg
-        .. default.gui_bg_img
-
-        ------------------------------------------------
-        -- Header
-        ------------------------------------------------
-        .. "label[0.3,0.2;Active Players Panel]"
-        .. "label[11,0.2;Server Age: "
-        .. age .. " days]"
-
-        ------------------------------------------------
-        -- Stats bar
-        ------------------------------------------------
-        .. "box[0.2,0.7;14.6,1.2;#00000088]"
-
-        .. "label[0.4,0.9;Players: "
-        .. stats.players .. "]"
-
-        .. "label[3.0,0.9;Total Hours: "
-        .. stats.hours .. "]"
-
-        .. "label[7.0,0.9;Most Active: "
-        .. stats.top .. "]"
-       ------------------------------------------------
-       -- Botones Footer
-       ------------------------------------------------
-        .. "button[8.5,9.2;3,0.8;ranktops;RANK TOPS]"
-        .. "button[11.8,9.2;3,0.8;guardian;GUARDIAN]"
-        ------------------------------------------------
-        -- Fondo lista
-        ------------------------------------------------
-        .. "box[0.2,2.0;14.6,7.6;#00000066]"
-
-        ------------------------------------------------
-        -- Scroll más abajo
-        ------------------------------------------------
-        .. "scroll_container[0.3,2.2;14.4,7.2;scroll;vertical]"
-
-    local y = 0.2
-
-    for pname, sdata in pairs(active_players) do
-      local pdata = persistent[pname]
-
-      ------------------------------------------------
-      -- Skin compacta
-      ------------------------------------------------
-      local skin = "character.png"
-
-      local player_obj = core.get_player_by_name(pname)
-      if player_obj and skins and skins.get_player_skin then
-        local s = skins.get_player_skin(player_obj)
-        if s then
-          skin = (s:get_preview() or skin) .. "^[resize:28x28"
-        end
-      end
-
-      ------------------------------------------------
-      -- Fila compacta
-      ------------------------------------------------
-      formspec =
-          formspec
-
-          .. "image[0.3,"..y..";0.7,0.7;"
-          .. skin .. "]"
-
-          .. "label[1.1,"..y..";"
-          .. core.formspec_escape(
-              get_rank_display(pname)
-          ) .. "]"
-
-          .. "label[6.2,"..y..";S:"
-          .. math.floor(
-              sdata.session_time / 3600
-          ) .. "h]"
-
-          .. "label[8.0,"..y..";T:"
-          .. math.floor(
-              pdata.total_hours
-          ) .. "h]"
-
-          .. "label[9.8,"..y..";J:"
-          .. pdata.sessions .. "]"
-
-      y = y + 0.8
-    end
-
-    formspec = formspec .. "scroll_container_end[]"
-
-    core.show_formspec( name, "ac:panel", formspec )
+    show_ac_panel(name)
 
     return true
   end
@@ -320,189 +461,242 @@ core.register_chatcommand("ac", {
 -- EVENTOS BOTONES PANEL AC (UNIFICADO)
 --------------------------------------------------------
 core.register_on_player_receive_fields(function(player, formname, fields)
+  local name = player:get_player_name()
+
+  ----------------------------------------------------
+  -- BACK FROM RANK TOPS
+  ----------------------------------------------------
+  if formname == "ac:ranktops" then
+    if fields.back then
+      show_ac_panel(name)
+    end
+
+    return
+  end
+
+
+  ----------------------------------------------------
+  -- BACK FROM GUARDIAN
+  ----------------------------------------------------
+  if formname == "ac:guardian" then
+    if fields.back then
+      show_ac_panel(name)
+    end
+
+    return
+  end
+
+
   if formname ~= "ac:panel" then return end
+  ----------------------------------------------------
+  -- PANEL RANK TOPS
+  ----------------------------------------------------
+  if fields.ranktops then
+    local groups = build_rank_tops()
 
-    ----------------------------------------------------
-    -- PANEL RANK TOPS
-    ----------------------------------------------------
-    if fields.ranktops then
-      local groups = build_rank_tops()
+    local fs =
+      "formspec_version[4]"
+      .. "size[14,10]"
+      .. default.gui_bg
+      .. default.gui_bg_img
+      .. "label[0.3,0.3;" ..
+        core.formspec_escape(S("Rank Tops Panel")) .. "]"
 
-      local fs =
-        "formspec_version[4]"
-        .. "size[14,10]"
-        .. default.gui_bg
-        .. default.gui_bg_img
-        .. "label[0.3,0.3;Rank Tops Panel]"
+    local y = 0.3
 
-      local y = 0
+    fs = fs ..
+      "scroll_container[0.3,0.8;12.5,7.8;scroll;vertical]"
 
-      fs = fs .. "scroll_container[0.3,0.8;12.8,8.8;scroll;vertical]"
-
-      local function draw(title,list)
-        if #list == 0 then return end
-        fs = fs .. "label[0.2,"..y..";--- " .. title .. " ---]"
-        y = y + 0.5
-        for i=1, #list do
-          local name = list[i][1]
-          local data = list[i][2]
-
-          fs = fs ..
-            "label[0.5,"..y..";"
-            .. i .. ". "
-            .. name
-            .. " - "
-            .. math.floor(data.total_hours)
-            .. "h]"
-
-          y = y + 0.5
-        end
-        y = y + 0.3
+    local function draw(title, list)
+      if #list == 0 then
+        return
       end
-
-      draw("OWNER", groups.owner)
-      draw("MODERATOR", groups.moderator)
-      draw("STAFF", groups.staff)
-      draw("GUARDIAN", groups.guardian)
-      draw("BUILDER", groups.builder)
-      draw("PLAYER", groups.player)
-
-      fs = fs .. "scroll_container_end[]"
-
-      local content_height = y
 
       fs = fs ..
-        "scrollbar[13.2,0.8;0.5,8.8;vertical;scroll;"
-        .. content_height .. "]"
+        "label[0.2," .. y .. ";--- " ..
+        core.formspec_escape(S(title)) ..
+        " ---]"
 
-      core.show_formspec(player:get_player_name(), "ac:ranktops", fs)
-    end
+      y = y + 0.5
 
-    ----------------------------------------------------
-    -- PANEL GUARDIAN PROGRESS
-    ----------------------------------------------------
-    if fields.guardian then
-      local list = {}
-      for name, data in pairs(persistent) do
-        local rank = ranks and ranks.get_rank and ranks.get_rank(name) or ""
-        rank = tostring(rank):lower()
-
-        if rank:find("build10") or rank:find("builder10") then
-          local total_hours = data.total_hours or 0
-
-          local sessions = data.sessions or 0
-
-          local days = math.max(1, (os.time() - data.first_join) / 86400)
-          -- Días jugados totales
-          local join_day = math.floor(data.first_join / 86400)
-          local today = math.floor(os.time() / 86400)
-          local days_played = math.min(today - join_day, data.sessions)
-
-          -- Antigüedad mínima de la cuenta (3 meses = 90 días)
-          local account_age_days = today - join_day
-          local age_ok = account_age_days >= 90
-
-          ------------------------------------------------
-          -- PROGRESOS
-          ------------------------------------------------
-          local hours_prog = math.min(100, (total_hours / 90) * 100)
-
-          local avg_day = total_hours / days
-
-          local activity_prog = math.min(100, (avg_day / 12) * 100)
-
-          local join_ratio = sessions / math.max(1,total_hours)
-
-          local join_prog = math.min(100, (0.5 / join_ratio) * 100)
-
-          ------------------------------------------------
-          -- CONDICIONES
-          ------------------------------------------------
-          local hours_ok = total_hours >= 90
-
-          local activity_ok = avg_day >= 12
-
-          local join_ok = join_ratio <= 0.5
-
-          ------------------------------------------------
-          -- AUTO ASCENSO
-          ------------------------------------------------
-          if hours_ok and activity_ok and join_ok and age_ok and days_played >= 60 and rank ~= "guardian" then
-            core.chat_send_all("💚 " .. name .. " promoted to Guardian!")
-            core.run_server_chatcommand("rank", name .. " guardian")
-          end
-
-          table.insert(list, {name = name, hours = total_hours, h = hours_prog, a = activity_prog, j = join_prog, ok =hours_ok and activity_ok and join_ok, days = days_played })
-        end
-      end
-
-      ------------------------------------------------
-      -- FORMSPEC
-      ------------------------------------------------
-      ------------------------------------------------
-      -- FORMSPEC LOG NUMÉRICO
-      ------------------------------------------------
-      local fs =
-        "formspec_version[4]"
-        .. "size[14,10]"
-        .. default.gui_bg
-        .. default.gui_bg_img
-
-        -- Título más abajo
-        .. "label[0.3,0.5;Guardian Progress Panel]"
-
-        -- Cabecera tabla
-        .. "box[0.3,1.0;13.4,0.8;#00000088]"
-        .. "label[0.5,1.2;Player]"
-        .. "label[4.0,1.2;Hours]"
-        .. "label[6.5,1.2;Activity %]"
-        .. "label[9.5,1.2;Join Ratio]"
-        .. "label[11.0,1.2;Days]"  -- NUEVO
-        .. "label[12.0,1.2;Status]"
-
-
-        -- Scroll más abajo
-        .. "scroll_container[0.3,2.0;13.4,7.5;scroll;vertical]"
-
-      local y = 0.2
-
-      for _, p in ipairs(list) do
-        local status = p.ok and "💚 READY" or "❌ NOT READY"
+      for i = 1, #list do
+        local name = list[i][1]
+        local data = list[i][2]
 
         fs = fs ..
-          -- Fondo fila
-          "box[0.0,"..y..";13.0,0.6;#11111166]"
+          "label[0.5," .. y .. ";" ..
+          i .. ". " ..
+          core.formspec_escape(name) ..
+          " - " ..
+          math.floor(data.total_hours) ..
+          "h]"
 
-          -- Nombre
-          .. "label[0.2,"..y..";"..p.name.."]"
+        y = y + 0.5
+      end
 
-          -- Horas reales (no %)
-          .. "label[4.0,"..y..";"
-          .. math.floor(p.hours)
-          .. " / 90]"
-
-          -- Actividad %
-          .. "label[6.5,"..y..";"
-          .. math.floor(p.a)
-          .. "%]"
-
-          -- Join ratio %
-          .. "label[9.5,"..y..";"
-          .. math.floor(p.j)
-          .. "%]"
-
-          -- Días jugados
-          .. "label[11.0,"..y..";"..p.days.."]"
-
-          -- Estado
-          .. "label[12.0,"..y..";"
-          .. status .. "]"
-
-        y = y + 0.7
+      y = y + 0.3
     end
+
+    draw("OWNER", groups.owner)
+    draw("MODERATOR", groups.moderator)
+    draw("STAFF", groups.staff)
+    draw("GUARDIAN", groups.guardian)
+    draw("BUILDER", groups.builder)
+    draw("PLAYER", groups.player)
 
     fs = fs .. "scroll_container_end[]"
 
+    ----------------------------------------------------
+    -- Scrollbar
+    ----------------------------------------------------
+    local viewport_height = 7.8
+    local content_height = math.max(y, viewport_height)
+
+    fs = fs ..
+      "scrollbar[13.0,0.8;0.5,7.8;vertical;scroll;" ..
+      content_height .. "]"
+
+    ----------------------------------------------------
+    -- Back button
+    ----------------------------------------------------
+    fs = fs ..
+      "button[5.0,9.0;4.0,0.8;back;" ..
+      core.formspec_escape(S("BACK")) .. "]"
+
+    core.show_formspec(
+      player:get_player_name(),
+      "ac:ranktops",
+      fs
+    )
+
+    return
+  end
+
+  ----------------------------------------------------
+  -- PANEL GUARDIAN PROGRESS
+  ----------------------------------------------------
+  if fields.guardian then
+    local list = {}
+    for name, data in pairs(persistent) do
+      local rank = ranks and ranks.get_rank and ranks.get_rank(name) or ""
+      rank = tostring(rank):lower()
+
+      if rank:find("build10") or rank:find("builder10") then
+        local total_hours = data.total_hours or 0
+
+        local sessions = data.sessions or 0
+
+        local days = math.max(1, (os.time() - data.first_join) / 86400)
+        -- Días jugados totales
+        local join_day = math.floor(data.first_join / 86400)
+        local today = math.floor(os.time() / 86400)
+        local days_played = math.min(today - join_day, data.sessions)
+
+        -- Antigüedad mínima de la cuenta (3 meses = 90 días)
+        local account_age_days = today - join_day
+        local age_ok = account_age_days >= 90
+
+        ------------------------------------------------
+        -- PROGRESOS
+        ------------------------------------------------
+        local hours_prog = math.min(100, (total_hours / 90) * 100)
+
+        local avg_day = total_hours / days
+
+        local activity_prog = math.min(100, (avg_day / 12) * 100)
+
+        local join_ratio = sessions / math.max(1,total_hours)
+
+        local join_prog = math.min(100, (0.5 / join_ratio) * 100)
+
+        ------------------------------------------------
+        -- CONDICIONES
+        ------------------------------------------------
+        local hours_ok = total_hours >= 90
+
+        local activity_ok = avg_day >= 12
+
+        local join_ok = join_ratio <= 0.5
+
+        ------------------------------------------------
+        -- AUTO ASCENSO
+        ------------------------------------------------
+        if hours_ok and activity_ok and join_ok and age_ok and days_played >= 60 and rank ~= "guardian" then
+          core.chat_send_all("💚 " .. S("@1 promoted to Guardian!", name) )
+          core.run_server_chatcommand("rank", name .. " guardian")
+        end
+
+        table.insert(list, {name = name, hours = total_hours, h = hours_prog, a = activity_prog, j = join_prog, ok = hours_ok and activity_ok and join_ok, days = days_played })
+      end
+    end
+
+    ------------------------------------------------
+    -- FORMSPEC
+    ------------------------------------------------
+    ------------------------------------------------
+    -- FORMSPEC LOG NUMÉRICO
+    ------------------------------------------------
+    local fs =
+      "formspec_version[4]"
+      .. "size[14,10]"
+      .. default.gui_bg
+      .. default.gui_bg_img
+
+      -- Título más abajo
+      .. "label[0.3,0.5;" .. core.formspec_escape(S("Guardian Progress Panel")) .. "]"
+
+      -- Cabecera tabla
+      .. "box[0.3,1.0;13.4,0.8;#00000088]"
+      .. "label[0.5,1.2;" .. core.formspec_escape(S("Player")) .. "]"
+      .. "label[4.0,1.2;" .. core.formspec_escape(S("Hours")) .. "]"
+      .. "label[6.5,1.2;" .. core.formspec_escape(S("Activity %")) .. "]"
+      .. "label[9.5,1.2;" .. core.formspec_escape(S("Join Ratio")) .. "]"
+      .. "label[11.0,1.2;" .. core.formspec_escape(S("Days")) .. "]"
+      .. "label[12.0,1.2;" .. core.formspec_escape(S("Status")) .. "]"
+
+
+      -- Scroll más abajo
+      .. "scroll_container[0.3,2.0;13.4,7.5;scroll;vertical]"
+
+    local y = 0.2
+
+    for _, p in ipairs(list) do
+      local status = "❌ " .. S("NOT READY")
+      if p.ok then
+        status = "💚 " .. S("READY")
+      end
+
+      fs = fs ..
+        -- Fondo fila
+        "box[0.0," .. y .. ";13.0,0.6;#11111166]"
+
+        -- Nombre
+        .. "label[0.2," .. y .. ";" .. core.formspec_escape(p.name) .. "]"
+
+        -- Horas reales (no %)
+        .. "label[4.0," .. y .. ";" .. core.formspec_escape(math.floor(p.hours) .. "/90") .. "]"
+
+        -- Actividad %
+        .. "label[6.5," .. y .. ";" .. core.formspec_escape(math.floor(p.a) .. "%") .. "]"
+
+        -- Join ratio %
+        .. "label[9.5," .. y .. ";" .. core.formspec_escape(math.floor(p.j) .. "%") .. "]"
+
+        -- Días jugados
+        .. "label[11.0," .. y .. ";" .. core.formspec_escape(p.days) .. "]"
+
+        -- Estado
+        .. "label[12.0," .. y .. ";" .. core.formspec_escape(status) .. "]"
+
+      y = y + 0.7
+    end
+
+    fs = fs ..
+      "scroll_container_end[]" ..
+      "button[5.0,9.0;4.0,0.8;back;" ..
+      core.formspec_escape(S("BACK")) .. "]"
+
     core.show_formspec(player:get_player_name(), "ac:guardian", fs)
+    return
   end
 end)
