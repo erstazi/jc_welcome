@@ -172,7 +172,7 @@ local function show_welcome(player)
       )
 
       .. string.format(
-        "label[%f,%f;%s",
+        "label[%f,%f;%s]",
         text_x,
         text_y_start + line_spacing,
         core.formspec_escape(S("Before starting, please read the rules with the /rules command."))
