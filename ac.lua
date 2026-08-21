@@ -375,29 +375,26 @@ local function show_ac_panel(name)
 
   local formspec =
     "formspec_version[4]"
-    .. "size[15,10]"
+    .. "size[20,11.2]"
     .. default.gui_bg
     .. default.gui_bg_img
 
-    .. "label[0.3,0.2;" ..
+    .. "label[0.3,0.3;" ..
       core.formspec_escape(S("Active Players Panel")) .. "]"
-    .. "label[11,0.2;" ..
+    .. "label[11,0.3;" ..
       core.formspec_escape(S("Server Age: @1 days", age)) .. "]"
 
-    .. "box[0.2,0.7;14.6,1.2;#00000088]"
+    .. "box[0.2,0.7;19.6,1.2;#00000088]"
 
-    .. "label[0.4,0.9;" ..
-      core.formspec_escape(S("Players: @1", stats.players)) .. "]"
+    .. "label[0.4,1.2;" .. core.formspec_escape(S("Players: @1", stats.players)) .. "]"
 
-    .. "label[3.0,0.9;" ..
-      core.formspec_escape(S("Total Hours: @1", stats.hours)) .. "]"
+    .. "label[7.0,1.2;" .. core.formspec_escape(S("Total Hours: @1", stats.hours)) .. "]"
 
-    .. "label[7.0,0.9;" ..
-      core.formspec_escape(S("Most Active: @1", stats.top)) .. "]"
+    .. "label[13.0,1.2;" .. core.formspec_escape(S("Most Active: @1", stats.top)) .. "]"
 
-    .. "box[0.2,2.0;14.6,6.8;#00000066]"
+    .. "box[0.2,2.0;19.6,8;#00000066]"
 
-    .. "scroll_container[0.3,2.2;14.4,7.2;scroll;vertical]"
+    .. "scroll_container[0.3,2.2;19.4,8.4;scroll;vertical]"
 
   local y = 0.2
 
@@ -417,15 +414,11 @@ local function show_ac_panel(name)
 
     formspec =
       formspec
-      .. "image[0.3," .. y .. ";0.7,0.7;" .. skin .. "]"
-      .. "label[1.1," .. y .. ";" ..
-        core.formspec_escape(get_rank_display(pname)) .. "]"
-      .. "label[6.2," .. y .. ";S:" ..
-        math.floor(sdata.session_time / 3600) .. "h]"
-      .. "label[8.0," .. y .. ";T:" ..
-        math.floor(pdata.total_hours) .. "h]"
-      .. "label[9.8," .. y .. ";J:" ..
-        pdata.sessions .. "]"
+      .. "image[0.3," .. y - 0.2 .. ";0.7,0.7;" .. skin .. "]"
+      .. "label[1.1," .. y .. ";" .. core.formspec_escape(get_rank_display(pname)) .. "]"
+      .. "label[6.2," .. y .. ";S:" .. math.floor(sdata.session_time / 3600) .. "h]"
+      .. "label[8.0," .. y .. ";T:" .. math.floor(pdata.total_hours) .. "h]"
+      .. "label[9.8," .. y .. ";J:" .. pdata.sessions .. "]"
 
     y = y + 0.8
   end
@@ -436,8 +429,8 @@ local function show_ac_panel(name)
     ------------------------------------------------
     -- Bottom buttons
     ------------------------------------------------
-    .. "button[8.5,9.2;3,0.8;ranktops;" .. core.formspec_escape(S("RANK TOPS")) .. "]"
-    .. "button[11.8,9.2;3,0.8;guardian;" .. core.formspec_escape(S("GUARDIAN")) .. "]"
+    .. "button[6.5,10.3;3,0.8;ranktops;" .. core.formspec_escape(S("RANK TOPS")) .. "]"
+    .. "button[10.5,10.3;3,0.8;guardian;" .. core.formspec_escape(S("GUARDIAN")) .. "]"
 
   core.show_formspec(name, "ac:panel", formspec)
 end
@@ -498,16 +491,15 @@ core.register_on_player_receive_fields(function(player, formname, fields)
 
     local fs =
       "formspec_version[4]"
-      .. "size[14,10]"
+      .. "size[20,11.2]"
       .. default.gui_bg
       .. default.gui_bg_img
-      .. "label[0.3,0.3;" ..
-        core.formspec_escape(S("Rank Tops Panel")) .. "]"
+      .. "label[0.3,0.3;" .. core.formspec_escape(S("Rank Tops Panel")) .. "]"
 
     local y = 0.3
 
     fs = fs ..
-      "scroll_container[0.3,0.8;12.5,7.8;scroll;vertical]"
+      "scroll_container[0.3,0.8;18.5,9.0;ranktops_scroll;vertical;0.1;0.3]"
 
     local function draw(title, list)
       if #list == 0 then
@@ -515,9 +507,7 @@ core.register_on_player_receive_fields(function(player, formname, fields)
       end
 
       fs = fs ..
-        "label[0.2," .. y .. ";--- " ..
-        core.formspec_escape(S(title)) ..
-        " ---]"
+        "label[0.2," .. y .. ";--- " .. core.formspec_escape(S(title)) .. " ---]"
 
       y = y + 0.5
 
@@ -526,12 +516,7 @@ core.register_on_player_receive_fields(function(player, formname, fields)
         local data = list[i][2]
 
         fs = fs ..
-          "label[0.5," .. y .. ";" ..
-          i .. ". " ..
-          core.formspec_escape(name) ..
-          " - " ..
-          math.floor(data.total_hours) ..
-          "h]"
+          "label[0.5," .. y .. ";" .. i .. ". " .. core.formspec_escape(name) .. " - " .. math.floor(data.total_hours) .. "h]"
 
         y = y + 0.5
       end
@@ -545,25 +530,25 @@ core.register_on_player_receive_fields(function(player, formname, fields)
     draw("GUARDIAN", groups.guardian)
     draw("BUILDER", groups.builder)
     draw("PLAYER", groups.player)
+    draw("PLAYER", groups.player)
+    draw("PLAYER", groups.player)
+    draw("PLAYER", groups.player)
 
     fs = fs .. "scroll_container_end[]"
 
     ----------------------------------------------------
     -- Scrollbar
     ----------------------------------------------------
-    local viewport_height = 7.8
-    local content_height = math.max(y, viewport_height)
 
-    fs = fs ..
-      "scrollbar[13.0,0.8;0.5,7.8;vertical;scroll;" ..
-      content_height .. "]"
+    fs = fs
+      .. "scrollbaroptions[max=1000;smallstep=10;largestep=10]"
+      .. "scrollbar[19.0,0.8;0.5,9.0;vertical;ranktops_scroll;0]"
 
     ----------------------------------------------------
-    -- Back button
+    -- BACK button
     ----------------------------------------------------
     fs = fs ..
-      "button[5.0,9.0;4.0,0.8;back;" ..
-      core.formspec_escape(S("BACK")) .. "]"
+      "button[8.0,10.2;4.0,0.8;back;" .. core.formspec_escape(S("BACK")) .. "]"
 
     core.show_formspec(
       player:get_player_name(),
@@ -637,7 +622,7 @@ core.register_on_player_receive_fields(function(player, formname, fields)
     ------------------------------------------------
     local fs =
       "formspec_version[4]"
-      .. "size[14,10]"
+      .. "size[21.0,11.2]"
       .. default.gui_bg
       .. default.gui_bg_img
 
@@ -645,25 +630,25 @@ core.register_on_player_receive_fields(function(player, formname, fields)
       .. "label[0.3,0.5;" .. core.formspec_escape(S("Guardian Progress Panel")) .. "]"
 
       -- Header background
-      .. "box[0.3,1.0;13.4,0.8;#00000088]"
+      .. "box[0.3,1.0;19.4,0.8;#00000088]"
 
       -- Header
-      .. "label[0.5,1.2;" .. core.formspec_escape(S("Player")) .. "]"
-      .. "label[3.5,1.2;" .. core.formspec_escape(S("Hours")) .. "]"
-      .. "label[5.3,1.2;" .. core.formspec_escape(S("Activity %")) .. "]"
-      .. "label[7.1,1.2;" .. core.formspec_escape(S("Join Ratio")) .. "]"
-      .. "label[8.9,1.2;" .. core.formspec_escape(S("Days")) .. "]"
-      .. "label[10.9,1.2;" .. core.formspec_escape(S("Status")) .. "]"
+      .. "label[0.5,1.5;" .. core.formspec_escape(S("Player")) .. "]"
+      .. "label[6.0,1.5;" .. core.formspec_escape(S("Hours")) .. "]"
+      .. "label[8.3,1.5;" .. core.formspec_escape(S("Activity %")) .. "]"
+      .. "label[10.9,1.5;" .. core.formspec_escape(S("Join Ratio")) .. "]"
+      .. "label[14.1,1.5;" .. core.formspec_escape(S("Days")) .. "]"
+      .. "label[16.3,1.5;" .. core.formspec_escape(S("Status")) .. "]"
 
       -- Column separators
-      .. "box[3.2,1.0;0.02,7.5;#ffffff22]"
-      .. "box[5.0,1.0;0.02,7.5;#ffffff22]"
-      .. "box[6.8,1.0;0.02,7.5;#ffffff22]"
-      .. "box[8.6,1.0;0.02,7.5;#ffffff22]"
-      .. "box[10.6,1.0;0.02,7.5;#ffffff22]"
+      .. "box[5.5,1.0;0.02,7.5;#ffffff22]"
+      .. "box[8.0,1.0;0.02,7.5;#ffffff22]"
+      .. "box[10.8,1.0;0.02,7.5;#ffffff22]"
+      .. "box[13.6,1.0;0.02,7.5;#ffffff22]"
+      .. "box[15.8,1.0;0.02,7.5;#ffffff22]"
 
       -- Scroll area
-      .. "scroll_container[0.3,2.0;13.4,7.5;scroll;vertical]"
+      .. "scroll_container[0.3,2.0;19.4,7.8;scroll_guardian;vertical]"
 
     local y = 0.2
 
@@ -674,36 +659,46 @@ core.register_on_player_receive_fields(function(player, formname, fields)
         status = S("READY")
       end
 
-      -- Row separator
-      fs = fs ..
-        "box[0.0," .. (y + 0.6) .. ";13.4,0.02;#ffffff22]"
+      fs = fs
+        -- Row separator
+        .. "box[0.3," .. (y + 0.3) .. ";19.4,0.02;#ffffff22]"
 
         -- Player
         .. "label[0.2," .. y .. ";" .. core.formspec_escape(p.name) .. "]"
 
         -- Hours
-        .. "label[3.2," .. y .. ";" .. core.formspec_escape(math.floor(p.hours) .. "/90") .. "]"
+        .. "label[5.7," .. y .. ";" .. core.formspec_escape(math.floor(p.hours) .. "/90") .. "]"
 
         -- Activity
-        .. "label[5.0," .. y .. ";" .. core.formspec_escape(math.floor(p.a) .. "%") .. "]"
+        .. "label[8.2," .. y .. ";" .. core.formspec_escape(math.floor(p.a) .. "%") .. "]"
 
         -- Join Ratio
-        .. "label[6.8," .. y .. ";" .. core.formspec_escape(math.floor(p.j) .. "%") .. "]"
+        .. "label[11.0," .. y .. ";" .. core.formspec_escape(math.floor(p.j) .. "%") .. "]"
 
         -- Days
-        .. "label[8.6," .. y .. ";" .. core.formspec_escape(p.days) .. "]"
+        .. "label[13.8," .. y .. ";" .. core.formspec_escape(p.days) .. "]"
 
         -- Status
-        .. "label[10.8," .. y .. ";" .. core.formspec_escape(status) .. "]"
+        .. "label[16.0," .. y .. ";" .. core.formspec_escape(status) .. "]"
 
       y = y + 0.7
     end
 
     fs = fs ..
-      "scroll_container_end[]" ..
+      "scroll_container_end[]"
+    ----------------------------------------------------
+    -- Scrollbar
+    ----------------------------------------------------
 
-      -- Back button
-      "button[5.0,9.0;4.0,0.8;back;" .. core.formspec_escape(S("BACK")) .. "]"
+    fs = fs
+      .. "scrollbaroptions[max=1000;smallstep=10;largestep=10]"
+      .. "scrollbar[19.8,1.8;0.5,8.2;vertical;scroll_guardian;0]"
+
+    ----------------------------------------------------
+    -- BACK button
+    ----------------------------------------------------
+    fs = fs ..
+      "button[8.0,10.2;4.0,0.8;back;" .. core.formspec_escape(S("BACK")) .. "]"
 
     core.show_formspec(player:get_player_name(), "ac:guardian", fs)
 

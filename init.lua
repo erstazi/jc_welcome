@@ -113,41 +113,39 @@ local function show_welcome(player)
   -- FORMSPEC
   --------------------------------------------------
 
-  local formspec = "size[17,10]"
+  local formspec = "formspec_version[4]"
+    .. "size[20,11.3]"
     .. default.gui_bg
     .. default.gui_bg_img
 
-    .. "box[0.0,0.0;12.5,2;#111111]"
+    .. "box[0.0,0.0;15.3,2;#111111]"
 
-    .. string.format(
-      "label[3.0,0.3;%s]",
-      core.formspec_escape(server_name)
-    )
+    .. string.format("label[3.0,0.3;%s]", core.formspec_escape(server_name) )
 
-    .. string.format(
-      "label[3.0,0.9;%s:%s]",
-      core.formspec_escape(server_address),
-      port
-    )
+    .. string.format("label[3.0,0.9;%s:%s]", core.formspec_escape(server_address), core.formspec_escape(port) )
 
     .. "image[0.5,0.0;2,2;inventory_logo.png]"
+    .. "image[14.7,0.2;0.9,0.9;discord_logo.png]"
 
-    .. "image[11.9,0.2;0.9,0.9;discord_logo.png]"
+    .. "button_url[15.6,0.2;4.1,0.9;discord_link;"
+      .. core.formspec_escape(S("Join Discord"))
+      .. ";[https://discord.gg/C8Ev9td5k](https://discord.gg/C8Ev9td5k)]"
 
-    .. "button_url[12.6,0.2;3.8,0.9;discord_link;" .. core.formspec_escape(S("Join Discord")) .. ";https://discord.gg/C8Ev9td5k]"
+    .. "button_url[15.6,1.2;4.1,0.9;web_link;"
+      .. core.formspec_escape(S("Visit Website"))
+      .. ";[https://just-craft.servegame.com/](https://just-craft.servegame.com/)]"
 
-    .. "button_url[12.6,1.2;3.8,0.9;web_link;" .. core.formspec_escape(S("Visit Website")) .. ";https://just-craft.servegame.com/]"
+    .. "button_url[15.6,2.2;4.1,0.9;forum_link;"
+      .. core.formspec_escape(S("Visit Forum"))
+      .. ";[https://forum.luanti.org/viewtopic.php?t=32339](https://forum.luanti.org/viewtopic.php?t=32339)]"
 
-    .. "button_url[12.6,2.2;3.8,0.9;forum_link;" .. core.formspec_escape(S("Visit Forum")) .. ";https://forum.luanti.org/viewtopic.php?t=32339]"
-
-    .. "button_exit[0.5,8.5;3,1;close;" .. core.formspec_escape(S("Let's Play!")) .. "]"
 
   --------------------------------------------------
   -- TEXTS AND AVATAR
   --------------------------------------------------
 
   local avatar_x = 0.5
-  local avatar_y = 3.5
+  local avatar_y = 2.5
   local avatar_w = 3
   local avatar_h = 4.5
 
@@ -172,9 +170,11 @@ local function show_welcome(player)
       )
 
       .. string.format(
-        "label[%f,%f;%s]",
+        "label[%f,%f;%f,%f;%s]",
         text_x,
         text_y_start + line_spacing,
+        10.5,
+        2,
         core.formspec_escape(S("Before starting, please read the rules with the /rules command."))
       )
 
@@ -198,16 +198,18 @@ local function show_welcome(player)
       )
 
       .. string.format(
-        "label[%f,%f;%s]",
+        "label[%f,%f;%f,%f;%s]",
         text_x,
         text_y_start + line_spacing,
+        10.5,
+        2,
         core.formspec_escape( S("You first joined on @1", os.date("%A, %B %d, %Y", ptime) ) )
       )
 
       .. string.format(
         "label[%f,%f;%s]",
         text_x,
-        text_y_start + 2 * line_spacing,
+        text_y_start + 4 * line_spacing,
         core.formspec_escape(S("Local Time: @1", local_time))
       )
 
@@ -226,10 +228,10 @@ local function show_welcome(player)
   -- PLAYER LIST
   --------------------------------------------------
 
-  local list_x = 11.9
+  local list_x = 14.5
   local list_y = 3.9
-  local list_w = 4.8
-  local list_h = 5.2
+  local list_w = 5.2
+  local list_h = 6.5
 
   formspec = formspec
     .. string.format(
@@ -243,7 +245,7 @@ local function show_welcome(player)
     .. string.format(
       "label[%f,%f;%s]",
       list_x,
-      list_y - 0.5,
+      list_y - 0.4,
       core.formspec_escape(S("@1 Players Online", #player_list))
     )
 
@@ -258,9 +260,7 @@ local function show_welcome(player)
   for i, name in ipairs(player_list) do
     local display_name = get_ranked_name(name)
 
-    formspec =
-      (i > 1 and formspec .. "," or formspec)
-      .. core.formspec_escape(display_name)
+    formspec = (i > 1 and formspec .. "," or formspec) .. core.formspec_escape(display_name)
   end
 
   formspec = formspec
@@ -277,7 +277,7 @@ local function show_welcome(player)
 
   if player_rank == "owner" then
     formspec = formspec
-      .. "label[0.0,6.0;" .. core.formspec_escape(S("Owner Section: Here you can monitor server activity")) .. "]"
+      .. "label[4.0,6.0;10.5,2;" .. core.formspec_escape(S("Owner Section: Here you can monitor server activity")) .. "]"
   end
 
   --------------------------------------------------
@@ -285,14 +285,21 @@ local function show_welcome(player)
   --------------------------------------------------
 
   formspec = formspec
-    .. "label[0.0,8.1;" .. core.formspec_escape(S("General Section: Enjoy the server!")) .. "]"
+    .. "label[0.2,8.0;14.2,1.5;" .. core.formspec_escape(S("General Section: Enjoy the server!")) .. "]"
 
   --------------------------------------------------
   -- FOOTER
   --------------------------------------------------
 
   formspec = formspec
-    .. "label[0.0,9.2;" .. core.formspec_escape(S("For a complete list of available commands, type /help into chat.")) .. "]"
+    .. "label[0.2,8.6;14.2,1.5;" .. core.formspec_escape(S("For a complete list of available commands, type /help into chat.")) .. "]"
+
+  --------------------------------------------------
+  -- Let's Play Button
+  --------------------------------------------------
+
+  formspec = formspec
+    .. "button_exit[0.2,10.1;3,1;close;" .. core.formspec_escape(S("Let's Play!")) .. "]"
 
   --------------------------------------------------
   -- SHOW
