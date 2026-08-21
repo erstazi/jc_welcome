@@ -277,7 +277,7 @@ msgstr ""
 msgid "Activity %"
 msgstr ""
 
-msgid "Join Ratio"
+msgid "Join %"
 msgstr ""
 
 msgid "Days"

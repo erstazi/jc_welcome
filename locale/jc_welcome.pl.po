@@ -281,8 +281,8 @@ msgstr "Godziny"
 msgid "Activity %"
 msgstr "Aktywność %"
 
-msgid "Join Ratio"
-msgstr "Współczynnik dołączeń"
+msgid "Join %"
+msgstr "Dołączenie %"
 
 msgid "Days"
 msgstr "Dni"

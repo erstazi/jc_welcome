@@ -281,8 +281,8 @@ msgstr "Uren"
 msgid "Activity %"
 msgstr "Activiteit %"
 
-msgid "Join Ratio"
-msgstr "Deelnameverhouding"
+msgid "Join %"
+msgstr "Join %"
 
 msgid "Days"
 msgstr "Dagen"

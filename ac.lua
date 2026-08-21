@@ -636,7 +636,7 @@ core.register_on_player_receive_fields(function(player, formname, fields)
       .. "label[0.5,1.5;" .. core.formspec_escape(S("Player")) .. "]"
       .. "label[6.0,1.5;" .. core.formspec_escape(S("Hours")) .. "]"
       .. "label[8.3,1.5;" .. core.formspec_escape(S("Activity %")) .. "]"
-      .. "label[10.9,1.5;" .. core.formspec_escape(S("Join Ratio")) .. "]"
+      .. "label[10.9,1.5;" .. core.formspec_escape(S("Join %")) .. "]"
       .. "label[14.1,1.5;" .. core.formspec_escape(S("Days")) .. "]"
       .. "label[16.3,1.5;" .. core.formspec_escape(S("Status")) .. "]"
 

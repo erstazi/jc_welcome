@@ -281,8 +281,8 @@ msgstr "Hours"
 msgid "Activity %"
 msgstr "Activity %"
 
-msgid "Join Ratio"
-msgstr "Join Ratio"
+msgid "Join %"
+msgstr "Join %"
 
 msgid "Days"
 msgstr "Days"
