@@ -129,15 +129,15 @@ local function show_welcome(player)
 
     .. "button_url[15.6,0.2;4.1,0.9;discord_link;"
       .. core.formspec_escape(S("Join Discord"))
-      .. ";[https://discord.gg/C8Ev9td5k](https://discord.gg/C8Ev9td5k)]"
+      .. ";https://discord.gg/C8Ev9td5k]"
 
     .. "button_url[15.6,1.2;4.1,0.9;web_link;"
       .. core.formspec_escape(S("Visit Website"))
-      .. ";[https://just-craft.servegame.com/](https://just-craft.servegame.com/)]"
+      .. ";https://just-craft.servegame.com/]"
 
     .. "button_url[15.6,2.2;4.1,0.9;forum_link;"
       .. core.formspec_escape(S("Visit Forum"))
-      .. ";[https://forum.luanti.org/viewtopic.php?t=32339](https://forum.luanti.org/viewtopic.php?t=32339)]"
+      .. ";https://forum.luanti.org/viewtopic.php?t=32339]"
 
 
   --------------------------------------------------
