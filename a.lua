@@ -43,8 +43,8 @@ local rules_table = {
   [31] = S("Do NOT share your account with others."),
   [32] = S("Do NOT ask for others' passwords."),
   [33] = S("Each player is responsible for their account security."),
-  [34] = S("Keep a friendly and safe environment for everyone."),
-  [35] = S("Do NOT post +18 or inappropriate content."),
+  [34] = S("Do NOT post +18 or inappropriate content."),
+  [35] = S("Keep a friendly and safe environment for everyone."),
   [36] = S("Romantic or inappropriate roleplay is forbidden."),
 }
 
