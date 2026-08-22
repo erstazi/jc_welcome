@@ -124,7 +124,7 @@ local function show_welcome(player)
 
     .. string.format("label[3.0,0.9;%s:%s]", core.formspec_escape(server_address), core.formspec_escape(port) )
 
-    .. "image[0.5,0.0;2,2;welcome_screen_logo.png]"
+    .. "image[0.5,0.0;2,2;inventory_logo.png]"
     .. "image[14.7,0.2;0.9,0.9;discord_logo.png]"
 
     .. "button_url[15.6,0.2;4.1,0.9;discord_link;"
