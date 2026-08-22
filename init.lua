@@ -124,7 +124,7 @@ local function show_welcome(player)
 
     .. string.format("label[3.0,0.9;%s:%s]", core.formspec_escape(server_address), core.formspec_escape(port) )
 
-    .. "image[0.5,0.0;2,2;inventory_logo.png]"
+    .. "image[0.5,0.0;2,2;welcome_screen_logo.png]"
     .. "image[14.7,0.2;0.9,0.9;discord_logo.png]"
 
     .. "button_url[15.6,0.2;4.1,0.9;discord_link;"
@@ -144,10 +144,15 @@ local function show_welcome(player)
   -- TEXTS AND AVATAR
   --------------------------------------------------
 
-  local avatar_x = 0.5
-  local avatar_y = 2.5
-  local avatar_w = 3
-  local avatar_h = 4.5
+  local avatar_x = 0.92
+  local avatar_y = 3.03
+  local avatar_w = 2.16
+  local avatar_h = 3.24
+
+  local frame_x = 0.25
+  local frame_y = 2.15
+  local frame_w = 3.5
+  local frame_h = 5.25
 
   local text_x = 4.0
   local text_y_start = 2.5
@@ -158,9 +163,7 @@ local function show_welcome(player)
   --------------------------------------------------
   -- NEW PLAYER / RETURNING PLAYER
   --------------------------------------------------
-
   if is_new_player then
-
     formspec = formspec
       .. string.format(
         "label[%f,%f;%s]",
@@ -177,18 +180,7 @@ local function show_welcome(player)
         2,
         core.formspec_escape(S("Before starting, please read the rules with the /rules command."))
       )
-
-      .. string.format(
-        "image[%f,%f;%f,%f;%s]",
-        avatar_x,
-        avatar_y,
-        avatar_w,
-        avatar_h,
-        skin_texture
-      )
-
   else
-
     formspec = formspec
       .. string.format(
         "label[%f,%f;%s]",
@@ -212,17 +204,33 @@ local function show_welcome(player)
         text_y_start + 4 * line_spacing,
         core.formspec_escape(S("Local Time: @1", local_time))
       )
-
-      .. string.format(
-        "image[%f,%f;%f,%f;%s]",
-        avatar_x,
-        avatar_y,
-        avatar_w,
-        avatar_h,
-        skin_texture
-      )
-
   end
+
+  formspec = formspec
+    -- Dark background behind player
+    .. string.format(
+      "box[%f,%f;%f,%f;#111111]",
+      frame_x + 0.40,
+      frame_y + 0.40,
+      frame_w - 0.95,
+      frame_h - 0.95
+    )
+    .. string.format(
+      "image[%f,%f;%f,%f;%s]",
+      avatar_x,
+      avatar_y,
+      avatar_w,
+      avatar_h,
+      skin_texture
+    )
+
+    .. string.format(
+      "image[%f,%f;%f,%f;player_frame.png]",
+      frame_x,
+      frame_y,
+      frame_w,
+      frame_h
+    )
 
   --------------------------------------------------
   -- PLAYER LIST
