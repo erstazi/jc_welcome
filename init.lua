@@ -212,7 +212,7 @@ local function show_welcome(player)
       "box[%f,%f;%f,%f;#111111]",
       frame_x + 0.40,
       frame_y + 0.40,
-      frame_w - 0.95,
+      frame_w - 0.55,
       frame_h - 0.95
     )
     .. string.format(
