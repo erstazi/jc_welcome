@@ -133,7 +133,7 @@ local function show_welcome(player)
 
     .. "button_url[15.6,1.2;4.1,0.9;web_link;"
       .. core.formspec_escape(S("Visit Website"))
-      .. ";https://just-craft.servegame.com/]"
+      .. ";https://justcraft.dssapp.us/]"
 
     .. "button_url[15.6,2.2;4.1,0.9;forum_link;"
       .. core.formspec_escape(S("Visit Forum"))
