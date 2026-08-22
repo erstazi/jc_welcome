@@ -16,6 +16,46 @@ core.register_on_newplayer(function(player)
 end)
 
 --------------------------------------------------------
+-- DATE FORMATTING
+--------------------------------------------------------
+
+local DAYS = {
+  S("Sunday"),
+  S("Monday"),
+  S("Tuesday"),
+  S("Wednesday"),
+  S("Thursday"),
+  S("Friday"),
+  S("Saturday")
+}
+
+local MONTHS = {
+  S("January"),
+  S("February"),
+  S("March"),
+  S("April"),
+  S("May"),
+  S("June"),
+  S("July"),
+  S("August"),
+  S("September"),
+  S("October"),
+  S("November"),
+  S("December")
+}
+
+local function format_date(timestamp)
+  local t = os.date("*t", timestamp)
+
+  return S("@1, @2 @3, @4",
+    DAYS[t.wday],
+    MONTHS[t.month],
+    t.day,
+    t.year
+  )
+end
+
+--------------------------------------------------------
 -- SHOW WELCOME SCREEN
 --------------------------------------------------------
 
@@ -195,7 +235,8 @@ local function show_welcome(player)
         text_y_start + line_spacing,
         10.5,
         2,
-        core.formspec_escape( S("You first joined on @1", os.date("%A, %B %d, %Y", ptime) ) )
+        -- core.formspec_escape( S("You first joined on @1", os.date("%A, %B %d, %Y", ptime) ) )
+        core.formspec_escape( S("You first joined on @1", format_date(ptime)) )
       )
 
       .. string.format(

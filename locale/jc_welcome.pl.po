@@ -298,3 +298,63 @@ msgstr "NIEGOTOWY"
 
 msgid "promoted to Guardian!"
 msgstr "otrzymał awans na Strażnika!"
+
+msgid "Sunday"
+msgstr "niedziela"
+
+msgid "Monday"
+msgstr "poniedziałek"
+
+msgid "Tuesday"
+msgstr "wtorek"
+
+msgid "Wednesday"
+msgstr "środa"
+
+msgid "Thursday"
+msgstr "czwartek"
+
+msgid "Friday"
+msgstr "piątek"
+
+msgid "Saturday"
+msgstr "sobota"
+
+msgid "January"
+msgstr "stycznia"
+
+msgid "February"
+msgstr "lutego"
+
+msgid "March"
+msgstr "marca"
+
+msgid "April"
+msgstr "kwietnia"
+
+msgid "May"
+msgstr "maja"
+
+msgid "June"
+msgstr "czerwca"
+
+msgid "July"
+msgstr "lipca"
+
+msgid "August"
+msgstr "sierpnia"
+
+msgid "September"
+msgstr "września"
+
+msgid "October"
+msgstr "października"
+
+msgid "November"
+msgstr "listopada"
+
+msgid "December"
+msgstr "grudnia"
+
+msgid "@1, @2 @3, @4"
+msgstr "@1, @3 @2 @4"

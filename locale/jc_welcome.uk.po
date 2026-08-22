@@ -298,3 +298,63 @@ msgstr "НЕ ГОТОВИЙ"
 
 msgid "promoted to Guardian!"
 msgstr "отримав підвищення до Хранителя!"
+
+msgid "Sunday"
+msgstr "неділя"
+
+msgid "Monday"
+msgstr "понеділок"
+
+msgid "Tuesday"
+msgstr "вівторок"
+
+msgid "Wednesday"
+msgstr "середа"
+
+msgid "Thursday"
+msgstr "четвер"
+
+msgid "Friday"
+msgstr "п’ятниця"
+
+msgid "Saturday"
+msgstr "субота"
+
+msgid "January"
+msgstr "січня"
+
+msgid "February"
+msgstr "лютого"
+
+msgid "March"
+msgstr "березня"
+
+msgid "April"
+msgstr "квітня"
+
+msgid "May"
+msgstr "травня"
+
+msgid "June"
+msgstr "червня"
+
+msgid "July"
+msgstr "липня"
+
+msgid "August"
+msgstr "серпня"
+
+msgid "September"
+msgstr "вересня"
+
+msgid "October"
+msgstr "жовтня"
+
+msgid "November"
+msgstr "листопада"
+
+msgid "December"
+msgstr "грудня"
+
+msgid "@1, @2 @3, @4"
+msgstr "@1, @3 @2 @4"
