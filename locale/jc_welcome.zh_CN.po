@@ -1,0 +1,366 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: jc_welcome\n"
+"Language: zh_CN\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Join Discord"
+msgstr "加入 Discord"
+
+msgid "Visit Website"
+msgstr "访问网站"
+
+msgid "Visit Forum"
+msgstr "访问论坛"
+
+msgid "Let's Play!"
+msgstr "开始游戏！"
+
+msgid "Show Places"
+msgstr "显示地点"
+
+msgid "You last logged on @1"
+msgstr "您上次登录是在 @1"
+
+msgid "Greetings, @1!"
+msgstr "您好，@1！"
+
+msgid "Before starting, please read the rules with the /rules command."
+msgstr "开始之前，请使用 /rules 命令阅读服务器规则。"
+
+msgid "Welcome back, @1!"
+msgstr "欢迎回来，@1！"
+
+msgid "You first joined on @1"
+msgstr "您首次加入是在 @1"
+
+msgid "Local Time: @1"
+msgstr "当地时间：@1"
+
+msgid "@1 Players Online"
+msgstr "@1 名玩家在线"
+
+msgid "Owner Section: Here you can monitor server activity"
+msgstr "服主区域：您可以在这里监控服务器活动"
+
+msgid "General Section: Enjoy the server!"
+msgstr "普通区域：享受服务器吧！"
+
+msgid "For a complete list of available commands, type /help into chat."
+msgstr "要查看所有可用命令，请在聊天中输入 /help。"
+
+msgid "Show the welcome screen again"
+msgstr "再次显示欢迎界面"
+
+msgid "Player not found."
+msgstr "未找到玩家。"
+
+msgid "SERVER RULES"
+msgstr "服务器规则"
+
+msgid "You have @1 seconds to accept."
+msgstr "您有 @1 秒的时间接受。"
+
+msgid "If you close this window without accepting, then you will have a @1 minute penalty."
+msgstr "如果您未接受就关闭此窗口，您将受到 @1 分钟的处罚。"
+
+msgid "You are temporarily penalized. Wait @1 seconds."
+msgstr "您暂时受到处罚。请等待 @1 秒。"
+
+msgid "Force player to accept rules"
+msgstr "强制玩家接受规则"
+
+msgid "Usage: /rule <player>"
+msgstr "用法：/rule <player>"
+
+msgid "I Accept"
+msgstr "我接受"
+
+msgid "Rules sent to @1"
+msgstr "规则已发送给 @1"
+
+msgid "You closed the rules window. You are penalized for @1 minutes."
+msgstr "您关闭了规则窗口。您将受到 @1 分钟的处罚。"
+
+msgid "@1 accepted the rules."
+msgstr "@1 接受了规则。"
+
+msgid "You did not accept the rules. You are penalized for @1 minutes."
+msgstr "您没有接受规则。您将受到 @1 分钟的处罚。"
+
+msgid "View panel or register sanction report"
+msgstr "查看面板或登记处罚报告"
+
+msgid "Usage: /sanction <player> <reason> <time> <type>"
+msgstr "用法：/sanction <player> <reason> <time> <type>"
+
+msgid "Sanction report registered (no punishment applied)."
+msgstr "处罚报告已登记（未实施处罚）。"
+
+msgid "View global sanction history"
+msgstr "查看全局处罚历史"
+
+msgid "No sanction history found."
+msgstr "未找到处罚历史记录。"
+
+msgid "Global Sanction History"
+msgstr "全局处罚历史"
+
+msgid "Show rules"
+msgstr "显示规则"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Use /rules to view the server rules"
+msgstr "使用 /rules 查看服务器规则"
+
+msgid "Do NOT steal from other players."
+msgstr "禁止偷窃其他玩家的物品。"
+
+msgid "Do NOT place lava or water on other players' areas."
+msgstr "禁止在其他玩家的区域放置岩浆或水。"
+
+msgid "Do NOT build on someone else's claimed area."
+msgstr "禁止在其他玩家已认领的区域建造。"
+
+msgid "Do NOT steal protected areas or land."
+msgstr "禁止盗取受保护的区域或土地。"
+
+msgid "Do NOT use modified or hacked clients."
+msgstr "禁止使用修改版或作弊客户端。"
+
+msgid "No insults, swearing, or offensive language."
+msgstr "禁止侮辱、咒骂或使用冒犯性语言。"
+
+msgid "Do NOT advertise other servers."
+msgstr "禁止宣传其他服务器。"
+
+msgid "Respect all players, especially Moderators and Staff."
+msgstr "尊重所有玩家，尤其是管理员和工作人员。"
+
+msgid "Do NOT ask for privileges or ranks (Moderator, Staff, Guardian)."
+msgstr "禁止索要权限或等级（管理员、工作人员、守护者）。"
+
+msgid "Moderator and Staff ranks are only given when applications are officially opened."
+msgstr "管理员和工作人员等级仅在正式开放申请时授予。"
+
+msgid "Do NOT place lava or water at spawn."
+msgstr "禁止在出生点放置岩浆或水。"
+
+msgid "Dating or looking for relationships inside the server is strictly forbidden."
+msgstr "严禁在服务器内约会或寻找恋爱关系。"
+
+msgid "Do NOT provoke fights or unnecessary arguments."
+msgstr "禁止挑起争斗或不必要的争吵。"
+
+msgid "Do NOT harass or annoy other players repeatedly."
+msgstr "禁止反复骚扰或打扰其他玩家。"
+
+msgid "Do NOT spam in chat."
+msgstr "禁止在聊天中刷屏。"
+
+msgid "Do NOT write everything in ALL CAPS."
+msgstr "禁止全部使用大写字母书写。"
+
+msgid "Do NOT spread false information to confuse others."
+msgstr "禁止传播虚假信息误导他人。"
+
+msgid "Do NOT build inappropriate or offensive structures."
+msgstr "禁止建造不当或冒犯性的建筑。"
+
+msgid "Do NOT destroy abandoned constructions without staff permission."
+msgstr "未经工作人员许可，禁止破坏废弃建筑。"
+
+msgid "Do NOT make traps that harm other players unfairly."
+msgstr "禁止制作不公平伤害其他玩家的陷阱。"
+
+msgid "Do NOT create lag machines or mechanisms that affect server performance."
+msgstr "禁止制造卡顿机器或影响服务器性能的装置。"
+
+msgid "Keep spawn and claimed areas tidy and aesthetically organized."
+msgstr "保持出生点和已认领区域整洁、美观、有序。"
+
+msgid "Do NOT exploit server bugs."
+msgstr "禁止利用服务器漏洞。"
+
+msgid "Do NOT duplicate items under any circumstances."
+msgstr "任何情况下都禁止复制物品。"
+
+msgid "Report bugs to Staff instead of exploiting them."
+msgstr "请向工作人员报告漏洞，而不是利用它们。"
+
+msgid "Do NOT scam other players in trades."
+msgstr "禁止在交易中欺骗其他玩家。"
+
+msgid "Owner decisions are final."
+msgstr "服主的决定为最终决定。"
+
+msgid "Do NOT publicly argue against punishments in chat."
+msgstr "禁止在聊天中公开争论处罚决定。"
+
+msgid "Report Staff issues to the Owner."
+msgstr "请向服主报告工作人员的问题。"
+
+msgid "Impersonating Staff will result in immediate punishment."
+msgstr "冒充工作人员将受到立即处罚。"
+
+msgid "Do NOT share your account with others."
+msgstr "禁止与他人共享您的账户。"
+
+msgid "Do NOT ask for others' passwords."
+msgstr "禁止索要他人的密码。"
+
+msgid "Each player is responsible for their account security."
+msgstr "每位玩家都应对自己的账户安全负责。"
+
+msgid "Keep a friendly and safe environment for everyone."
+msgstr "为所有人保持友好、安全的环境。"
+
+msgid "Do NOT post +18 or inappropriate content."
+msgstr "禁止发布 18+ 或不适当的内容。"
+
+msgid "Romantic or inappropriate roleplay is forbidden."
+msgstr "禁止恋爱或不适当的角色扮演。"
+
+msgid "Active Players Panel"
+msgstr "活跃玩家面板"
+
+msgid "Server Age: @1 days"
+msgstr "服务器运行时间：@1 天"
+
+msgid "Players: @1"
+msgstr "玩家：@1"
+
+msgid "Total Hours: @1"
+msgstr "总小时数：@1"
+
+msgid "Most Active: @1"
+msgstr "最活跃：@1"
+
+msgid "RANK TOPS"
+msgstr "等级排行榜"
+
+msgid "GUARDIAN"
+msgstr "守护者"
+
+msgid "Active Players Panel v3"
+msgstr "活跃玩家面板 v3"
+
+msgid "No permission."
+msgstr "没有权限。"
+
+msgid "Rank Tops Panel"
+msgstr "等级排行榜面板"
+
+msgid "OWNER"
+msgstr "服主"
+
+msgid "MODERATOR"
+msgstr "管理员"
+
+msgid "STAFF"
+msgstr "工作人员"
+
+msgid "BUILDER"
+msgstr "建筑师"
+
+msgid "PLAYER"
+msgstr "玩家"
+
+msgid "BACK"
+msgstr "返回"
+
+msgid "Guardian Progress Panel"
+msgstr "守护者进度面板"
+
+msgid "Player"
+msgstr "玩家"
+
+msgid "Hours"
+msgstr "小时"
+
+msgid "Activity %"
+msgstr "活跃度 %"
+
+msgid "Join %"
+msgstr "加入率 %"
+
+msgid "Days"
+msgstr "天数"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "READY"
+msgstr "准备就绪"
+
+msgid "NOT READY"
+msgstr "未准备就绪"
+
+msgid "promoted to Guardian!"
+msgstr "晋升为守护者！"
+
+msgid "Sunday"
+msgstr "星期日"
+
+msgid "Monday"
+msgstr "星期一"
+
+msgid "Tuesday"
+msgstr "星期二"
+
+msgid "Wednesday"
+msgstr "星期三"
+
+msgid "Thursday"
+msgstr "星期四"
+
+msgid "Friday"
+msgstr "星期五"
+
+msgid "Saturday"
+msgstr "星期六"
+
+msgid "January"
+msgstr "一月"
+
+msgid "February"
+msgstr "二月"
+
+msgid "March"
+msgstr "三月"
+
+msgid "April"
+msgstr "四月"
+
+msgid "May"
+msgstr "五月"
+
+msgid "June"
+msgstr "六月"
+
+msgid "July"
+msgstr "七月"
+
+msgid "August"
+msgstr "八月"
+
+msgid "September"
+msgstr "九月"
+
+msgid "October"
+msgstr "十月"
+
+msgid "November"
+msgstr "十一月"
+
+msgid "December"
+msgstr "十二月"
+
+msgid "@1, @2 @3, @4"
+msgstr "@4年@3月@2日，@1"
+
+msgid "@1, @2 @3, @4 at @5:@6"
+msgstr "@4年@3月@2日，@1 @5:@6"
