@@ -16,6 +16,12 @@ msgstr ""
 msgid "Let's Play!"
 msgstr ""
 
+msgid "Show Places"
+msgstr ""
+
+msgid "You last logged on @1"
+msgstr ""
+
 msgid "Greetings, @1!"
 msgstr ""
 
@@ -354,3 +360,7 @@ msgstr ""
 
 msgid "@1, @2 @3, @4"
 msgstr ""
+
+msgid "@1, @2 @3, @4 at @5:@6"
+msgstr ""
+

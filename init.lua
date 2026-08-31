@@ -3,11 +3,9 @@ local modpath = core.get_modpath(core.get_current_modname())
 --------------------------------------------------------
 -- Luanti :: Welcome Splash Screen Mod v2.1
 --------------------------------------------------------
-
 --------------------------------------------------------
 -- NEW PLAYER / FIRST JOIN DATA
 --------------------------------------------------------
-
 core.register_on_newplayer(function(player)
   local meta = player:get_meta()
 
@@ -18,7 +16,6 @@ end)
 --------------------------------------------------------
 -- DATE FORMATTING
 --------------------------------------------------------
-
 local DAYS = {
   S("Sunday"),
   S("Monday"),
@@ -55,10 +52,22 @@ local function format_date(timestamp)
   )
 end
 
+local function format_datetime(timestamp)
+  local t = os.date("*t", timestamp)
+
+  return S("@1, @2 @3, @4 at @5:@6",
+    DAYS[t.wday],
+    MONTHS[t.month],
+    t.day,
+    t.year,
+    string.format("%02d", t.hour),
+    string.format("%02d", t.min)
+  )
+end
+
 --------------------------------------------------------
 -- SHOW WELCOME SCREEN
 --------------------------------------------------------
-
 local function show_welcome(player)
   if not player or player:get_hp() <= 0 then
     return
@@ -73,6 +82,7 @@ local function show_welcome(player)
 
   local is_new_player = meta:get_int("welcome_new_player") == 1
   local ptime = meta:get_int("welcome_first_join")
+  local ltime = meta:get_int("welcome_previous_join")
 
   -- Existing player from before this feature existed.
   -- Give them a timestamp, but still treat them as
@@ -118,6 +128,7 @@ local function show_welcome(player)
     port = "30000"
   end
 
+  local local_time = os.date("%H:%M:%S")
 
   --------------------------------------------------
   -- Rank
@@ -164,6 +175,8 @@ local function show_welcome(player)
 
     .. string.format("label[3.5,0.9;%s:%s]", core.formspec_escape(server_address), core.formspec_escape(port) )
 
+    .. string.format("label[3.5,1.5;%s]", core.formspec_escape( S("Local Time: @1", local_time) ) )
+
     .. "image[0.97,0.0;2,2;welcome_screen_logo.png]"
     .. "image[14.7,0.2;0.9,0.9;discord_logo.png]"
 
@@ -196,23 +209,23 @@ local function show_welcome(player)
 
   local text_x = 4.0
   local text_y_start = 2.5
-  local line_spacing = 0.7
-
-  local local_time = os.date("%H:%M:%S")
+  -- local line_spacing = 0.8
+  local line_spacing = 1.2
 
   --------------------------------------------------
   -- NEW PLAYER / RETURNING PLAYER
   --------------------------------------------------
   if is_new_player then
-    formspec = formspec
-      .. string.format(
+    formspec = formspec ..
+      string.format(
         "label[%f,%f;%s]",
         text_x,
         text_y_start,
         core.formspec_escape(S("Greetings, @1!", pname))
       )
 
-      .. string.format(
+    formspec = formspec ..
+      string.format(
         "label[%f,%f;%f,%f;%s]",
         text_x,
         text_y_start + line_spacing,
@@ -221,30 +234,38 @@ local function show_welcome(player)
         core.formspec_escape(S("Before starting, please read the rules with the /rules command."))
       )
   else
-    formspec = formspec
-      .. string.format(
+    formspec = formspec ..
+      string.format(
         "label[%f,%f;%s]",
         text_x,
         text_y_start,
         core.formspec_escape(S("Welcome back, @1!", pname))
       )
 
-      .. string.format(
+    formspec = formspec ..
+      string.format(
         "label[%f,%f;%f,%f;%s]",
         text_x,
-        text_y_start + line_spacing,
+        text_y_start + 1 * line_spacing,
         10.5,
         2,
-        -- core.formspec_escape( S("You first joined on @1", os.date("%A, %B %d, %Y", ptime) ) )
         core.formspec_escape( S("You first joined on @1", format_date(ptime)) )
       )
 
-      .. string.format(
-        "label[%f,%f;%s]",
-        text_x,
-        text_y_start + 4 * line_spacing,
-        core.formspec_escape(S("Local Time: @1", local_time))
-      )
+    if ltime > 0 then
+      formspec = formspec
+        .. string.format(
+          "label[%f,%f;%f,%f;%s]",
+          text_x,
+          text_y_start + 2 * line_spacing,
+          10.5,
+          2,
+          core.formspec_escape(
+            S("You last logged on @1", format_datetime(ltime))
+          )
+        )
+    end
+
   end
 
   formspec = formspec
@@ -350,6 +371,9 @@ local function show_welcome(player)
   formspec = formspec
     .. "button_exit[0.2,10.1;3,1;close;" .. core.formspec_escape(S("Let's Play!")) .. "]"
 
+  formspec = formspec
+    .. "button[3.4,10.1;3,1;show_places;" .. core.formspec_escape(S("Show Places")) .. "]"
+
   --------------------------------------------------
   -- SHOW
   --------------------------------------------------
@@ -360,15 +384,56 @@ local function show_welcome(player)
     formspec
   )
 end
+
 --------------------------------------------------------
 -- SHOW ON JOIN
 --------------------------------------------------------
+core.register_on_player_receive_fields(function(player, formname, fields)
 
+  if formname ~= "welcome:splash" then
+    return false
+  end
+
+  if fields.show_places then
+    if jc_places and jc_places.show_places then
+      jc_places.show_places(player:get_player_name())
+    end
+    return true
+  end
+
+  return false
+end)
+
+--------------------------------------------------------
+-- SHOW ON JOIN
+--------------------------------------------------------
 core.register_on_joinplayer(function(player)
+  local meta = player:get_meta()
+  local now = os.time()
+
+  --------------------------------------------------
+  -- Save the previous join time BEFORE updating it.
+  --------------------------------------------------
+  local last_join = meta:get_int("welcome_last_join")
+
+  if last_join > 0 then
+    meta:set_int("welcome_previous_join", last_join)
+  end
+
+  --------------------------------------------------
+  -- Show welcome screen.
+  -- This now displays the previous join time.
+  --------------------------------------------------
   show_welcome(player)
 
-  local meta = player:get_meta()
+  --------------------------------------------------
+  -- Record this join as the current last join.
+  --------------------------------------------------
+  meta:set_int("welcome_last_join", now)
 
+  --------------------------------------------------
+  -- Existing player after their first join.
+  --------------------------------------------------
   if meta:get_int("welcome_new_player") == 1 then
     meta:set_int("welcome_new_player", 0)
   end
@@ -377,7 +442,6 @@ end)
 --------------------------------------------------------
 -- /welcome
 --------------------------------------------------------
-
 core.register_chatcommand("welcome", {
   description = S("Show the welcome screen again"),
 

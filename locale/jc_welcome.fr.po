@@ -17,6 +17,12 @@ msgstr "Visiter le forum"
 msgid "Let's Play!"
 msgstr "Jouons !"
 
+msgid "Show Places"
+msgstr "Afficher les lieux"
+
+msgid "You last logged on @1"
+msgstr "Votre dernière connexion était le @1"
+
 msgid "Greetings, @1!"
 msgstr "Bonjour, @1 !"
 
@@ -358,3 +364,6 @@ msgstr "décembre"
 
 msgid "@1, @2 @3, @4"
 msgstr "@1 @3 @2 @4"
+
+msgid "@1, @2 @3, @4 at @5:@6"
+msgstr "@1, @2 @3, @4 à @5:@6"

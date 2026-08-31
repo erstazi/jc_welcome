@@ -17,6 +17,12 @@ msgstr "Посетить форум"
 msgid "Let's Play!"
 msgstr "Давайте играть!"
 
+msgid "Show Places"
+msgstr "Показать места"
+
+msgid "You last logged on @1"
+msgstr "Ваш последний вход был @1"
+
 msgid "Greetings, @1!"
 msgstr "Приветствуем, @1!"
 
@@ -358,3 +364,6 @@ msgstr "декабря"
 
 msgid "@1, @2 @3, @4"
 msgstr "@1, @3 @2 @4"
+
+msgid "@1, @2 @3, @4 at @5:@6"
+msgstr "@1, @2 @3, @4 в @5:@6"
