@@ -29,8 +29,8 @@ msgstr "Ви востаннє входили @1"
 msgid "Greetings, @1!"
 msgstr "Вітаємо, @1!"
 
-msgid "Before starting, please read the rules with the /rules command."
-msgstr "Перед початком, будь ласка, ознайомтеся з правилами за допомогою команди /rules."
+msgid "Before starting, please read the rules with the @1 command."
+msgstr "Перед початком, будь ласка, ознайомтеся з правилами за допомогою команди @1."
 
 msgid "Welcome back, @1!"
 msgstr "З поверненням, @1!"
@@ -116,8 +116,8 @@ msgstr "Показати правила"
 msgid "Close"
 msgstr "Закрити"
 
-msgid "Use /rules to view the server rules"
-msgstr "Використовуйте /rules, щоб переглянути правила сервера"
+msgid "Use @1 to view the server rules"
+msgstr "Використовуйте @1, щоб переглянути правила сервера"
 
 msgid "Do NOT steal from other players."
 msgstr "НЕ крадіть у інших гравців."

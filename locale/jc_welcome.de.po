@@ -29,8 +29,8 @@ msgstr "Du hast dich zuletzt am @1 angemeldet"
 msgid "Greetings, @1!"
 msgstr "Hallo, @1!"
 
-msgid "Before starting, please read the rules with the /rules command."
-msgstr "Bevor du beginnst, lies bitte die Regeln mit dem Befehl /rules."
+msgid "Before starting, please read the rules with the @1 command."
+msgstr "Bevor du beginnst, lies bitte die Regeln mit dem Befehl @1."
 
 msgid "Welcome back, @1!"
 msgstr "Willkommen zurück, @1!"
@@ -116,8 +116,8 @@ msgstr "Regeln anzeigen"
 msgid "Close"
 msgstr "Schließen"
 
-msgid "Use /rules to view the server rules"
-msgstr "Verwende /rules, um die Serverregeln anzuzeigen"
+msgid "Use @1 to view the server rules"
+msgstr "Verwende @1, um die Serverregeln anzuzeigen"
 
 msgid "Do NOT steal from other players."
 msgstr "Stehle NICHT von anderen Spielern."

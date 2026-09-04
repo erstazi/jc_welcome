@@ -29,8 +29,8 @@ msgstr "Je was voor het laatst online op @1"
 msgid "Greetings, @1!"
 msgstr "Hallo, @1!"
 
-msgid "Before starting, please read the rules with the /rules command."
-msgstr "Lees voordat je begint de regels met het commando /rules."
+msgid "Before starting, please read the rules with the @1 command."
+msgstr "Lees voordat je begint de regels met het commando @1."
 
 msgid "Welcome back, @1!"
 msgstr "Welkom terug, @1!"
@@ -116,8 +116,8 @@ msgstr "Regels tonen"
 msgid "Close"
 msgstr "Sluiten"
 
-msgid "Use /rules to view the server rules"
-msgstr "Gebruik /rules om de serverregels te bekijken"
+msgid "Use @1 to view the server rules"
+msgstr "Gebruik @1 om de serverregels te bekijken"
 
 msgid "Do NOT steal from other players."
 msgstr "STEEL NIET van andere spelers."

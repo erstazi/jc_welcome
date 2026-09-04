@@ -231,7 +231,7 @@ local function show_welcome(player)
         text_y_start + line_spacing,
         10.5,
         2,
-        core.formspec_escape(S("Before starting, please read the rules with the /rules command."))
+        core.formspec_escape( S("Before starting, please read the rules with the @1 command.", core.colorize("#FFFF00", "/rules") ) )
       )
   else
     formspec = formspec ..

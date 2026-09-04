@@ -354,6 +354,7 @@ core.register_chatcommand("rules", {
 
 core.register_on_joinplayer(function(player)
   local name = player:get_player_name()
-  local message = S("Use /rules to view the server rules")
+  -- local message = S("Use /rules to view the server rules")
+  local message = S("Use @1 to view the server rules", core.colorize("#FFFF00", "/rules"))
   core.chat_send_player(name, message)
 end)

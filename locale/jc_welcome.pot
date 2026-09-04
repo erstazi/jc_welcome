@@ -28,7 +28,7 @@ msgstr ""
 msgid "Greetings, @1!"
 msgstr ""
 
-msgid "Before starting, please read the rules with the /rules command."
+msgid "Before starting, please read the rules with the @1 command."
 msgstr ""
 
 msgid "Welcome back, @1!"
@@ -115,7 +115,7 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-msgid "Use /rules to view the server rules"
+msgid "Use @1 to view the server rules"
 msgstr ""
 
 msgid "Do NOT steal from other players."

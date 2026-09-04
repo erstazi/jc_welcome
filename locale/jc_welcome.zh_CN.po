@@ -29,8 +29,8 @@ msgstr "您上次登录是在 @1"
 msgid "Greetings, @1!"
 msgstr "您好，@1！"
 
-msgid "Before starting, please read the rules with the /rules command."
-msgstr "开始之前，请使用 /rules 命令阅读服务器规则。"
+msgid "Before starting, please read the rules with the @1 command."
+msgstr "开始之前，请使用 @1 命令阅读服务器规则。"
 
 msgid "Welcome back, @1!"
 msgstr "欢迎回来，@1！"
@@ -116,8 +116,8 @@ msgstr "显示规则"
 msgid "Close"
 msgstr "关闭"
 
-msgid "Use /rules to view the server rules"
-msgstr "使用 /rules 查看服务器规则"
+msgid "Use @1 to view the server rules"
+msgstr "使用 @1 查看服务器规则"
 
 msgid "Do NOT steal from other players."
 msgstr "禁止偷窃其他玩家的物品。"
