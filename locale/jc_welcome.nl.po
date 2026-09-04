@@ -20,6 +20,9 @@ msgstr "Laten we spelen!"
 msgid "Show Places"
 msgstr "Locaties tonen"
 
+msgid "Sounds"
+msgstr "Geluiden"
+
 msgid "You last logged on @1"
 msgstr "Je was voor het laatst online op @1"
 

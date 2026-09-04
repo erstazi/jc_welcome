@@ -20,6 +20,9 @@ msgstr "开始游戏！"
 msgid "Show Places"
 msgstr "显示地点"
 
+msgid "Sounds"
+msgstr "声音"
+
 msgid "You last logged on @1"
 msgstr "您上次登录是在 @1"
 

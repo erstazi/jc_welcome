@@ -20,6 +20,9 @@ msgstr "Vamos jogar!"
 msgid "Show Places"
 msgstr "Mostrar locais"
 
+msgid "Sounds"
+msgstr "Sons"
+
 msgid "You last logged on @1"
 msgstr "O seu último acesso foi em @1"
 

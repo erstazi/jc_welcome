@@ -20,6 +20,9 @@ msgstr "Гайда грати!"
 msgid "Show Places"
 msgstr "Показати місця"
 
+msgid "Sounds"
+msgstr "Звуки"
+
 msgid "You last logged on @1"
 msgstr "Ви востаннє входили @1"
 
