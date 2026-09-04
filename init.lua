@@ -374,6 +374,9 @@ local function show_welcome(player)
   formspec = formspec
     .. "button[3.4,10.1;3,1;show_places;" .. core.formspec_escape(S("Show Places")) .. "]"
 
+  formspec = formspec
+    .. "button[6.6,10.1;3,1;show_sounds;" .. core.formspec_escape(S("Sounds")) .. "]"
+
   --------------------------------------------------
   -- SHOW
   --------------------------------------------------
@@ -396,7 +399,22 @@ core.register_on_player_receive_fields(function(player, formname, fields)
 
   if fields.show_places then
     if jc_places and jc_places.show_places then
+      if not player then
+        return false, S("Player not found.")
+      end
+
       jc_places.show_places(player:get_player_name())
+    end
+    return true
+  end
+
+  if fields.show_sounds then
+    if jc_special_sounds and jc_special_sounds.show_sounds_formspec then
+      if not player then
+        return false, S("Player not found.")
+      end
+
+      jc_special_sounds.show_sounds_formspec(player)
     end
     return true
   end
