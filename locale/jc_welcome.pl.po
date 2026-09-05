@@ -18,19 +18,19 @@ msgid "Let's Play!"
 msgstr "Zagrajmy!"
 
 msgid "Show Places"
-msgstr "Pokaż miejsca"
+msgstr "Wyświetl miejsca"
 
 msgid "Sounds"
 msgstr "Dźwięki"
 
 msgid "You last logged on @1"
-msgstr "Ostatnio logowałeś się @1"
+msgstr "Ostatnio logowałeś się: @1"
 
 msgid "Greetings, @1!"
 msgstr "Witaj, @1!"
 
 msgid "Before starting, please read the rules with the @1 command."
-msgstr "Przed rozpoczęciem przeczytaj zasady za pomocą komendy @1."
+msgstr "Przed rozpoczęciem przeczytaj regulamin dostępny po wpisaniu komendy @1."
 
 msgid "Welcome back, @1!"
 msgstr "Witaj ponownie, @1!"
@@ -45,7 +45,7 @@ msgid "@1 Players Online"
 msgstr "Graczy online: @1"
 
 msgid "Owner Section: Here you can monitor server activity"
-msgstr "Sekcja właściciela: tutaj możesz monitorować aktywność serwera"
+msgstr "Sekcja administracyjna: tutaj możesz monitorować aktywność serwera"
 
 msgid "General Section: Enjoy the server!"
 msgstr "Sekcja ogólna: baw się dobrze na serwerze!"
@@ -54,19 +54,19 @@ msgid "For a complete list of available commands, type /help into chat."
 msgstr "Aby zobaczyć pełną listę dostępnych komend, wpisz /help na czacie."
 
 msgid "Show the welcome screen again"
-msgstr "Pokaż ponownie ekran powitalny"
+msgstr "Wyświetl ponownie ekran powitalny"
 
 msgid "Player not found."
 msgstr "Nie znaleziono gracza."
 
 msgid "SERVER RULES"
-msgstr "ZASADY SERWERA"
+msgstr "REGULAMIN SERWERA"
 
 msgid "You have @1 seconds to accept."
 msgstr "Masz @1 sekund na zaakceptowanie zasad."
 
 msgid "If you close this window without accepting, then you will have a @1 minute penalty."
-msgstr "Jeśli zamkniesz to okno bez zaakceptowania zasad, otrzymasz karę na @1 minutę."
+msgstr "Jeśli zamkniesz to okno bez zaakceptowania zasad, otrzymasz karę na @1 minut."
 
 msgid "You are temporarily penalized. Wait @1 seconds."
 msgstr "Obecnie obowiązuje Cię kara. Poczekaj @1 sekund."
@@ -81,13 +81,13 @@ msgid "I Accept"
 msgstr "Akceptuję"
 
 msgid "Rules sent to @1"
-msgstr "Zasady wysłano do @1"
+msgstr "Regulamin wysłano do @1"
 
 msgid "You closed the rules window. You are penalized for @1 minutes."
 msgstr "Zamknąłeś okno zasad. Otrzymujesz karę na @1 minut."
 
 msgid "@1 accepted the rules."
-msgstr "@1 zaakceptował zasady."
+msgstr "@1 zaakceptował regulamin."
 
 msgid "You did not accept the rules. You are penalized for @1 minutes."
 msgstr "Nie zaakceptowałeś zasad. Otrzymujesz karę na @1 minut."
@@ -111,13 +111,13 @@ msgid "Global Sanction History"
 msgstr "Globalna historia kar"
 
 msgid "Show rules"
-msgstr "Pokaż zasady"
+msgstr "Wyświetl regulamin"
 
 msgid "Close"
 msgstr "Zamknij"
 
 msgid "Use @1 to view the server rules"
-msgstr "Użyj @1, aby wyświetlić zasady serwera"
+msgstr "Użyj @1, aby wyświetlić regulamin serwera"
 
 msgid "Do NOT steal from other players."
 msgstr "NIE kradnij innym graczom."
@@ -135,7 +135,7 @@ msgid "Do NOT use modified or hacked clients."
 msgstr "NIE używaj zmodyfikowanych ani zhakowanych klientów."
 
 msgid "No insults, swearing, or offensive language."
-msgstr "Zakazane są obrażanie, przeklinanie i używanie obraźliwego języka."
+msgstr "Zakazane jest obrażanie innych, przeklinanie i używanie obraźliwego języka."
 
 msgid "Do NOT advertise other servers."
 msgstr "NIE reklamuj innych serwerów."
@@ -147,13 +147,13 @@ msgid "Do NOT ask for privileges or ranks (Moderator, Staff, Guardian)."
 msgstr "NIE proś o uprawnienia ani rangi (Moderator, Staff, Guardian)."
 
 msgid "Moderator and Staff ranks are only given when applications are officially opened."
-msgstr "Rangi Moderator i Staff są przyznawane tylko wtedy, gdy oficjalnie otwarte są rekrutacje."
+msgstr "Rangi Moderator i Staff są przyznawane tylko wtedy, gdy rekrutacje są oficjalnie otwarte."
 
 msgid "Do NOT place lava or water at spawn."
 msgstr "NIE umieszczaj lawy ani wody na spawnie."
 
 msgid "Dating or looking for relationships inside the server is strictly forbidden."
-msgstr "Umawianie się na randki lub szukanie związków na serwerze jest surowo zabronione."
+msgstr "Randkowanie i szukanie związków na serwerze jest surowo zabronione."
 
 msgid "Do NOT provoke fights or unnecessary arguments."
 msgstr "NIE prowokuj bójek ani niepotrzebnych kłótni."
@@ -222,10 +222,10 @@ msgid "Keep a friendly and safe environment for everyone."
 msgstr "Dbaj o przyjazną i bezpieczną atmosferę dla wszystkich."
 
 msgid "Do NOT post +18 or inappropriate content."
-msgstr "NIE publikuj treści +18 ani innych nieodpowiednich treści."
+msgstr "NIE publikuj treści +18 ani innych nieprzyzwoitych treści."
 
 msgid "Romantic or inappropriate roleplay is forbidden."
-msgstr "Romantyczne lub nieodpowiednie odgrywanie ról jest zabronione."
+msgstr "Romantyczne lub nieprzyzwoite odgrywanie ról jest zabronione."
 
 msgid "Active Players Panel"
 msgstr "Panel aktywnych graczy"
@@ -234,7 +234,7 @@ msgid "Server Age: @1 days"
 msgstr "Wiek serwera: @1 dni"
 
 msgid "Players: @1"
-msgstr "Gracze: @1"
+msgstr "Graczy: @1"
 
 msgid "Total Hours: @1"
 msgstr "Łączna liczba godzin: @1"
@@ -369,4 +369,4 @@ msgid "@1, @2 @3, @4"
 msgstr "@1, @3 @2 @4"
 
 msgid "@1, @2 @3, @4 at @5:@6"
-msgstr "@1, @2 @3, @4 o @5:@6"
+msgstr "@1, @3 @2 @4 o @5:@6"
