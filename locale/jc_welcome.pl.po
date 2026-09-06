@@ -288,10 +288,10 @@ msgid "Hours"
 msgstr "Godziny"
 
 msgid "Activity %"
-msgstr "Aktywność (w %)"
+msgstr "Aktywność (%)"
 
 msgid "Join %"
-msgstr "Częstotliwość logowań (w %)"
+msgstr "Częstotliwość logowań (%)"
 
 msgid "Days"
 msgstr "Dni"
