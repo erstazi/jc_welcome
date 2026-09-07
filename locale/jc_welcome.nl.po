@@ -50,8 +50,8 @@ msgstr "Eigenaarsectie: hier kun je de serveractiviteit controleren"
 msgid "General Section: Enjoy the server!"
 msgstr "Algemene sectie: veel plezier op de server!"
 
-msgid "For a complete list of available commands, type /help into chat."
-msgstr "Typ /help in de chat voor een volledige lijst met beschikbare commando's."
+msgid "For a complete list of available commands, type @1 into chat."
+msgstr "Typ @1 in de chat voor een volledige lijst met beschikbare commando's."
 
 msgid "Show the welcome screen again"
 msgstr "Welkomstscherm opnieuw tonen"

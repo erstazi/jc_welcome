@@ -50,8 +50,8 @@ msgstr "Secção do proprietário: aqui pode monitorizar a atividade do servidor
 msgid "General Section: Enjoy the server!"
 msgstr "Secção geral: divirta-se no servidor!"
 
-msgid "For a complete list of available commands, type /help into chat."
-msgstr "Para obter a lista completa dos comandos disponíveis, escreva /help no chat."
+msgid "For a complete list of available commands, type @1 into chat."
+msgstr "Para obter a lista completa dos comandos disponíveis, escreva @1 no chat."
 
 msgid "Show the welcome screen again"
 msgstr "Mostrar novamente o ecrã de boas-vindas"

@@ -49,7 +49,7 @@ msgstr ""
 msgid "General Section: Enjoy the server!"
 msgstr ""
 
-msgid "For a complete list of available commands, type /help into chat."
+msgid "For a complete list of available commands, type @1 into chat."
 msgstr ""
 
 msgid "Show the welcome screen again"

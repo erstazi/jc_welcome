@@ -362,7 +362,7 @@ local function show_welcome(player)
   --------------------------------------------------
 
   formspec = formspec
-    .. "label[0.2,8.6;14.2,1.5;" .. core.formspec_escape(S("For a complete list of available commands, type /help into chat.")) .. "]"
+    .. "label[0.2,8.6;14.2,1.5;" .. core.formspec_escape( S("For a complete list of available commands, type @1 into chat.", core.colorize("#FFFF00", "/help") ) ) .. "]"
 
   --------------------------------------------------
   -- Let's Play Button

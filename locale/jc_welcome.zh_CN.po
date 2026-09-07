@@ -50,8 +50,8 @@ msgstr "服主区域：您可以在这里监控服务器活动"
 msgid "General Section: Enjoy the server!"
 msgstr "普通区域：享受服务器吧！"
 
-msgid "For a complete list of available commands, type /help into chat."
-msgstr "要查看所有可用命令，请在聊天中输入 /help。"
+msgid "For a complete list of available commands, type @1 into chat."
+msgstr "要查看所有可用命令，请在聊天中输入 @1。"
 
 msgid "Show the welcome screen again"
 msgstr "再次显示欢迎界面"

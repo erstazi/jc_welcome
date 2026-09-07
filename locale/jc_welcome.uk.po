@@ -50,8 +50,8 @@ msgstr "Розділ власника: тут ви можете стежити �
 msgid "General Section: Enjoy the server!"
 msgstr "Загальний розділ: насолоджуйтеся грою на сервері!"
 
-msgid "For a complete list of available commands, type /help into chat."
-msgstr "Щоб переглянути повний список доступних команд, введіть /help у чаті."
+msgid "For a complete list of available commands, type @1 into chat."
+msgstr "Щоб переглянути повний список доступних команд, введіть @1 у чаті."
 
 msgid "Show the welcome screen again"
 msgstr "Знову показати вітальний екран"
