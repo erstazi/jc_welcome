@@ -3,6 +3,8 @@ local modpath = core.get_modpath(core.get_current_modname())
 --------------------------------------------------------
 -- Luanti :: Welcome Splash Screen Mod v2.1
 --------------------------------------------------------
+jc_welcome = jc_welcome or {}
+
 --------------------------------------------------------
 -- NEW PLAYER / FIRST JOIN DATA
 --------------------------------------------------------

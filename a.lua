@@ -9,48 +9,65 @@ local timeout_seconds = 120
 local penalty_seconds = 120
 local penalty_minutes = penalty_seconds / 60
 
-local rules_table = {
-  [1] = S("Do NOT steal from other players."),
-  [2] = S("Do NOT place lava or water on other players' areas."),
-  [3] = S("Do NOT build on someone else's claimed area."),
-  [4] = S("Do NOT steal protected areas or land."),
-  [5] = S("Do NOT use modified or hacked clients."),
-  [6] = S("No insults, swearing, or offensive language."),
-  [7] = S("Do NOT advertise other servers."),
-  [8] = S("Respect all players, especially Moderators and Staff."),
-  [9] = S("Do NOT ask for privileges or ranks (Moderator, Staff, Guardian)."),
-  [10] = S("Moderator and Staff ranks are only given when applications are officially opened."),
-  [11] = S("Do NOT place lava or water at spawn."),
-  [12] = S("Dating or looking for relationships inside the server is strictly forbidden."),
-  [13] = S("Do NOT provoke fights or unnecessary arguments."),
-  [14] = S("Do NOT harass or annoy other players repeatedly."),
-  [15] = S("Do NOT spam in chat."),
-  [16] = S("Do NOT write everything in ALL CAPS."),
-  [17] = S("Do NOT spread false information to confuse others."),
-  [18] = S("Do NOT build inappropriate or offensive structures."),
-  [19] = S("Do NOT destroy abandoned constructions without staff permission."),
-  [20] = S("Do NOT make traps that harm other players unfairly."),
-  [21] = S("Do NOT create lag machines or mechanisms that affect server performance."),
-  [22] = S("Keep spawn and claimed areas tidy and aesthetically organized."),
-  [23] = S("Do NOT exploit server bugs."),
-  [24] = S("Do NOT duplicate items under any circumstances."),
-  [25] = S("Report bugs to Staff instead of exploiting them."),
-  [26] = S("Do NOT scam other players in trades."),
-  [27] = S("Owner decisions are final."),
-  [28] = S("Do NOT publicly argue against punishments in chat."),
-  [29] = S("Report Staff issues to the Owner."),
-  [30] = S("Impersonating Staff will result in immediate punishment."),
-  [31] = S("Do NOT share your account with others."),
-  [32] = S("Do NOT ask for others' passwords."),
-  [33] = S("Each player is responsible for their account security."),
-  [34] = S("Do NOT post +18 or inappropriate content."),
-  [35] = S("Keep a friendly and safe environment for everyone."),
-  [36] = S("Romantic or inappropriate roleplay is forbidden."),
+jc_welcome = jc_welcome or {}
+
+-------------------------------------------------------------------------------
+-- Raw server rules
+--
+-- These are NOT translated. This allows other mods, such as jc_special
+-- website.lua, to access the original English text.
+-------------------------------------------------------------------------------
+jc_welcome.rules_raw = {
+  [1] = "Do NOT steal from other players.",
+  [2] = "Do NOT place lava or water on other players' areas.",
+  [3] = "Do NOT build on someone else's claimed area.",
+  [4] = "Do NOT steal protected areas or land.",
+  [5] = "Do NOT use modified or hacked clients.",
+  [6] = "No insults, swearing, or offensive language.",
+  [7] = "Do NOT advertise other servers.",
+  [8] = "Respect all players, especially Moderators and Staff.",
+  [9] = "Do NOT ask for privileges or ranks (Moderator, Staff, Guardian).",
+  [10] = "Moderator and Staff ranks are only given when applications are officially opened.",
+  [11] = "Do NOT place lava or water at spawn.",
+  [12] = "Dating or looking for relationships inside the server is strictly forbidden.",
+  [13] = "Do NOT provoke fights or unnecessary arguments.",
+  [14] = "Do NOT harass or annoy other players repeatedly.",
+  [15] = "Do NOT spam in chat.",
+  [16] = "Do NOT write everything in ALL CAPS.",
+  [17] = "Do NOT spread false information to confuse others.",
+  [18] = "Do NOT build inappropriate or offensive structures.",
+  [19] = "Do NOT destroy abandoned constructions without staff permission.",
+  [20] = "Do NOT make traps that harm other players unfairly.",
+  [21] = "Do NOT create lag machines or mechanisms that affect server performance.",
+  [22] = "Keep spawn and claimed areas tidy and aesthetically organized.",
+  [23] = "Do NOT exploit server bugs.",
+  [24] = "Do NOT duplicate items under any circumstances.",
+  [25] = "Report bugs to Staff instead of exploiting them.",
+  [26] = "Do NOT scam other players in trades.",
+  [27] = "Owner decisions are final.",
+  [28] = "Do NOT publicly argue against punishments in chat.",
+  [29] = "Report Staff issues to the Owner.",
+  [30] = "Impersonating Staff will result in immediate punishment.",
+  [31] = "Do NOT share your account with others.",
+  [32] = "Do NOT ask for others' passwords.",
+  [33] = "Each player is responsible for their account security.",
+  [34] = "Do NOT post +18 or inappropriate content.",
+  [35] = "Keep a friendly and safe environment for everyone.",
+  [36] = "Romantic or inappropriate roleplay is forbidden.",
 }
 
+-------------------------------------------------------------------------------
+-- Translated server rules
+-------------------------------------------------------------------------------
+jc_welcome.rules_table = {}
+
+for i, rule in ipairs(jc_welcome.rules_raw) do
+  jc_welcome.rules_table[i] = S(rule)
+end
+
 local rules_parts = {}
-for i = 1, #rules_table do
-  rules_parts[i] = i .. ") " .. rules_table[i]
+for i = 1, #jc_welcome.rules_table do
+  rules_parts[i] = i .. ") " .. jc_welcome.rules_table[i]
 end
 
 local rules_text =
@@ -63,9 +80,6 @@ local mandatory_rules_text =
   S("You have @1 seconds to accept.", timeout_seconds) ..
   "\n" ..
   S("If you close this window without accepting, then you will have a @1 minute penalty.", penalty_minutes)
----
-
--- SISTEMA DE PENALIZACIÓN PERSISTENTE
 
 local penalty_file = core.get_worldpath() .. "/rule_penalties.txt"
 
@@ -97,7 +111,6 @@ end
 local temp_penalties = load_penalties()
 
 -- Freeze system
-
 core.register_globalstep(function()
   for name,_ in pairs(frozen_players) do
     local player = core.get_player_by_name(name)
@@ -110,8 +123,6 @@ core.register_globalstep(function()
   end
 end)
 
-
-
 -- Block chat
 core.register_on_chat_message(function(name)
   if frozen_players[name] then
@@ -119,9 +130,7 @@ core.register_on_chat_message(function(name)
   end
 end)
 
-
 -- Block login if penalized
-
 core.register_on_prejoinplayer(function(name)
   local expire = temp_penalties[name]
   if expire then
@@ -134,8 +143,6 @@ core.register_on_prejoinplayer(function(name)
     end
   end
 end)
-
-
 
 -- Command
 core.register_chatcommand("rule", {
@@ -175,9 +182,7 @@ core.register_chatcommand("rule", {
   end
 })
 
-
 -- Form handler
-
 core.register_on_player_receive_fields(function(player, formname, fields)
   if formname ~= "rules:confirm" then return end
 
@@ -206,10 +211,7 @@ core.register_on_player_receive_fields(function(player, formname, fields)
 end)
 
 
----
-
 -- Timeout auto kick
-
 core.register_globalstep(function()
   for name,data in pairs(pending_rules) do
     if os.time() - data.time > timeout_seconds then
@@ -228,13 +230,14 @@ local storage = core.get_mod_storage()
 -- =========================
 -- /sanction
 -- =========================
+--[[
+-- DEPRECIATED
 
 core.register_chatcommand("sanction", {
   params = "[player reason time type]",
   description = S("View panel or register sanction report"),
   privs = {ban = true},
   func = function(name, param)
-    -- Si no hay parámetros → abrir panel
     if param == "" then
       local formspec =
         "formspec_version[4]" ..
@@ -306,11 +309,13 @@ core.register_chatcommand("sanction", {
     return true, S("Sanction report registered (no punishment applied).")
   end,
 })
+]]
 
 -- =========================
 -- /h (historial)
 -- =========================
-
+--[[
+-- DEPRECIATED
 core.register_chatcommand("h", {
   description = S("View global sanction history"),
   privs = {ban = true},
@@ -335,6 +340,7 @@ core.register_chatcommand("h", {
     return true
   end,
 })
+]]
 
 -----Rules
 core.register_chatcommand("rules", {
@@ -351,10 +357,8 @@ core.register_chatcommand("rules", {
   end
 })
 
-
 core.register_on_joinplayer(function(player)
   local name = player:get_player_name()
-  -- local message = S("Use /rules to view the server rules")
   local message = S("Use @1 to view the server rules", core.colorize("#FFFF00", "/rules"))
   core.chat_send_player(name, message)
 end)
