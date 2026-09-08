@@ -57,6 +57,51 @@ jc_welcome.rules_raw = {
 }
 
 -------------------------------------------------------------------------------
+-- Raw server rules in Spanish
+--
+-- These are NOT translated. This allows other mods, such as jc_special
+-- website.lua, to access the original Spanish text.
+-------------------------------------------------------------------------------
+jc_welcome.rules_es_raw = {
+  [1] = "No robes a otros jugadores.",
+  [2] = "No coloques lava ni agua en las zonas de otros jugadores.",
+  [3] = "No construyas en la zona reclamada de otra persona.",
+  [4] = "No robes zonas o terrenos protegidos.",
+  [5] = "No uses clientes modificados o hackeados.",
+  [6] = "No se permiten insultos, palabrotas ni lenguaje ofensivo.",
+  [7] = "No hagas publicidad de otros servidores.",
+  [8] = "Respeta a todos los jugadores, especialmente a los Moderadores y al Staff.",
+  [9] = "No pidas privilegios ni rangos (Moderador, Staff, Guardián).",
+  [10] = "Los rangos de Moderador y Staff solo se otorgan cuando las solicitudes se abren oficialmente.",
+  [11] = "No coloques lava ni agua en el spawn.",
+  [12] = "Está estrictamente prohibido tener citas o buscar relaciones dentro del servidor.",
+  [13] = "No provoques peleas ni discusiones innecesarias.",
+  [14] = "No acoses ni molestes repetidamente a otros jugadores.",
+  [15] = "No hagas spam en el chat.",
+  [16] = "No escribas todo en MAYÚSCULAS.",
+  [17] = "No difundas información falsa para confundir a los demás.",
+  [18] = "No construyas estructuras inapropiadas u ofensivas.",
+  [19] = "No destruyas construcciones abandonadas sin permiso del Staff.",
+  [20] = "No hagas trampas que perjudiquen injustamente a otros jugadores.",
+  [21] = "No crees máquinas de lag ni mecanismos que afecten al rendimiento del servidor.",
+  [22] = "Mantén el spawn y las zonas reclamadas limpios y organizados estéticamente.",
+  [23] = "No aproveches los errores (bugs) del servidor.",
+  [24] = "No dupliques objetos bajo ninguna circunstancia.",
+  [25] = "Informa de los errores al Staff en lugar de aprovecharte de ellos.",
+  [26] = "No estafes a otros jugadores en los intercambios.",
+  [27] = "Las decisiones del propietario son definitivas.",
+  [28] = "No discutas públicamente las sanciones en el chat.",
+  [29] = "Informa de los problemas relacionados con el Staff al propietario.",
+  [30] = "Hacerse pasar por un miembro del Staff resultará en un castigo inmediato.",
+  [31] = "No compartas tu cuenta con otras personas.",
+  [32] = "No pidas las contraseñas de otras personas.",
+  [33] = "Cada jugador es responsable de la seguridad de su cuenta.",
+  [34] = "No publiques contenido +18 o inapropiado.",
+  [35] = "Mantén un ambiente amistoso y seguro para todos.",
+  [36] = "El juego de rol romántico o inapropiado está prohibido.",
+}
+
+-------------------------------------------------------------------------------
 -- Translated server rules
 -------------------------------------------------------------------------------
 jc_welcome.rules_table = {}
