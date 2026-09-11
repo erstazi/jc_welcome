@@ -1,5 +1,6 @@
 local S = core.get_translator(core.get_current_modname())
 local modpath = core.get_modpath(core.get_current_modname())
+local ESC = core.formspec_escape
 
 --------------------------------------------------------
 -- IF Active Players Panel v1.6 (Scroll + UI + Skins Fix)
@@ -138,9 +139,9 @@ local function show_if_panel(name)
     -- Header
     ------------------------------------------------
     .."label[0.4,0.3;IF - Players Online]"
-    .."label[9.5,0.3;Time: "..server_time.."]"
-    .."label[9.5,0.8;Day: "..days.."]"
-    .."label[9.5,1.3;Year: "..years.."]"
+    .."label[9.5,0.3;Time: " .. ESC(server_time) .. "]"
+    .."label[9.5,0.8;Day: " .. ESC(days) .. "]"
+    .."label[9.5,1.3;Year: " .. ESC(years) .. "]"
 
     ------------------------------------------------
     -- Refresh button
@@ -150,12 +151,12 @@ local function show_if_panel(name)
     ------------------------------------------------
     -- Fondo lista
     ------------------------------------------------
-    .."box[0.3,2.0;12.4,6.7;#00000066]"
+    .."box[0.3,2.0;12.0,6.7;#00000066]"
 
     ------------------------------------------------
     -- Scroll container
     ------------------------------------------------
-    .."scroll_container[0.4,2.2;12.2,6.3;scroll;vertical]"
+    .."scroll_container[0.4,2.2;11.8,6.3;scroll_players_activeornot;vertical]"
 
   ----------------------------------------------------
   -- Player list
@@ -209,27 +210,10 @@ local function show_if_panel(name)
     -- Row draw
     ------------------------------------------------
     formspec = formspec
-      ..string.format(
-        "image[0.3,%.2f;0.8,0.8;%s]",
-        y,
-        head_texture
-      )
-      ..string.format(
-        "label[1.3,%.2f;%s]",
-        y+0.1,
-        core.formspec_escape(display_name)
-      )
-      ..string.format(
-        "label[7.0,%.2f;%dm %ds]",
-        y+0.1,
-        minutes,
-        seconds
-      )
-      ..string.format(
-        "label[9.5,%.2f;%s]",
-        y+0.1,
-        status
-      )
+      ..string.format("image[0.3,%.2f;0.4,0.8;%s]", ESC(y-0.2), ESC(head_texture) )
+      ..string.format("label[1.3,%.2f;%s]", ESC(y+0.15), ESC(display_name) )
+      ..string.format("label[7.0,%.2f;%dm %ds]", ESC(y+0.15), ESC(minutes), ESC(seconds) )
+      ..string.format("label[9.5,%.2f;%s]", ESC(y+0.15), ESC(status) )
 
     y = y + 0.9
   end
@@ -238,6 +222,8 @@ local function show_if_panel(name)
   -- Close scroll
   ----------------------------------------------------
   formspec = formspec .. "scroll_container_end[]"
+  formspec = formspec .. "scrollbaroptions[max=1000;smallstep=10;largestep=10]"
+  formspec = formspec .. "scrollbar[12.3,2.0;0.5,6.7;vertical;scroll_players_activeornot;0]"
 
   ----------------------------------------------------
   -- Show

@@ -1,5 +1,6 @@
 local S = core.get_translator(core.get_current_modname())
 local modpath = core.get_modpath(core.get_current_modname())
+local ESC = core.formspec_escape
 --------------------------------------------------------
 -- Luanti :: Welcome Splash Screen Mod v2.1
 --------------------------------------------------------
@@ -173,25 +174,25 @@ local function show_welcome(player)
 
     .. "box[0.0,0.0;15.3,2;#111111]"
 
-    .. string.format("label[3.5,0.3;%s]", core.formspec_escape(server_name) )
+    .. string.format("label[3.5,0.3;%s]", ESC(server_name) )
 
-    .. string.format("label[3.5,0.9;%s:%s]", core.formspec_escape(server_address), core.formspec_escape(port) )
+    .. string.format("label[3.5,0.9;%s:%s]", ESC(server_address), ESC(port) )
 
-    .. string.format("label[3.5,1.5;%s]", core.formspec_escape( S("Local Time: @1", local_time) ) )
+    .. string.format("label[3.5,1.5;%s]", ESC( S("Local Time: @1", local_time) ) )
 
     .. "image[0.97,0.0;2,2;welcome_screen_logo.png]"
     .. "image[14.7,0.2;0.9,0.9;discord_logo.png]"
 
     .. "button_url[15.6,0.2;4.1,0.9;discord_link;"
-      .. core.formspec_escape(S("Join Discord"))
+      .. ESC(S("Join Discord"))
       .. ";https://discord.gg/C8Ev9td5k]"
 
     .. "button_url[15.6,1.2;4.1,0.9;web_link;"
-      .. core.formspec_escape(S("Visit Website"))
+      .. ESC(S("Visit Website"))
       .. ";https://justcraft.dssapp.us/]"
 
     .. "button_url[15.6,2.2;4.1,0.9;forum_link;"
-      .. core.formspec_escape(S("Visit Forum"))
+      .. ESC(S("Visit Forum"))
       .. ";https://forum.luanti.org/viewtopic.php?t=32339]"
 
 
@@ -223,7 +224,7 @@ local function show_welcome(player)
         "label[%f,%f;%s]",
         text_x,
         text_y_start,
-        core.formspec_escape(S("Greetings, @1!", pname))
+        ESC(S("Greetings, @1!", pname))
       )
 
     formspec = formspec ..
@@ -233,7 +234,7 @@ local function show_welcome(player)
         text_y_start + line_spacing,
         10.5,
         2,
-        core.formspec_escape( S("Before starting, please read the rules with the @1 command.", core.colorize("#FFFF00", "/rules") ) )
+        ESC( S("Before starting, please read the rules with the @1 command.", core.colorize("#FFFF00", "/rules") ) )
       )
   else
     formspec = formspec ..
@@ -241,7 +242,7 @@ local function show_welcome(player)
         "label[%f,%f;%s]",
         text_x,
         text_y_start,
-        core.formspec_escape(S("Welcome back, @1!", pname))
+        ESC(S("Welcome back, @1!", pname))
       )
 
     formspec = formspec ..
@@ -251,7 +252,7 @@ local function show_welcome(player)
         text_y_start + 1 * line_spacing,
         10.5,
         2,
-        core.formspec_escape( S("You first joined on @1", format_date(ptime)) )
+        ESC( S("You first joined on @1", format_date(ptime)) )
       )
 
     if ltime > 0 then
@@ -262,7 +263,7 @@ local function show_welcome(player)
           text_y_start + 2 * line_spacing,
           10.5,
           2,
-          core.formspec_escape(
+          ESC(
             S("You last logged on @1", format_datetime(ltime))
           )
         )
@@ -318,7 +319,7 @@ local function show_welcome(player)
       "label[%f,%f;%s]",
       list_x,
       list_y - 0.4,
-      core.formspec_escape(S("@1 Players Online", #player_list))
+      ESC(S("@1 Players Online", #player_list))
     )
 
     .. string.format(
@@ -332,7 +333,7 @@ local function show_welcome(player)
   for i, name in ipairs(player_list) do
     local display_name = get_ranked_name(name)
 
-    formspec = (i > 1 and formspec .. "," or formspec) .. core.formspec_escape(display_name)
+    formspec = (i > 1 and formspec .. "," or formspec) .. ESC(display_name)
   end
 
   formspec = formspec
@@ -349,7 +350,7 @@ local function show_welcome(player)
 
   if player_rank == "owner" then
     formspec = formspec
-      .. "label[4.0,6.0;10.5,2;" .. core.formspec_escape(S("Owner Section: Here you can monitor server activity")) .. "]"
+      .. "label[4.0,6.0;10.5,2;" .. ESC(S("Owner Section: Here you can monitor server activity")) .. "]"
   end
 
   --------------------------------------------------
@@ -357,27 +358,27 @@ local function show_welcome(player)
   --------------------------------------------------
 
   formspec = formspec
-    .. "label[0.2,8.0;14.2,1.5;" .. core.formspec_escape(S("General Section: Enjoy the server!")) .. "]"
+    .. "label[0.2,8.0;14.2,1.5;" .. ESC(S("General Section: Enjoy the server!")) .. "]"
 
   --------------------------------------------------
   -- FOOTER
   --------------------------------------------------
 
   formspec = formspec
-    .. "label[0.2,8.6;14.2,1.5;" .. core.formspec_escape( S("For a complete list of available commands, type @1 into chat.", core.colorize("#FFFF00", "/help") ) ) .. "]"
+    .. "label[0.2,8.6;14.2,1.5;" .. ESC( S("For a complete list of available commands, type @1 into chat.", core.colorize("#FFFF00", "/help") ) ) .. "]"
 
   --------------------------------------------------
   -- Let's Play Button
   --------------------------------------------------
 
   formspec = formspec
-    .. "button_exit[0.2,10.1;3,1;close;" .. core.formspec_escape(S("Let's Play!")) .. "]"
+    .. "button_exit[0.2,10.1;3,1;close;" .. ESC(S("Let's Play!")) .. "]"
 
   formspec = formspec
-    .. "button[3.4,10.1;3,1;show_places;" .. core.formspec_escape(S("Show Places")) .. "]"
+    .. "button[3.4,10.1;3,1;show_places;" .. ESC(S("Show Places")) .. "]"
 
   formspec = formspec
-    .. "button[6.6,10.1;3,1;show_sounds;" .. core.formspec_escape(S("Sounds")) .. "]"
+    .. "button[6.6,10.1;3,1;show_sounds;" .. ESC(S("Sounds")) .. "]"
 
   --------------------------------------------------
   -- SHOW
