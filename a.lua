@@ -2,6 +2,8 @@
 local S = core.get_translator(core.get_current_modname())
 local modpath = core.get_modpath(core.get_current_modname())
 
+local storage = core.get_mod_storage()
+
 local pending_rules = {}
 local frozen_players = {}
 
@@ -116,7 +118,7 @@ for i = 1, #jc_welcome.rules_table do
 end
 
 local rules_text =
-  "=== JUST-CRAFT " .. S("SERVER RULES") .. " ===\n\n" ..
+  "=== " .. S("@1 SERVER RULES", "JUST-CRAFT") .. " ===\n\n" ..
   table.concat(rules_parts, "\n")
 
 local mandatory_rules_text =
@@ -124,7 +126,8 @@ local mandatory_rules_text =
   "\n\n" ..
   S("You have @1 seconds to accept.", timeout_seconds) ..
   "\n" ..
-  S("If you close this window without accepting, then you will have a @1 minute penalty.", penalty_minutes)
+  S("If you close this window without accepting, then you will have a @1 minute penalty.", penalty_minutes) ..
+  ""
 
 local penalty_file = core.get_worldpath() .. "/rule_penalties.txt"
 
@@ -216,9 +219,7 @@ core.register_chatcommand("rule", {
       "formspec_version[4]" ..
       "size[10,8]" ..
       "label[0.5,0.3;" .. core.formspec_escape(S("SERVER RULES - MANDATORY")) .. "]" ..
-      "textarea[0.5,1;9,5.5;rules;;" ..
-      core.formspec_escape(mandatory_rules_text) ..
-      "]" ..
+      "textarea[0.5,1;9,5.5;rules;;" .. core.formspec_escape(mandatory_rules_text) .. "]" ..
       "button[3.5,6.8;3,1;accept;" .. core.formspec_escape(S("I Accept")) .. "]"
 
     core.show_formspec(param, "rules:confirm", formspec)
@@ -269,123 +270,6 @@ core.register_globalstep(function()
     end
   end
 end)
-
-local storage = core.get_mod_storage()
-
--- =========================
--- /sanction
--- =========================
---[[
--- DEPRECIATED
-
-core.register_chatcommand("sanction", {
-  params = "[player reason time type]",
-  description = S("View panel or register sanction report"),
-  privs = {ban = true},
-  func = function(name, param)
-    if param == "" then
-      local formspec =
-        "formspec_version[4]" ..
-        "size[12,10]" ..
-
-        "label[0.5,0.5;=== JUST-CRAFT SANCTION SYSTEM ===]" ..
-
-        "textarea[0.5,1.2;11,8;;SANCTION CATEGORIES:;" ..
-
-        "WARNING (Rules: 13,14,15,16,17,28)\n" ..
-        "- Minor arguments\n" ..
-        "- Spam / CAPS\n" ..
-        "- Public punishment discussion\n\n" ..
-
-        "MUTE (Rules: 6,12,35,36)\n" ..
-        "- Insults / Offensive language\n" ..
-        "- Dating / +18 content\n\n" ..
-
-        "REMOVE PRIVS (Rules: 9,30)\n" ..
-        "- Asking for ranks\n" ..
-        "- Impersonating Staff\n\n" ..
-
-        "TEMP BAN (Rules: 1,2,3,4,19,20,26)\n" ..
-        "- Stealing / Griefing\n" ..
-        "- Traps / Scams\n\n" ..
-
-        "PERMANENT BAN (Rules: 5,23,24)\n" ..
-        "- Hacked client\n" ..
-        "- Exploits / Duplication\n" ..
-        "]"
-
-      core.show_formspec(name,       "justcraft:sanction_panel", formspec)
-      return true
-    end
-
-    -- Si tiene parámetros → registrar informe
-    local args = param:split(" ")
-
-    if #args < 4 then
-        return false, S("Usage: /sanction <player> <reason> <time> <type>")
-    end
-
-    local target = args[1]
-    local reason = args[2]
-    local time = args[3]
-    local stype = args[4]
-
-    local date = os.date("%Y-%m-%d %H:%M:%S")
-
-    local entry = "[" .. date .. "] Staff: " .. name ..
-                  " | Player: " .. target ..
-                  " | Type: " .. stype ..
-                  " | Time: " .. time ..
-                  " | Reason: " .. reason
-
-    local key = "history_global"
-    local data = storage:get_string(key)
-
-    local history = {}
-
-    if data ~= "" then
-      history = core.deserialize(data) or {}
-    end
-
-    table.insert(history, entry)
-
-    storage:set_string("history_global", core.serialize(history))
-
-    return true, S("Sanction report registered (no punishment applied).")
-  end,
-})
-]]
-
--- =========================
--- /h (historial)
--- =========================
---[[
--- DEPRECIATED
-core.register_chatcommand("h", {
-  description = S("View global sanction history"),
-  privs = {ban = true},
-  func = function(name)
-    local data = storage:get_string("history_global")
-
-    if data == "" then
-      return false, S("No sanction history found.")
-    end
-
-    local history = core.deserialize(data) or {}
-
-    local text = table.concat(history, "\n")
-
-    core.show_formspec(name, "justcraft:history",
-      "formspec_version[4]" ..
-      "size[12,9]" ..
-      "textarea[0.5,0.5;11,8;;" .. core.formspec_escape(S("Global Sanction History")) .. ":;" ..
-      core.formspec_escape(text) .. "]"
-    )
-
-    return true
-  end,
-})
-]]
 
 -----Rules
 core.register_chatcommand("rules", {

@@ -59,8 +59,8 @@ msgstr "Willkommensbildschirm erneut anzeigen"
 msgid "Player not found."
 msgstr "Spieler nicht gefunden."
 
-msgid "SERVER RULES"
-msgstr "SERVERREGELN"
+msgid "@1 SERVER RULES"
+msgstr "@1 SERVERREGELN"
 
 msgid "You have @1 seconds to accept."
 msgstr "Du hast @1 Sekunden, um zu akzeptieren."
@@ -91,24 +91,6 @@ msgstr "@1 hat die Regeln akzeptiert."
 
 msgid "You did not accept the rules. You are penalized for @1 minutes."
 msgstr "Du hast die Regeln nicht akzeptiert. Du wirst für @1 Minuten bestraft."
-
-msgid "View panel or register sanction report"
-msgstr "Panel anzeigen oder Sanktionsbericht registrieren"
-
-msgid "Usage: /sanction <player> <reason> <time> <type>"
-msgstr "Verwendung: /sanction <player> <reason> <time> <type>"
-
-msgid "Sanction report registered (no punishment applied)."
-msgstr "Sanktionsbericht registriert (keine Strafe verhängt)."
-
-msgid "View global sanction history"
-msgstr "Globale Sanktionshistorie anzeigen"
-
-msgid "No sanction history found."
-msgstr "Keine Sanktionshistorie gefunden."
-
-msgid "Global Sanction History"
-msgstr "Globale Sanktionshistorie"
 
 msgid "Show rules"
 msgstr "Regeln anzeigen"

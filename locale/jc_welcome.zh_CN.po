@@ -59,8 +59,8 @@ msgstr "再次显示欢迎界面"
 msgid "Player not found."
 msgstr "未找到玩家。"
 
-msgid "SERVER RULES"
-msgstr "服务器规则"
+msgid "@1 SERVER RULES"
+msgstr "@1 服务器规则"
 
 msgid "You have @1 seconds to accept."
 msgstr "您有 @1 秒的时间接受。"
@@ -91,24 +91,6 @@ msgstr "@1 接受了规则。"
 
 msgid "You did not accept the rules. You are penalized for @1 minutes."
 msgstr "您没有接受规则。您将受到 @1 分钟的处罚。"
-
-msgid "View panel or register sanction report"
-msgstr "查看面板或登记处罚报告"
-
-msgid "Usage: /sanction <player> <reason> <time> <type>"
-msgstr "用法：/sanction <player> <reason> <time> <type>"
-
-msgid "Sanction report registered (no punishment applied)."
-msgstr "处罚报告已登记（未实施处罚）。"
-
-msgid "View global sanction history"
-msgstr "查看全局处罚历史"
-
-msgid "No sanction history found."
-msgstr "未找到处罚历史记录。"
-
-msgid "Global Sanction History"
-msgstr "全局处罚历史"
 
 msgid "Show rules"
 msgstr "显示规则"

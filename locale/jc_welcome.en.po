@@ -59,8 +59,8 @@ msgstr "Show the welcome screen again"
 msgid "Player not found."
 msgstr "Player not found."
 
-msgid "SERVER RULES"
-msgstr "SERVER RULES"
+msgid "@1 SERVER RULES"
+msgstr "@1 SERVER RULES"
 
 msgid "You have @1 seconds to accept."
 msgstr "You have @1 seconds to accept."
@@ -91,24 +91,6 @@ msgstr "@1 accepted the rules."
 
 msgid "You did not accept the rules. You are penalized for @1 minutes."
 msgstr "You did not accept the rules. You are penalized for @1 minutes."
-
-msgid "View panel or register sanction report"
-msgstr "View panel or register sanction report"
-
-msgid "Usage: /sanction <player> <reason> <time> <type>"
-msgstr "Usage: /sanction <player> <reason> <time> <type>"
-
-msgid "Sanction report registered (no punishment applied)."
-msgstr "Sanction report registered (no punishment applied)."
-
-msgid "View global sanction history"
-msgstr "View global sanction history"
-
-msgid "No sanction history found."
-msgstr "No sanction history found."
-
-msgid "Global Sanction History"
-msgstr "Global Sanction History"
 
 msgid "Show rules"
 msgstr "Show rules"

@@ -59,8 +59,8 @@ msgstr "Снова показать экран приветствия"
 msgid "Player not found."
 msgstr "Игрок не найден."
 
-msgid "SERVER RULES"
-msgstr "ПРАВИЛА СЕРВЕРА"
+msgid "@1 SERVER RULES"
+msgstr "ПРАВИЛА СЕРВЕРА @1"
 
 msgid "You have @1 seconds to accept."
 msgstr "У вас есть @1 секунд, чтобы принять правила."
@@ -91,24 +91,6 @@ msgstr "@1 принял правила."
 
 msgid "You did not accept the rules. You are penalized for @1 minutes."
 msgstr "Вы не приняли правила. Вы наказаны на @1 минут."
-
-msgid "View panel or register sanction report"
-msgstr "Просмотреть панель или зарегистрировать отчет о наказании"
-
-msgid "Usage: /sanction <player> <reason> <time> <type>"
-msgstr "Использование: /sanction <player> <reason> <time> <type>"
-
-msgid "Sanction report registered (no punishment applied)."
-msgstr "Отчет о наказании зарегистрирован (наказание не применено)."
-
-msgid "View global sanction history"
-msgstr "Просмотреть общую историю наказаний"
-
-msgid "No sanction history found."
-msgstr "История наказаний не найдена."
-
-msgid "Global Sanction History"
-msgstr "Общая история наказаний"
 
 msgid "Show rules"
 msgstr "Показать правила"

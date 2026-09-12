@@ -110,20 +110,13 @@ local function migrate_old_data()
 
   table.sort(players)
 
-  storage:set_string(
-    "players",
-    core.serialize(players)
-  )
+  storage:set_string("players", core.serialize(players) )
 
   -- Verify that ModStorage now contains the data.
   local verify = storage:get_string("players")
 
   if verify == "" then
-    core.log(
-      "error",
-      "[jc_welcome] ModStorage verification failed. Original ac_data.mt was NOT changed."
-    )
-
+    core.log("error", "[jc_welcome] ModStorage verification failed. Original ac_data.mt was NOT changed." )
     return false
   end
 
@@ -131,21 +124,10 @@ local function migrate_old_data()
   local renamed = os.rename(old_file, migrated_file)
 
   if renamed then
-    core.log(
-      "action",
-      "[jc_welcome] Migration complete: " ..
-      count .. " players moved to ModStorage."
-    )
-
-    core.log(
-      "action",
-      "[jc_welcome] Original data saved as ac_data.mt.migrated."
-    )
+    core.log("action", "[jc_welcome] Migration complete: " .. count .. " players moved to ModStorage." )
+    core.log("action", "[jc_welcome] Original data saved as ac_data.mt.migrated.")
   else
-    core.log(
-      "warning",
-      "[jc_welcome] Data migrated successfully, but ac_data.mt could not be renamed."
-    )
+    core.log("warning", "[jc_welcome] Data migrated successfully, but ac_data.mt could not be renamed.")
   end
 
   return true
@@ -469,7 +451,6 @@ core.register_on_player_receive_fields(function(player, formname, fields)
     return
   end
 
-
   ----------------------------------------------------
   -- BACK FROM GUARDIAN
   ----------------------------------------------------
@@ -480,7 +461,6 @@ core.register_on_player_receive_fields(function(player, formname, fields)
 
     return
   end
-
 
   if formname ~= "ac:panel" then return end
   ----------------------------------------------------
@@ -539,7 +519,6 @@ core.register_on_player_receive_fields(function(player, formname, fields)
     ----------------------------------------------------
     -- Scrollbar
     ----------------------------------------------------
-
     fs = fs
       .. "scrollbaroptions[max=1000;smallstep=10;largestep=10]"
       .. "scrollbar[19.0,0.8;0.5,9.0;vertical;ranktops_scroll;0]"

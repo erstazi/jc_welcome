@@ -59,8 +59,8 @@ msgstr "Wyświetl ponownie ekran powitalny"
 msgid "Player not found."
 msgstr "Nie znaleziono gracza."
 
-msgid "SERVER RULES"
-msgstr "REGULAMIN SERWERA"
+msgid "@1 SERVER RULES"
+msgstr "ZASADY SERWERA @1"
 
 msgid "You have @1 seconds to accept."
 msgstr "Masz @1 sekund na zaakceptowanie zasad."
@@ -91,24 +91,6 @@ msgstr "@1 zaakceptował regulamin."
 
 msgid "You did not accept the rules. You are penalized for @1 minutes."
 msgstr "Nie zaakceptowałeś zasad. Otrzymujesz karę na @1 minut."
-
-msgid "View panel or register sanction report"
-msgstr "Wyświetl panel lub zarejestruj raport o karze"
-
-msgid "Usage: /sanction <player> <reason> <time> <type>"
-msgstr "Użycie: /sanction <gracz> <powód> <czas> <typ>"
-
-msgid "Sanction report registered (no punishment applied)."
-msgstr "Raport o karze został zarejestrowany (nie nałożono kary)."
-
-msgid "View global sanction history"
-msgstr "Wyświetl globalną historię kar"
-
-msgid "No sanction history found."
-msgstr "Nie znaleziono historii kar."
-
-msgid "Global Sanction History"
-msgstr "Globalna historia kar"
 
 msgid "Show rules"
 msgstr "Wyświetl regulamin"

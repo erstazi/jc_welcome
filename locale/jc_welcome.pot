@@ -58,7 +58,7 @@ msgstr ""
 msgid "Player not found."
 msgstr ""
 
-msgid "SERVER RULES"
+msgid "@1 SERVER RULES"
 msgstr ""
 
 msgid "You have @1 seconds to accept."
@@ -89,24 +89,6 @@ msgid "@1 accepted the rules."
 msgstr ""
 
 msgid "You did not accept the rules. You are penalized for @1 minutes."
-msgstr ""
-
-msgid "View panel or register sanction report"
-msgstr ""
-
-msgid "Usage: /sanction <player> <reason> <time> <type>"
-msgstr ""
-
-msgid "Sanction report registered (no punishment applied)."
-msgstr ""
-
-msgid "View global sanction history"
-msgstr ""
-
-msgid "No sanction history found."
-msgstr ""
-
-msgid "Global Sanction History"
 msgstr ""
 
 msgid "Show rules"

@@ -59,8 +59,8 @@ msgstr "Знову показати вітальний екран"
 msgid "Player not found."
 msgstr "Гравця не знайдено."
 
-msgid "SERVER RULES"
-msgstr "ПРАВИЛА СЕРВЕРА"
+msgid "@1 SERVER RULES"
+msgstr "ПРАВИЛА СЕРВЕРА @1"
 
 msgid "You have @1 seconds to accept."
 msgstr "У вас є @1 секунд для прийняття правил."
@@ -91,24 +91,6 @@ msgstr "@1 прийняв правила."
 
 msgid "You did not accept the rules. You are penalized for @1 minutes."
 msgstr "Ви не прийняли правила. Вас покарано на @1 хвилин."
-
-msgid "View panel or register sanction report"
-msgstr "Переглянути панель або зареєструвати звіт про покарання"
-
-msgid "Usage: /sanction <player> <reason> <time> <type>"
-msgstr "Використання: /sanction <player> <reason> <time> <type>"
-
-msgid "Sanction report registered (no punishment applied)."
-msgstr "Звіт про покарання зареєстровано (покарання не застосовано)."
-
-msgid "View global sanction history"
-msgstr "Переглянути загальну історію покарань"
-
-msgid "No sanction history found."
-msgstr "Історію покарань не знайдено."
-
-msgid "Global Sanction History"
-msgstr "Загальна історія покарань"
 
 msgid "Show rules"
 msgstr "Показати правила"

@@ -59,8 +59,8 @@ msgstr "Welkomstscherm opnieuw tonen"
 msgid "Player not found."
 msgstr "Speler niet gevonden."
 
-msgid "SERVER RULES"
-msgstr "SERVERREGELS"
+msgid "@1 SERVER RULES"
+msgstr "SERVERREGELS VAN @1"
 
 msgid "You have @1 seconds to accept."
 msgstr "Je hebt @1 seconden om te accepteren."
@@ -91,24 +91,6 @@ msgstr "@1 heeft de regels geaccepteerd."
 
 msgid "You did not accept the rules. You are penalized for @1 minutes."
 msgstr "Je hebt de regels niet geaccepteerd. Je krijgt een straf van @1 minuten."
-
-msgid "View panel or register sanction report"
-msgstr "Paneel bekijken of sanctierapport registreren"
-
-msgid "Usage: /sanction <player> <reason> <time> <type>"
-msgstr "Gebruik: /sanction <player> <reason> <time> <type>"
-
-msgid "Sanction report registered (no punishment applied)."
-msgstr "Sanctierapport geregistreerd (geen straf toegepast)."
-
-msgid "View global sanction history"
-msgstr "Globale sanctiegeschiedenis bekijken"
-
-msgid "No sanction history found."
-msgstr "Geen sanctiegeschiedenis gevonden."
-
-msgid "Global Sanction History"
-msgstr "Globale sanctiegeschiedenis"
 
 msgid "Show rules"
 msgstr "Regels tonen"
