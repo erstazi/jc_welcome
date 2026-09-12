@@ -5,6 +5,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Show the welcome screen again"
+msgstr "Afficher à nouveau l'écran de bienvenue"
+
 msgid "Join Discord"
 msgstr "Rejoindre Discord"
 
@@ -97,6 +100,9 @@ msgstr "Afficher les règles"
 
 msgid "Close"
 msgstr "Fermer"
+
+msgid "Shows Guardian rank requirements"
+msgstr "Affiche les conditions requises pour le rang de Gardien"
 
 msgid "Use @1 to view the server rules"
 msgstr "Utilisez @1 pour voir les règles du serveur"
@@ -224,8 +230,11 @@ msgstr "Heures totales : @1"
 msgid "Most Active: @1"
 msgstr "Plus actif : @1"
 
-msgid "RANK TOPS"
-msgstr "TOP DES RANGS"
+msgid "TOP PLAYERS"
+msgstr "MEILLEURS JOUEURS"
+
+msgid "Top Players Panel"
+msgstr "Panneau des meilleurs joueurs"
 
 msgid "GUARDIAN"
 msgstr "GARDIEN"
@@ -235,9 +244,6 @@ msgstr "Panneau des joueurs actifs v3"
 
 msgid "No permission."
 msgstr "Aucune permission."
-
-msgid "Rank Tops Panel"
-msgstr "Panneau des meilleurs rangs"
 
 msgid "OWNER"
 msgstr "PROPRIÉTAIRE"

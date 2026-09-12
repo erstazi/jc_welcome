@@ -1,17 +1,16 @@
--- a.lua
+-- rules_model.lua
 local S = core.get_translator(core.get_current_modname())
-local modpath = core.get_modpath(core.get_current_modname())
-
+local ESC = core.formspec_escape
 local storage = core.get_mod_storage()
 
-local pending_rules = {}
-local frozen_players = {}
+jc_rules_model = {}
 
-local timeout_seconds = 120
-local penalty_seconds = 120
-local penalty_minutes = penalty_seconds / 60
+jc_rules_model.pending_rules = {}
+jc_rules_model.frozen_players = {}
 
-jc_welcome = jc_welcome or {}
+jc_rules_model.timeout_seconds = 120
+jc_rules_model.penalty_seconds = 120
+jc_rules_model.penalty_minutes = jc_rules_model.penalty_seconds / 60
 
 -------------------------------------------------------------------------------
 -- Raw server rules
@@ -19,6 +18,8 @@ jc_welcome = jc_welcome or {}
 -- These are NOT translated. This allows other mods, such as jc_special
 -- website.lua, to access the original English text.
 -------------------------------------------------------------------------------
+jc_welcome = jc_welcome or {}
+
 jc_welcome.rules_raw = {
   [1] = "Do NOT steal from other players.",
   [2] = "Do NOT place lava or water on other players' areas.",
@@ -117,16 +118,16 @@ for i = 1, #jc_welcome.rules_table do
   rules_parts[i] = i .. ") " .. jc_welcome.rules_table[i]
 end
 
-local rules_text =
+jc_rules_model.rules_text =
   "=== " .. S("@1 SERVER RULES", "JUST-CRAFT") .. " ===\n\n" ..
   table.concat(rules_parts, "\n")
 
-local mandatory_rules_text =
-  rules_text ..
+jc_rules_model.mandatory_rules_text =
+  jc_rules_model.rules_text ..
   "\n\n" ..
-  S("You have @1 seconds to accept.", timeout_seconds) ..
+  S("You have @1 seconds to accept.", jc_rules_model.timeout_seconds) ..
   "\n" ..
-  S("If you close this window without accepting, then you will have a @1 minute penalty.", penalty_minutes) ..
+  S("If you close this window without accepting, then you will have a @1 minute penalty.", jc_rules_model.penalty_minutes) ..
   ""
 
 local penalty_file = core.get_worldpath() .. "/rule_penalties.txt"
@@ -156,138 +157,5 @@ local function save_penalties(t)
   end
 end
 
-local temp_penalties = load_penalties()
-
--- Freeze system
-core.register_globalstep(function()
-  for name,_ in pairs(frozen_players) do
-    local player = core.get_player_by_name(name)
-    if player then
-      player:set_physics_override({
-        speed = 0,
-        jump = 0
-      })
-    end
-  end
-end)
-
--- Block chat
-core.register_on_chat_message(function(name)
-  if frozen_players[name] then
-    return true
-  end
-end)
-
--- Block login if penalized
-core.register_on_prejoinplayer(function(name)
-  local expire = temp_penalties[name]
-  if expire then
-    if os.time() < expire then
-      local remaining = expire - os.time()
-      return S("You are temporarily penalized. Wait @1 seconds.", remaining)
-    else
-      temp_penalties[name] = nil
-      save_penalties(temp_penalties)
-    end
-  end
-end)
-
--- Command
-core.register_chatcommand("rule", {
-  params = "<player>",
-  description = S("Force player to accept rules"),
-  privs = { ban = true },
-
-  func = function(name, param)
-    if param == "" then
-      return false, S("Usage: /rule <player>")
-    end
-
-    local target = core.get_player_by_name(param)
-    if not target then
-      return false, S("Player not found.")
-    end
-
-    pending_rules[param] = {
-      moderator = name,
-      time = os.time()
-    }
-
-    frozen_players[param] = true
-
-    local formspec =
-      "formspec_version[4]" ..
-      "size[10,8]" ..
-      "label[0.5,0.3;" .. core.formspec_escape(S("SERVER RULES - MANDATORY")) .. "]" ..
-      "textarea[0.5,1;9,5.5;rules;;" .. core.formspec_escape(mandatory_rules_text) .. "]" ..
-      "button[3.5,6.8;3,1;accept;" .. core.formspec_escape(S("I Accept")) .. "]"
-
-    core.show_formspec(param, "rules:confirm", formspec)
-
-    return true, S("Rules sent to @1", param)
-  end
-})
-
--- Form handler
-core.register_on_player_receive_fields(function(player, formname, fields)
-  if formname ~= "rules:confirm" then return end
-
-  local name = player:get_player_name()
-
-  -- Closed without accepting
-  if fields.quit and pending_rules[name] then
-    temp_penalties[name] = os.time() + penalty_seconds
-    save_penalties(temp_penalties)
-    core.kick_player(name, S("You closed the rules window. You are penalized for @1 minutes.", penalty_minutes) )
-    pending_rules[name] = nil
-    frozen_players[name] = nil
-    return
-  end
-
-  -- Accepted
-  if fields.accept and pending_rules[name] then
-    local mod_name = pending_rules[name].moderator
-    frozen_players[name] = nil
-    player:set_physics_override({ speed = 1, jump = 1 })
-    core.close_formspec(name, "rules:confirm")
-
-    core.chat_send_player(mod_name, S("@1 accepted the rules.", name) )
-    pending_rules[name] = nil
-  end
-end)
-
-
--- Timeout auto kick
-core.register_globalstep(function()
-  for name,data in pairs(pending_rules) do
-    if os.time() - data.time > timeout_seconds then
-      temp_penalties[name] = os.time() + penalty_seconds
-      save_penalties(temp_penalties)
-      core.kick_player(name, S("You did not accept the rules. You are penalized for @1 minutes.", penalty_minutes) )
-
-      pending_rules[name] = nil
-      frozen_players[name] = nil
-    end
-  end
-end)
-
------Rules
-core.register_chatcommand("rules", {
-  description = S("Show rules"),
-  func = function(name)
-    local formspec =
-      "formspec_version[4]" ..
-      "size[10,8]" ..
-      "bgcolor[#00000000;true]" ..
-      "textarea[0.5,0.5;9,6;rules;;" .. core.formspec_escape(rules_text) .. "]" ..
-      "button_exit[3.5,7;3,1;exit;" .. core.formspec_escape(S("Close")) .. "]"
-
-    core.show_formspec(name, "rules:show", formspec)
-  end
-})
-
-core.register_on_joinplayer(function(player)
-  local name = player:get_player_name()
-  local message = S("Use @1 to view the server rules", core.colorize("#FFFF00", "/rules"))
-  core.chat_send_player(name, message)
-end)
+jc_rules_model.temp_penalties = load_penalties()
+jc_rules_model.save_penalties = save_penalties

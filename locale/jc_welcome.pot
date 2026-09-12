@@ -4,6 +4,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Show the welcome screen again"
+msgstr ""
+
 msgid "Join Discord"
 msgstr ""
 
@@ -95,6 +98,9 @@ msgid "Show rules"
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "Shows Guardian rank requirements"
 msgstr ""
 
 msgid "Use @1 to view the server rules"
@@ -223,7 +229,10 @@ msgstr ""
 msgid "Most Active: @1"
 msgstr ""
 
-msgid "RANK TOPS"
+msgid "TOP PLAYERS"
+msgstr ""
+
+msgid "Top Players Panel"
 msgstr ""
 
 msgid "GUARDIAN"
@@ -233,9 +242,6 @@ msgid "Active Players Panel v3"
 msgstr ""
 
 msgid "No permission."
-msgstr ""
-
-msgid "Rank Tops Panel"
 msgstr ""
 
 msgid "OWNER"

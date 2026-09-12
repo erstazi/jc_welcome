@@ -5,6 +5,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Show the welcome screen again"
+msgstr "Знову показати екран привітання"
+
 msgid "Join Discord"
 msgstr "Приєднатися до Discord"
 
@@ -97,6 +100,9 @@ msgstr "Показати правила"
 
 msgid "Close"
 msgstr "Закрити"
+
+msgid "Shows Guardian rank requirements"
+msgstr "Показує вимоги для рангу Вартового"
 
 msgid "Use @1 to view the server rules"
 msgstr "Використовуйте @1, щоб переглянути правила сервера"
@@ -224,8 +230,11 @@ msgstr "Загальна кількість годин: @1"
 msgid "Most Active: @1"
 msgstr "Найактивніший: @1"
 
-msgid "RANK TOPS"
-msgstr "НАЙКРАЩІ ЗА РАНГАМИ"
+msgid "TOP PLAYERS"
+msgstr "НАЙКРАЩІ ГРАВЦІ"
+
+msgid "Top Players Panel"
+msgstr "Панель найкращих гравців"
 
 msgid "GUARDIAN"
 msgstr "ХРАНИТЕЛЬ"
@@ -235,9 +244,6 @@ msgstr "Панель активних гравців v3"
 
 msgid "No permission."
 msgstr "Немає дозволу."
-
-msgid "Rank Tops Panel"
-msgstr "Панель найкращих за рангами"
 
 msgid "OWNER"
 msgstr "ВЛАСНИК"

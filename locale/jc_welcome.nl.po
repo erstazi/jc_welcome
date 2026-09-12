@@ -5,6 +5,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Show the welcome screen again"
+msgstr "Welkomstscherm opnieuw tonen"
+
 msgid "Join Discord"
 msgstr "Deelnemen aan Discord"
 
@@ -97,6 +100,9 @@ msgstr "Regels tonen"
 
 msgid "Close"
 msgstr "Sluiten"
+
+msgid "Shows Guardian rank requirements"
+msgstr "Toont de vereisten voor de Guardian-rang"
 
 msgid "Use @1 to view the server rules"
 msgstr "Gebruik @1 om de serverregels te bekijken"
@@ -224,8 +230,11 @@ msgstr "Totale uren: @1"
 msgid "Most Active: @1"
 msgstr "Meest actief: @1"
 
-msgid "RANK TOPS"
-msgstr "RANGTOPPERS"
+msgid "TOP PLAYERS"
+msgstr "Topspelers"
+
+msgid "Top Players Panel"
+msgstr "Paneel met topspelers"
 
 msgid "GUARDIAN"
 msgstr "BESCHERMER"
@@ -235,9 +244,6 @@ msgstr "Paneel actieve spelers v3"
 
 msgid "No permission."
 msgstr "Geen toestemming."
-
-msgid "Rank Tops Panel"
-msgstr "Ranglijstpaneel"
 
 msgid "OWNER"
 msgstr "EIGENAAR"

@@ -5,6 +5,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+msgid "Show the welcome screen again"
+msgstr "再次显示欢迎界面"
+
 msgid "Join Discord"
 msgstr "加入 Discord"
 
@@ -97,6 +100,9 @@ msgstr "显示规则"
 
 msgid "Close"
 msgstr "关闭"
+
+msgid "Shows Guardian rank requirements"
+msgstr "显示 Guardian 等级要求"
 
 msgid "Use @1 to view the server rules"
 msgstr "使用 @1 查看服务器规则"
@@ -224,8 +230,11 @@ msgstr "总小时数：@1"
 msgid "Most Active: @1"
 msgstr "最活跃：@1"
 
-msgid "RANK TOPS"
-msgstr "等级排行榜"
+msgid "TOP PLAYERS"
+msgstr "顶尖玩家"
+
+msgid "Top Players Panel"
+msgstr "顶尖玩家面板"
 
 msgid "GUARDIAN"
 msgstr "守护者"
@@ -235,9 +244,6 @@ msgstr "活跃玩家面板 v3"
 
 msgid "No permission."
 msgstr "没有权限。"
-
-msgid "Rank Tops Panel"
-msgstr "等级排行榜面板"
 
 msgid "OWNER"
 msgstr "服主"
