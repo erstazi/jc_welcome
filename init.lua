@@ -315,41 +315,42 @@ local function show_welcome(player)
   -- SHOW
   --------------------------------------------------
 
-  core.show_formspec(
-    pname,
-    "welcome:splash",
-    formspec
-  )
+  core.show_formspec(pname, "welcome:splash", formspec )
 end
 
 --------------------------------------------------------
 -- SHOW ON JOIN
 --------------------------------------------------------
 core.register_on_player_receive_fields(function(player, formname, fields)
-
   if formname ~= "welcome:splash" then
     return false
   end
 
   if fields.show_places then
-    if jc_places and jc_places.show_places then
-      if not player then
-        return false, S("Player not found.")
-      end
+    if not player then
+      return false, S("Player not found.")
+    end
 
+    core.close_formspec(player:get_player_name(), "welcome:splash")
+
+    if jc_places and jc_places.show_places then
       jc_places.show_places(player:get_player_name())
     end
+
     return true
   end
 
   if fields.show_sounds then
-    if jc_special_sounds and jc_special_sounds.show_sounds_formspec then
-      if not player then
-        return false, S("Player not found.")
-      end
+    if not player then
+      return false, S("Player not found.")
+    end
 
+    core.close_formspec(player:get_player_name(), "welcome:splash")
+
+    if jc_special_sounds and jc_special_sounds.show_sounds_formspec then
       jc_special_sounds.show_sounds_formspec(player)
     end
+
     return true
   end
 
