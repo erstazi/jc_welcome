@@ -1,3 +1,4 @@
+local modname = core.get_current_modname()
 local S = core.get_translator(core.get_current_modname())
 local modpath = core.get_modpath(core.get_current_modname())
 local ESC = core.formspec_escape
@@ -15,6 +16,13 @@ core.register_on_newplayer(function(player)
   meta:set_int("welcome_new_player", 1)
   meta:set_int("welcome_first_join", os.time())
 end)
+
+--------------------------------------------------------
+-- SERVER LINKS
+--------------------------------------------------------
+local link_server_website = "https://justcraft.dssapp.us/"
+local link_discord = "https://discord.gg/C8Ev9td5k"
+local link_luanti_forum_post = "https://forum.luanti.org/viewtopic.php?t=32339"
 
 --------------------------------------------------------
 -- DATE FORMATTING
@@ -82,7 +90,6 @@ local function show_welcome(player)
   --------------------------------------------------
   -- NEW / EXISTING PLAYER
   --------------------------------------------------
-
   local is_new_player = meta:get_int("welcome_new_player") == 1
   local ptime = meta:get_int("welcome_first_join")
   local ltime = meta:get_int("welcome_previous_join")
@@ -98,7 +105,6 @@ local function show_welcome(player)
   --------------------------------------------------
   -- Dynamic Real Skin
   --------------------------------------------------
-
   local skin_texture = "character.png"
 
   if player and skins.get_player_skin then
@@ -112,7 +118,6 @@ local function show_welcome(player)
   --------------------------------------------------
   -- Server Details
   --------------------------------------------------
-
   local server_name = core.settings:get("server_name")
 
   if server_name == "" then
@@ -136,7 +141,6 @@ local function show_welcome(player)
   --------------------------------------------------
   -- Rank
   --------------------------------------------------
-
   local function get_ranked_name(name)
     local rank = ranks.get_rank(name) or "basic"
     local def = ranks.get_def(rank)
@@ -156,7 +160,6 @@ local function show_welcome(player)
   --------------------------------------------------
   -- ONLINE PLAYER LIST
   --------------------------------------------------
-
   local player_list = {}
 
   for _, p in ipairs(core.get_connected_players()) do
@@ -166,34 +169,21 @@ local function show_welcome(player)
   --------------------------------------------------
   -- FORMSPEC
   --------------------------------------------------
-
   local formspec = "formspec_version[4]"
     .. "size[20,11.3]"
     .. default.gui_bg
     .. default.gui_bg_img
 
     .. "box[0.0,0.0;15.3,2;#111111]"
-
     .. string.format("label[3.5,0.3;%s]", ESC(server_name) )
-
     .. string.format("label[3.5,0.9;%s:%s]", ESC(server_address), ESC(port) )
-
     .. string.format("label[3.5,1.5;%s]", ESC( S("Local Time: @1", local_time) ) )
 
     .. "image[0.97,0.0;2,2;welcome_screen_logo.png]"
     .. "image[14.7,0.2;0.9,0.9;discord_logo.png]"
-
-    .. "button_url[15.6,0.2;4.1,0.9;discord_link;"
-      .. ESC(S("Join Discord"))
-      .. ";https://discord.gg/C8Ev9td5k]"
-
-    .. "button_url[15.6,1.2;4.1,0.9;web_link;"
-      .. ESC(S("Visit Website"))
-      .. ";https://justcraft.dssapp.us/]"
-
-    .. "button_url[15.6,2.2;4.1,0.9;forum_link;"
-      .. ESC(S("Visit Forum"))
-      .. ";https://forum.luanti.org/viewtopic.php?t=32339]"
+    .. "button_url[15.6,0.2;4.1,0.9;discord_link;" .. ESC(S("Join Discord")) .. ";" .. ESC(link_discord) .. "]"
+    .. "button_url[15.6,1.2;4.1,0.9;web_link;" .. ESC(S("Visit Website")) .. ";" .. ESC(link_server_website) .. "]"
+    .. "button_url[15.6,2.2;4.1,0.9;forum_link;" .. ESC(S("Visit Forum")) .. ";" .. ESC(link_luanti_forum_post) .. "]"
 
 
   --------------------------------------------------
@@ -212,7 +202,6 @@ local function show_welcome(player)
 
   local text_x = 4.0
   local text_y_start = 2.5
-  -- local line_spacing = 0.8
   local line_spacing = 1.2
 
   --------------------------------------------------
@@ -224,7 +213,7 @@ local function show_welcome(player)
         "label[%f,%f;%s]",
         text_x,
         text_y_start,
-        ESC(S("Greetings, @1!", pname))
+        ESC( S("Greetings, @1!", core.colorize("#00FF00", pname) ) )
       )
 
     formspec = formspec ..
@@ -239,10 +228,12 @@ local function show_welcome(player)
   else
     formspec = formspec ..
       string.format(
-        "label[%f,%f;%s]",
+        "label[%f,%f;%f,%f;%s]",
         text_x,
         text_y_start,
-        ESC(S("Welcome back, @1!", pname))
+        10.5,
+        2,
+        ESC( S("Welcome back, @1!", core.colorize("#00FF00", pname) ) )
       )
 
     formspec = formspec ..
@@ -263,122 +254,62 @@ local function show_welcome(player)
           text_y_start + 2 * line_spacing,
           10.5,
           2,
-          ESC(
-            S("You last logged on @1", format_datetime(ltime))
-          )
+          ESC( S("You last logged on @1", format_datetime(ltime)) )
         )
     end
-
   end
 
   formspec = formspec
     -- Dark background behind player
-    .. string.format(
-      "box[%f,%f;%f,%f;#111111]",
-      frame_x + 0.40,
-      frame_y + 0.40,
-      frame_w - 0.55,
-      frame_h - 0.95
-    )
-    .. string.format(
-      "image[%f,%f;%f,%f;%s]",
-      avatar_x,
-      avatar_y,
-      avatar_w,
-      avatar_h,
-      skin_texture
-    )
-
-    .. string.format(
-      "image[%f,%f;%f,%f;player_frame.png]",
-      frame_x,
-      frame_y,
-      frame_w,
-      frame_h
-    )
+    .. string.format("box[%f,%f;%f,%f;#111111]", frame_x + 0.40, frame_y + 0.40, frame_w - 0.55, frame_h - 0.95 )
+    .. string.format("image[%f,%f;%f,%f;%s]", avatar_x, avatar_y, avatar_w, avatar_h, skin_texture )
+    .. string.format("image[%f,%f;%f,%f;player_frame.png]", frame_x, frame_y, frame_w, frame_h )
 
   --------------------------------------------------
   -- PLAYER LIST
   --------------------------------------------------
-
   local list_x = 14.5
   local list_y = 3.9
   local list_w = 5.2
   local list_h = 6.5
 
   formspec = formspec
-    .. string.format(
-      "box[%f,%f;%f,%f;#111111]",
-      list_x,
-      list_y,
-      list_w,
-      list_h
-    )
-
-    .. string.format(
-      "label[%f,%f;%s]",
-      list_x,
-      list_y - 0.4,
-      ESC(S("@1 Players Online", #player_list))
-    )
-
-    .. string.format(
-      "textlist[%f,%f;%f,%f;player_list;",
-      list_x,
-      list_y,
-      list_w,
-      list_h
-    )
+    .. string.format( "box[%f,%f;%f,%f;#111111]", list_x, list_y, list_w, list_h )
+    .. string.format("label[%f,%f;%s]", list_x, list_y - 0.4, ESC(S("@1 Players Online", #player_list)) )
+    .. string.format("textlist[%f,%f;%f,%f;player_list;", list_x, list_y, list_w, list_h )
 
   for i, name in ipairs(player_list) do
     local display_name = get_ranked_name(name)
-
     formspec = (i > 1 and formspec .. "," or formspec) .. ESC(display_name)
   end
 
-  formspec = formspec
-    .. string.format(
-      ";%d;true]",
-      #player_list
-    )
+  formspec = formspec .. string.format(";%d;true]", #player_list )
 
   --------------------------------------------------
   -- OWNER
   --------------------------------------------------
-
   local player_rank = ranks.get_rank(pname) or "basic"
 
   if player_rank == "owner" then
-    formspec = formspec
-      .. "label[4.0,6.0;10.5,2;" .. ESC(S("Owner Section: Here you can monitor server activity")) .. "]"
+    formspec = formspec .. "label[4.0,6.0;10.5,2;" .. ESC(S("Owner Section: Here you can monitor server activity")) .. "]"
   end
 
   --------------------------------------------------
   -- GENERAL
   --------------------------------------------------
-
-  formspec = formspec
-    .. "label[0.2,8.0;14.2,1.5;" .. ESC(S("General Section: Enjoy the server!")) .. "]"
+  formspec = formspec .. "label[0.2,8.0;14.2,1.5;" .. ESC(S("General Section: Enjoy the server!")) .. "]"
 
   --------------------------------------------------
   -- FOOTER
   --------------------------------------------------
-
-  formspec = formspec
-    .. "label[0.2,8.6;14.2,1.5;" .. ESC( S("For a complete list of available commands, type @1 into chat.", core.colorize("#FFFF00", "/help") ) ) .. "]"
+  formspec = formspec .. "label[0.2,8.6;14.2,1.5;" .. ESC( S("For a complete list of available commands, type @1 into chat.", core.colorize("#FFFF00", "/help") ) ) .. "]"
 
   --------------------------------------------------
   -- Let's Play Button
   --------------------------------------------------
-
-  formspec = formspec
-    .. "button_exit[0.2,10.1;3,1;close;" .. ESC(S("Let's Play!")) .. "]"
-
-  formspec = formspec
-    .. "button[3.4,10.1;3,1;show_places;" .. ESC(S("Show Places")) .. "]"
-
-  formspec = formspec
-    .. "button[6.6,10.1;3,1;show_sounds;" .. ESC(S("Sounds")) .. "]"
+  formspec = formspec .. "button_exit[0.2,10.1;3,1;close;" .. ESC(S("Let's Play!")) .. "]"
+  formspec = formspec .. "button[3.4,10.1;3,1;show_places;" .. ESC(S("Show Places")) .. "]"
+  formspec = formspec .. "button[6.6,10.1;3,1;show_sounds;" .. ESC(S("Sounds")) .. "]"
 
   --------------------------------------------------
   -- SHOW
@@ -483,24 +414,20 @@ core.register_chatcommand("welcome", {
 -- LOAD AC PANEL
 -- CARGAR AC PANEL
 --------------------------------------------------
-
-dofile(core.get_modpath("jc_welcome") .. "/ac.lua")
+dofile(modpath .. "/ac.lua")
 
 --------------------------------------------------
 -- LOAD IF PANEL
 -- CARGAR IF PANEL
 --------------------------------------------------
-
-dofile(core.get_modpath("jc_welcome") .. "/if.lua")
+dofile(modpath .. "/if.lua")
 
 --------------------------------------------------
 -- HELP
 --------------------------------------------------
-
-dofile(core.get_modpath("jc_welcome") .. "/help.lua")
+dofile(modpath .. "/help.lua")
 
 --------------------------------------------------
--- A
+-- Server Rules
 --------------------------------------------------
-
-dofile(core.get_modpath("jc_welcome") .. "/a.lua")
+dofile(modpath .. "/server_rules.lua")
