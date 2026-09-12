@@ -52,11 +52,11 @@ function jc_ac_view.show_panel(name)
 
     formspec =
       formspec
-      .. "image[0.3," .. y - 0.2 .. ";0.7,0.7;" .. skin .. "]"
-      .. "label[1.1," .. y .. ";" .. ESC(jc_ac_model.get_rank_display(pname)) .. "]"
-      .. "label[6.2," .. y .. ";S:" .. math.floor(sdata.session_time / 3600) .. "h]"
-      .. "label[8.0," .. y .. ";T:" .. math.floor(pdata.total_hours) .. "h]"
-      .. "label[9.8," .. y .. ";J:" .. pdata.sessions .. "]"
+      .. "image[0.3," .. y - 0.2 .. ";0.4,0.8;" .. skin .. "]"
+      .. "label[1.1," .. y + 0.2 .. ";" .. ESC(jc_ac_model.get_rank_display(pname)) .. "]"
+      .. "label[6.2," .. y + 0.2 .. ";S:" .. ESC(math.floor(sdata.session_time / 3600)) .. "h]"
+      .. "label[8.0," .. y + 0.2 .. ";T:" .. ESC(math.floor(pdata.total_hours)) .. "h]"
+      .. "label[9.8," .. y + 0.2 .. ";J:" .. ESC(pdata.sessions) .. "]"
 
     y = y + 0.8
   end
