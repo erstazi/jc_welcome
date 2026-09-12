@@ -36,11 +36,11 @@ dofile(modpath .. "/if_view.lua")
 dofile(modpath .. "/if_controller.lua")
 
 --------------------------------------------------
--- HELP MVC
+-- Guardian Information MVC
 --------------------------------------------------
-dofile(modpath .. "/help_model.lua")
-dofile(modpath .. "/help_view.lua")
-dofile(modpath .. "/help_controller.lua")
+dofile(modpath .. "/guardian_model.lua")
+dofile(modpath .. "/guardian_view.lua")
+dofile(modpath .. "/guardian_controller.lua")
 
 --------------------------------------------------
 -- Server Rules

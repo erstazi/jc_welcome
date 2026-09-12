@@ -1,10 +1,10 @@
--- help_model.lua
+-- guardian_model.lua
 local S = core.get_translator(core.get_current_modname())
 local ESC = core.formspec_escape
 
-jc_help_model = {}
+jc_guardian_model = {}
 
-function jc_help_model.get_guardian_text()
+function jc_guardian_model.get_guardian_text()
   return "" ..
     "=== JUST-CRAFT RANK SYSTEM ===\n\n" ..
 
