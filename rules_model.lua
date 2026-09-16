@@ -1,8 +1,12 @@
 -- rules_model.lua
+local mod_name = core.get_current_modname()
 local S = core.get_translator(core.get_current_modname())
 local ESC = core.formspec_escape
 local storage = core.get_mod_storage()
 
+-------------------------------------------------------------------------------
+-- Configuration
+-------------------------------------------------------------------------------
 jc_rules_model = {}
 
 jc_rules_model.pending_rules = {}
@@ -11,6 +15,11 @@ jc_rules_model.frozen_players = {}
 jc_rules_model.timeout_seconds = 120
 jc_rules_model.penalty_seconds = 120
 jc_rules_model.penalty_minutes = jc_rules_model.penalty_seconds / 60
+
+-------------------------------------------------------------------------------
+-- Change this to wherever you want the rules.json to be written.
+-------------------------------------------------------------------------------
+local RULES_JSON = core.get_worldpath() .. "/rules.json"
 
 -------------------------------------------------------------------------------
 -- Raw server rules
@@ -157,5 +166,196 @@ local function save_penalties(t)
   end
 end
 
+
+-------------------------------------------------------------------------------
+-- JSON encoder and Helper Functions
+-------------------------------------------------------------------------------
+local function json_escape(str)
+  str = tostring(str)
+
+  str = str:gsub("\\", "\\\\")
+  str = str:gsub("\"", "\\\"")
+  str = str:gsub("\b", "\\b")
+  str = str:gsub("\f", "\\f")
+  str = str:gsub("\n", "\\n")
+  str = str:gsub("\r", "\\r")
+  str = str:gsub("\t", "\\t")
+
+  return str
+end
+
+local function json_encode(value)
+  local value_type = type(value)
+
+  -- ------------------------------------------------------------
+  -- String
+  -- ------------------------------------------------------------
+  if value_type == "string" then
+    return "\"" .. json_escape(value) .. "\""
+
+  -- ------------------------------------------------------------
+  -- Number
+  -- ------------------------------------------------------------
+  elseif value_type == "number" then
+    if value ~= value then
+      return "null"
+    end
+
+    if value == math.huge or value == -math.huge then
+      return "null"
+    end
+
+    return tostring(value)
+
+  -- ------------------------------------------------------------
+  -- Boolean
+  -- ------------------------------------------------------------
+  elseif value_type == "boolean" then
+    return value and "true" or "false"
+
+  -- ------------------------------------------------------------
+  -- Nil
+  -- ------------------------------------------------------------
+  elseif value_type == "nil" then
+    return "null"
+
+  -- ------------------------------------------------------------
+  -- Table
+  -- ------------------------------------------------------------
+  elseif value_type == "table" then
+    local parts = {}
+    local is_array = true
+    local count = 0
+
+    -- Determine whether this is an array.
+    for key, _ in pairs(value) do
+      count = count + 1
+
+      if type(key) ~= "number" or key < 1 or key % 1 ~= 0 then
+        is_array = false
+        break
+      end
+    end
+
+    -- ----------------------------------------------------------
+    -- JSON array
+    -- ----------------------------------------------------------
+    if is_array then
+      for i = 1, count do
+        parts[#parts + 1] = json_encode(value[i])
+      end
+
+      return "[" .. table.concat(parts, ",") .. "]"
+
+    -- ----------------------------------------------------------
+    -- JSON object
+    -- ----------------------------------------------------------
+    else
+      for key, item in pairs(value) do
+        parts[#parts + 1] =
+          "\"" .. json_escape(key) .. "\":" .. json_encode(item)
+      end
+
+      table.sort(parts)
+
+      return "{" .. table.concat(parts, ",") .. "}"
+    end
+  end
+
+  return "null"
+end
+
+-------------------------------------------------------------------------------
+-- Get server rules from jc_welcome
+-------------------------------------------------------------------------------
+local function get_rules()
+  local rules = {}
+
+  if not jc_welcome.rules_raw then
+    return rules
+  end
+
+  for i = 1, #jc_welcome.rules_raw do
+    rules[#rules + 1] = jc_welcome.rules_raw[i]
+  end
+
+  return rules
+end
+
+-------------------------------------------------------------------------------
+-- Get server rules in Spanish from jc_welcome
+-------------------------------------------------------------------------------
+local function get_rules_es()
+  local rules_es = {}
+
+  if not jc_welcome.rules_es_raw then
+    return rules_es
+  end
+
+  for i = 1, #jc_welcome.rules_es_raw do
+    rules_es[#rules_es + 1] = jc_welcome.rules_es_raw[i]
+  end
+
+  return rules_es
+end
+
+-------------------------------------------------------------------------------
+-- Generate rules data
+-------------------------------------------------------------------------------
+local function get_rules_data()
+  local data = {
+    rules = get_rules(),
+    rules_es = get_rules_es(),
+    updated = os.date("!%Y-%m-%dT%H:%M:%SZ"),
+  }
+
+  return data
+end
+
+-------------------------------------------------------------------------------
+-- Write rules JSON file
+-------------------------------------------------------------------------------
+local function write_rules_json()
+  local data = get_rules_data()
+  local json = json_encode(data)
+
+  -- This prevents the website from ever seeing a partially-written JSON file.
+  local temp_file = RULES_JSON .. ".tmp"
+
+  local file, err = io.open(temp_file, "w")
+
+  if not file then
+    core.log("error", "[" .. mod_name .. "] Could not open rules JSON for writing: " .. tostring(err) )
+    return false
+  end
+
+  file:write(json)
+  file:write("\n")
+  file:close()
+
+  -- Replace the old JSON with the newly generated one.
+  local success, rename_err = os.rename(temp_file, RULES_JSON)
+
+  if not success then
+    core.log("error", "[" .. mod_name .. "] Could not replace rules JSON: " .. tostring(rename_err) )
+
+    os.remove(temp_file)
+
+    return false
+  end
+
+  core.log("action", "[" .. mod_name .. "] rules JSON updated: " .. RULES_JSON )
+
+  return true
+end
+
+-------------------------------------------------------------------------------
+-- Initial update
+-------------------------------------------------------------------------------
+write_rules_json()
+
+-------------------------------------------------------------------------------
+-- Initial update
+-------------------------------------------------------------------------------
 jc_rules_model.temp_penalties = load_penalties()
 jc_rules_model.save_penalties = save_penalties

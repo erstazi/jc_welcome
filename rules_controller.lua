@@ -1,5 +1,8 @@
 -- rules_controller.lua
+local mod_name = core.get_current_modname()
 local S = core.get_translator(core.get_current_modname())
+
+jc_rules_controller = {}
 
 local pending_rules = jc_rules_model.pending_rules
 local frozen_players = jc_rules_model.frozen_players
