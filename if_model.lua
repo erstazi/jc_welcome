@@ -1,15 +1,21 @@
 -- if_model.lua
+
 jc_if_model = {}
 
 jc_if_model.session_times = {}
 jc_if_model.player_activity = {}
+jc_if_model.player_dead = {}
 
 function jc_if_model.get_status(name)
-  if (jc_if_model.player_activity[name] or 0) > 80 then
-    return core.colorize("#ff5555","AFK")
-  else
-    return core.colorize("#55ff55","Active")
+  if jc_if_model.player_dead[name] then
+    return core.colorize("#ff5555", "DEAD")
   end
+
+  if (jc_if_model.player_activity[name] or 0) > 80 then
+    return core.colorize("#FFFF55", "AFK")
+  end
+
+  return core.colorize("#55ff55", "ACTIVE")
 end
 
 function jc_if_model.get_rank_display(name)
@@ -22,36 +28,41 @@ function jc_if_model.get_rank_display(name)
 
   if def and def.prefix then
     local colour = def.colour or "#ffffff"
-    return core.colorize( colour, "["..def.prefix:upper().."] " ) .. name
+    return core.colorize(colour, "[" .. def.prefix:upper() .. "] ") .. name
   end
 
   return name
 end
 
 function jc_if_model.get_server_time()
-  local time = core.get_timeofday()*24
+  local time = core.get_timeofday() * 24
   local hour = math.floor(time)
-  local minute = math.floor((time-hour)*60)
-  return string.format("%02d:%02d",hour,minute)
+  local minute = math.floor((time - hour) * 60)
+
+  return string.format("%02d:%02d", hour, minute)
 end
 
 function jc_if_model.get_world_age()
   local total = core.get_gametime()
-  local days = math.floor(total/86400)
-  local years = math.floor(days/365)
+  local days = math.floor(total / 86400)
+  local years = math.floor(days / 365)
+
   return days, years
 end
 
 function jc_if_model.get_online_players()
   local online = {}
 
-  for pname,time in pairs(jc_if_model.session_times) do
+  for pname, time in pairs(jc_if_model.session_times) do
     if core.get_player_by_name(pname) then
-      table.insert(online,{ name=pname, time=time })
+      table.insert(online, {
+        name = pname,
+        time = time,
+      })
     end
   end
 
-  table.sort(online,function(a,b)
+  table.sort(online, function(a, b)
     return a.time > b.time
   end)
 

@@ -1,4 +1,5 @@
 -- if_view.lua
+
 local ESC = core.formspec_escape
 
 jc_if_view = {}
@@ -15,32 +16,32 @@ function jc_if_view.show_panel(name)
   ----------------------------------------------------
   local formspec =
     "formspec_version[4]"
-    .."size[13,9]"
-    ..default.gui_bg
-    ..default.gui_bg_img
+    .. "size[13,9]"
+    .. default.gui_bg
+    .. default.gui_bg_img
 
     ------------------------------------------------
     -- Header
     ------------------------------------------------
-    .."label[0.4,0.3;IF - Players Online]"
-    .."label[9.5,0.3;Time: " .. ESC(server_time) .. "]"
-    .."label[9.5,0.8;Day: " .. ESC(days) .. "]"
-    .."label[9.5,1.3;Year: " .. ESC(years) .. "]"
+    .. "label[0.4,0.3;IF - Players Online]"
+    .. "label[9.5,0.3;Time: " .. ESC(server_time) .. "]"
+    .. "label[9.5,0.8;Day: " .. ESC(days) .. "]"
+    .. "label[9.5,1.3;Year: " .. ESC(years) .. "]"
 
     ------------------------------------------------
     -- Refresh button
     ------------------------------------------------
-    .."button[5.2,0.25;2.5,0.8;refresh;Refresh]"
+    .. "button[5.2,0.25;2.5,0.8;refresh;Refresh]"
 
     ------------------------------------------------
     -- Bottom of the list
     ------------------------------------------------
-    .."box[0.3,2.0;12.0,6.7;#00000066]"
+    .. "box[0.3,2.0;12.0,6.7;#00000066]"
 
     ------------------------------------------------
     -- Scroll container
     ------------------------------------------------
-    .."scroll_container[0.4,2.2;11.8,6.3;scroll_players_activeornot;vertical]"
+    .. "scroll_container[0.4,2.2;11.8,6.3;scroll_players_activeornot;vertical]"
 
   ----------------------------------------------------
   -- Player list
@@ -52,13 +53,13 @@ function jc_if_view.show_panel(name)
   ----------------------------------------------------
   local y = 0.2
 
-  for _,p in ipairs(online) do
-    local minutes = math.floor(p.time/60)
-    local seconds = math.floor(p.time%60)
+  for _, p in ipairs(online) do
+    local minutes = math.floor(p.time / 60)
+    local seconds = math.floor(p.time % 60)
     local player_obj = core.get_player_by_name(p.name)
 
     ------------------------------------------------
-    -- Skin FIX
+    -- Skin
     ------------------------------------------------
     local head_texture = "character.png"
 
@@ -81,13 +82,14 @@ function jc_if_view.show_panel(name)
     local status = jc_if_model.get_status(p.name)
 
     ------------------------------------------------
-    -- Row draw
+    -- Row
     ------------------------------------------------
     formspec = formspec
-      ..string.format("image[0.3,%.2f;0.4,0.8;%s]", ESC(y-0.2), ESC(head_texture) )
-      ..string.format("label[1.3,%.2f;%s]", ESC(y+0.15), ESC(display_name) )
-      ..string.format("label[7.0,%.2f;%dm %ds]", ESC(y+0.15), ESC(minutes), ESC(seconds) )
-      ..string.format("label[9.5,%.2f;%s]", ESC(y+0.15), ESC(status) )
+      .. string.format("image[0.3,%.2f;0.4,0.8;%s]", ESC(y - 0.2), ESC(head_texture) )
+      .. string.format("label[1.3,%.2f;%s]", ESC(y + 0.15), ESC(display_name) )
+      .. string.format("label[7.0,%.2f;%dm %ds]", ESC(y + 0.15), ESC(minutes), ESC(seconds) )
+      .. string.format("label[9.5,%.2f;%s]", ESC(y + 0.15), ESC(status)
+      )
 
     y = y + 0.9
   end
