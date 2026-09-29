@@ -107,6 +107,12 @@ function jc_welcome_model.get_data(player)
     player_list[#player_list + 1] = p:get_player_name()
   end
 
+  local notices = {}
+
+  if jc_notices and jc_notices.notices then
+    notices = jc_notices.notices.get_all()
+  end
+
   return {
     player = player,
     player_name = pname,
@@ -119,7 +125,7 @@ function jc_welcome_model.get_data(player)
     port = port,
     local_time = os.date("%H:%M:%S"),
     player_list = player_list,
-
+    notices = notices,
     link_server_website = jc_welcome_config.link_server_website,
     link_discord = jc_welcome_config.link_discord,
     link_luanti_forum_post = jc_welcome_config.link_luanti_forum_post,

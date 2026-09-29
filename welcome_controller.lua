@@ -58,6 +58,22 @@ core.register_on_player_receive_fields(function(player, formname, fields)
     return true
   end
 
+
+  for field, value in pairs(fields) do
+    local notice_id = field:match("^view_notice_(%d+)$")
+
+    if notice_id and value then
+      if jc_notices and jc_notices.notices then
+        local player_name = player:get_player_name()
+
+        core.close_formspec(player_name, "welcome:splash")
+        jc_notices.notices.show(player_name, tonumber(notice_id))
+      end
+
+      return true
+    end
+  end
+
   return false
 end)
 

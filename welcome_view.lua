@@ -127,6 +127,63 @@ function jc_welcome_view.build(data)
       frame_h
     )
 
+
+
+  --------------------------------------------------
+  -- NOTICES
+  --------------------------------------------------
+
+  local notices_x = 0.25
+  local notices_y = 7.7
+  local notices_w = 13.9
+  local notices_h = 2.0
+
+  formspec = formspec
+    .. string.format(
+      "box[%f,%f;%f,%f;#111111]",
+      notices_x,
+      notices_y,
+      notices_w,
+      notices_h
+    )
+    .. string.format(
+      "label[%f,%f;%s]",
+      notices_x,
+      notices_y - 0.4,
+      ESC(S("Notices"))
+    )
+
+  if #data.notices > 0 then
+    local notice_y = notices_y + 0.2
+    local notice_limit = math.min(#data.notices, 2)
+
+    for i = 1, notice_limit do
+      local notice = data.notices[i]
+      local title = notice.title or ""
+      local date = os.date("%Y-%m-%d %H:%M", notice.created or 0)
+
+      formspec = formspec
+        .. string.format(
+          "label[%f,%f;8.5,0.7;%s]",
+          notices_x + 0.2,
+          notice_y + ((i - 1) * 0.8),
+          ESC(title .. " - " .. date)
+        )
+        .. string.format(
+          "button[%f,%f;2.5,0.6;view_notice_%d;%s]",
+          notices_x + 10.0,
+          notice_y - 0.08 + ((i - 1) * 0.8),
+          notice.id,
+          ESC(S("View Notice"))
+        )
+    end
+  else
+    formspec = formspec ..
+      string.format("label[%f,%f;%s]", notices_x + 0.2, notices_y + 0.2, ESC(S("There are no notices.")) )
+  end
+
+
+
   local list_x = 14.5
   local list_y = 3.9
   local list_w = 5.2
