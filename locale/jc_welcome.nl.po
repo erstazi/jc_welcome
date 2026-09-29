@@ -26,8 +26,8 @@ msgstr "Locaties tonen"
 msgid "Sounds"
 msgstr "Geluiden"
 
-msgid "You last logged on @1"
-msgstr "Je was voor het laatst online op @1"
+msgid "You last logged on @1."
+msgstr "Je was voor het laatst online op @1."
 
 msgid "Greetings, @1!"
 msgstr "Hallo, @1!"
@@ -38,8 +38,8 @@ msgstr "Lees voordat je begint de regels met het commando @1."
 msgid "Welcome back, @1!"
 msgstr "Welkom terug, @1!"
 
-msgid "You first joined on @1"
-msgstr "Je bent voor het eerst toegetreden op @1"
+msgid "You first joined on @1."
+msgstr "Je bent voor het eerst toegetreden op @1."
 
 msgid "Local Time: @1"
 msgstr "Lokale tijd: @1"

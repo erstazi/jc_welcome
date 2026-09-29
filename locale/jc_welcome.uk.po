@@ -26,8 +26,8 @@ msgstr "Показати місця"
 msgid "Sounds"
 msgstr "Звуки"
 
-msgid "You last logged on @1"
-msgstr "Ви востаннє входили @1"
+msgid "You last logged on @1."
+msgstr "Ви востаннє входили @1."
 
 msgid "Greetings, @1!"
 msgstr "Вітаємо, @1!"
@@ -38,8 +38,8 @@ msgstr "Перед початком, будь ласка, ознайомтеся
 msgid "Welcome back, @1!"
 msgstr "З поверненням, @1!"
 
-msgid "You first joined on @1"
-msgstr "Ви вперше приєдналися: @1"
+msgid "You first joined on @1."
+msgstr "Ви вперше приєдналися: @1."
 
 msgid "Local Time: @1"
 msgstr "Місцевий час: @1"

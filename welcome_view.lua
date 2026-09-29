@@ -52,59 +52,55 @@ function jc_welcome_view.build(data)
   local text_y_start = 2.5
   local line_spacing = 1.2
 
+  local welcome_message = ""
+
   if data.is_new_player then
-    formspec = formspec ..
-      string.format(
-        "label[%f,%f;%f,%f;%s]",
-        text_x,
-        text_y_start,
-        10.5,
-        2,
-        ESC( S("Greetings, @1!", core.colorize("#00FF00", pname) ) )
-      )
-
-    formspec = formspec ..
-      string.format(
-        "label[%f,%f;%f,%f;%s]",
-        text_x,
-        text_y_start + line_spacing,
-        10.5,
-        2,
-        ESC( S("Before starting, please read the rules with the @1 command.", core.colorize("#FFFF00", "/rules") ) )
-      )
+    welcome_message = welcome_message ..
+      S("Greetings, @1!", core.colorize("#00FF00", pname) ) ..
+      " " ..
+      S("Before starting, please read the rules with the @1 command.", core.colorize("#FFFF00", "/rules") ) ..
+      ""
   else
-    formspec = formspec ..
-      string.format(
-        "label[%f,%f;%f,%f;%s]",
-        text_x,
-        text_y_start,
-        10.5,
-        2,
-        ESC( S("Welcome back, @1!", core.colorize("#00FF00", pname) ) )
-      )
-
-    formspec = formspec ..
-      string.format(
-        "label[%f,%f;%f,%f;%s]",
-        text_x,
-        text_y_start + 1 * line_spacing,
-        10.5,
-        2,
-        ESC( S("You first joined on @1", jc_welcome_model.format_date(data.first_join) ) )
-      )
+    welcome_message = welcome_message ..
+      S("Welcome back, @1!", core.colorize("#00FF00", pname) ) ..
+      " " ..
+      S("You first joined on @1.", core.colorize("#FFFF00", jc_welcome_model.format_date(data.first_join) ) ) ..
+      " " ..
+      ""
 
     if data.previous_join > 0 then
-      formspec = formspec ..
-        string.format(
-          "label[%f,%f;%f,%f;%s]",
-          text_x,
-          text_y_start + 2 * line_spacing,
-          10.5,
-          2,
-          ESC( S("You last logged on @1", jc_welcome_model.format_datetime(data.previous_join) ) )
-        )
+      welcome_message = welcome_message ..
+        " " ..
+        S("You last logged on @1.", core.colorize("#FFFF00", jc_welcome_model.format_datetime(data.previous_join) ) ) ..
+        ""
     end
   end
+
+  local player_rank = ranks.get_rank(pname) or "basic"
+
+  if player_rank == "owner" then
+    welcome_message = welcome_message ..
+      " " ..
+      S("Owner Section: Here you can monitor server activity") ..
+      ""
+  end
+
+  welcome_message = welcome_message ..
+    " " ..
+    S("General Section: Enjoy the server!") ..
+    " " ..
+    S("For a complete list of available commands, type @1 into chat.", core.colorize("#FFFF00", "/help") ) ..
+    ""
+
+  formspec = formspec ..
+    string.format(
+      "label[%f,%f;%f,%f;%s]",
+      text_x,
+      text_y_start,
+      10.2,
+      5,
+      ESC( welcome_message )
+    )
 
   formspec = formspec
     -- Dark background behind player
@@ -165,16 +161,6 @@ function jc_welcome_view.build(data)
   end
 
   formspec = formspec .. string.format(";%d;true]", #data.player_list)
-
-  local player_rank = ranks.get_rank(pname) or "basic"
-
-  if player_rank == "owner" then
-    formspec = formspec .. "label[4.0,6.0;10.5,2;" .. ESC( S("Owner Section: Here you can monitor server activity") ) .. "]"
-  end
-
-  formspec = formspec .. "label[0.2,8.0;14.2,1.5;" .. ESC( S("General Section: Enjoy the server!") ) .. "]"
-
-  formspec = formspec .. "label[0.2,8.6;14.2,1.5;" .. ESC( S("For a complete list of available commands, type @1 into chat.", core.colorize("#FFFF00", "/help") ) ) .. "]"
 
   formspec = formspec .. "button_exit[0.2,10.1;3,1;close;" .. ESC( S("Let's Play!") ) .. "]"
 

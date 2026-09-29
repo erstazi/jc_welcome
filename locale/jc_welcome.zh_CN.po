@@ -26,8 +26,8 @@ msgstr "显示地点"
 msgid "Sounds"
 msgstr "声音"
 
-msgid "You last logged on @1"
-msgstr "您上次登录是在 @1"
+msgid "You last logged on @1."
+msgstr "您上次登录是在 @1。"
 
 msgid "Greetings, @1!"
 msgstr "您好，@1！"
@@ -38,8 +38,8 @@ msgstr "开始之前，请使用 @1 命令阅读服务器规则。"
 msgid "Welcome back, @1!"
 msgstr "欢迎回来，@1！"
 
-msgid "You first joined on @1"
-msgstr "您首次加入是在 @1"
+msgid "You first joined on @1."
+msgstr "您首次加入是在 @1。"
 
 msgid "Local Time: @1"
 msgstr "当地时间：@1"

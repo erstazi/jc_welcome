@@ -26,8 +26,8 @@ msgstr "Wyświetl miejsca"
 msgid "Sounds"
 msgstr "Dźwięki"
 
-msgid "You last logged on @1"
-msgstr "Ostatnio logowałeś się: @1"
+msgid "You last logged on @1."
+msgstr "Ostatnio logowałeś się: @1."
 
 msgid "Greetings, @1!"
 msgstr "Witaj, @1!"
@@ -38,8 +38,8 @@ msgstr "Przed rozpoczęciem przeczytaj regulamin dostępny po wpisaniu komendy @
 msgid "Welcome back, @1!"
 msgstr "Witaj ponownie, @1!"
 
-msgid "You first joined on @1"
-msgstr "Po raz pierwszy dołączyłeś: @1"
+msgid "You first joined on @1."
+msgstr "Po raz pierwszy dołączyłeś: @1."
 
 msgid "Local Time: @1"
 msgstr "Czas lokalny: @1"

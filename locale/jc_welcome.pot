@@ -25,7 +25,7 @@ msgstr ""
 msgid "Sounds"
 msgstr ""
 
-msgid "You last logged on @1"
+msgid "You last logged on @1."
 msgstr ""
 
 msgid "Greetings, @1!"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Welcome back, @1!"
 msgstr ""
 
-msgid "You first joined on @1"
+msgid "You first joined on @1."
 msgstr ""
 
 msgid "Local Time: @1"
