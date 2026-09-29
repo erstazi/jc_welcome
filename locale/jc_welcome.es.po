@@ -17,6 +17,15 @@ msgstr "Visitar el sitio web"
 msgid "Visit Forum"
 msgstr "Visitar el foro"
 
+msgid "Notices"
+msgstr "Avisos"
+
+msgid "View Notice"
+msgstr "Ver aviso"
+
+msgid "There are no notices."
+msgstr "No hay avisos."
+
 msgid "Let's Play!"
 msgstr "¡A jugar!"
 

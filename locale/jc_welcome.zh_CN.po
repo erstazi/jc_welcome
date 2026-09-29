@@ -17,6 +17,15 @@ msgstr "访问网站"
 msgid "Visit Forum"
 msgstr "访问论坛"
 
+msgid "Notices"
+msgstr "公告"
+
+msgid "View Notice"
+msgstr "查看公告"
+
+msgid "There are no notices."
+msgstr "没有公告。"
+
 msgid "Let's Play!"
 msgstr "开始游戏！"
 

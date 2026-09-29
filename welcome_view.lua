@@ -38,19 +38,20 @@ function jc_welcome_view.build(data)
     "button_url[15.6,2.2;4.1,0.9;forum_link;" .. ESC( S("Visit Forum") ) .. ";" .. ESC(data.link_luanti_forum_post) .. "]" ..
     ""
 
-  local avatar_x = 0.92
-  local avatar_y = 3.03
-  local avatar_w = 2.16
-  local avatar_h = 3.24
-
-  local frame_x = 0.25
-  local frame_y = 2.15
-  local frame_w = 3.5
-  local frame_h = 5.25
-
   local text_x = 4.0
   local text_y_start = 2.5
   local line_spacing = 1.2
+
+  -- 100%
+  local avatar_x = 0.92
+  local avatar_y = 2.85
+  local avatar_w = 2.16
+  local avatar_h = 3.24
+
+  local frame_x = avatar_x - 0.67
+  local frame_y = avatar_y - 0.88
+  local frame_w = 3.5
+  local frame_h = 5.25
 
   local welcome_message = ""
 
@@ -137,6 +138,8 @@ function jc_welcome_view.build(data)
   local notices_y = 7.7
   local notices_w = 13.9
   local notices_h = 2.0
+  local row_height = 0.8
+  local scroll_max = math.max(0, math.ceil((#data.notices * row_height) - 1.5))
 
   formspec = formspec
     .. string.format(
@@ -149,38 +152,45 @@ function jc_welcome_view.build(data)
     .. string.format(
       "label[%f,%f;%s]",
       notices_x,
-      notices_y - 0.4,
+      notices_y - 0.35,
       ESC(S("Notices"))
+    )
+    .. string.format(
+      "scroll_container[%f,%f;%f,%f;notices_scroll;vertical;1]",
+      notices_x + 0.2,
+      notices_y + 0.1,
+      notices_w - 0.6,
+      notices_h - 0.2
     )
 
   if #data.notices > 0 then
-    local notice_y = notices_y + 0.2
-    local notice_limit = math.min(#data.notices, 2)
-
-    for i = 1, notice_limit do
-      local notice = data.notices[i]
+    for i, notice in ipairs(data.notices) do
+      local y = 0.1 + ((i - 1) * row_height)
       local title = notice.title or ""
       local date = os.date("%Y-%m-%d %H:%M", notice.created or 0)
 
       formspec = formspec
         .. string.format(
-          "label[%f,%f;8.5,0.7;%s]",
-          notices_x + 0.2,
-          notice_y + ((i - 1) * 0.8),
+          "label[0.0,%f;8.5,0.7;%s]",
+          y,
           ESC(title .. " - " .. date)
         )
         .. string.format(
-          "button[%f,%f;2.5,0.6;view_notice_%d;%s]",
-          notices_x + 10.0,
-          notice_y - 0.08 + ((i - 1) * 0.8),
+          "button[9.0,%f;2.5,0.6;view_notice_%d;%s]",
+          y - 0.08,
           notice.id,
           ESC(S("View Notice"))
         )
     end
   else
     formspec = formspec ..
-      string.format("label[%f,%f;%s]", notices_x + 0.2, notices_y + 0.2, ESC(S("There are no notices.")) )
+      string.format("label[0.0,0.2;%s]", ESC(S("There are no notices.")) )
   end
+
+  formspec = formspec
+    .. "scroll_container_end[]"
+    .. string.format("scrollbaroptions[min=0;max=%d;smallstep=1;largestep=3]", scroll_max )
+    .. string.format( "scrollbar[%f,%f;0.4,%f;vertical;notices_scroll;0]", notices_x + notices_w - 0.4, notices_y, notices_h)
 
 
 

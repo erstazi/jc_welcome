@@ -17,6 +17,15 @@ msgstr "Odwiedź stronę internetową"
 msgid "Visit Forum"
 msgstr "Odwiedź forum"
 
+msgid "Notices"
+msgstr "Ogłoszenia"
+
+msgid "View Notice"
+msgstr "Zobacz ogłoszenie"
+
+msgid "There are no notices."
+msgstr "Brak ogłoszeń."
+
 msgid "Let's Play!"
 msgstr "Zagrajmy!"
 
