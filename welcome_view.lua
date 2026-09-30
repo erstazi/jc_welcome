@@ -170,11 +170,7 @@ function jc_welcome_view.build(data)
       local date = os.date("%Y-%m-%d %H:%M", notice.created or 0)
 
       formspec = formspec
-        .. string.format(
-          "label[0.0,%f;8.5,0.7;%s]",
-          y,
-          ESC(core.colorize("#FFFF00", date) .. " - " .. title )
-        )
+        .. string.format("label[0.0,%f;8.5,0.7;%s]", y, ESC(core.colorize("#FFFF00", date) .. " - " .. title ) )
         .. string.format(
           "button[9.0,%f;2.6,0.6;view_notice_%d;%s]",
           y - 0.08,
