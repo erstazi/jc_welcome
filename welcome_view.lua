@@ -173,10 +173,10 @@ function jc_welcome_view.build(data)
         .. string.format(
           "label[0.0,%f;8.5,0.7;%s]",
           y,
-          ESC(title .. " - " .. date)
+          ESC(core.colorize("#FFFF00", date) .. " - " .. title )
         )
         .. string.format(
-          "button[9.0,%f;2.5,0.6;view_notice_%d;%s]",
+          "button[9.0,%f;2.6,0.6;view_notice_%d;%s]",
           y - 0.08,
           notice.id,
           ESC(S("View Notice"))
