@@ -17,14 +17,21 @@ msgstr "Visiter le site web"
 msgid "Visit Forum"
 msgstr "Visiter le forum"
 
+#: welcome_view.lua
 msgid "Notices"
 msgstr "Avis"
 
+#: welcome_view.lua
 msgid "View Notice"
 msgstr "Voir l'avis"
 
+#: welcome_view.lua
 msgid "There are no notices."
 msgstr "Il n'y a aucun avis."
+
+#: welcome_view.lua
+msgid "When you view a notice, it will be translated."
+msgstr "Lorsque vous consultez une annonce, elle sera traduite."
 
 msgid "Let's Play!"
 msgstr "Jouons !"
@@ -59,8 +66,8 @@ msgstr "@1 joueurs en ligne"
 msgid "Owner Section: Here you can monitor server activity"
 msgstr "Section propriétaire : vous pouvez surveiller l'activité du serveur ici"
 
-msgid "General Section: Enjoy the server!"
-msgstr "Section générale : profitez du serveur !"
+msgid "Enjoy the server!"
+msgstr "Profitez du serveur !"
 
 msgid "For a complete list of available commands, type @1 into chat."
 msgstr "Pour obtenir la liste complète des commandes disponibles, tapez @1 dans le chat."

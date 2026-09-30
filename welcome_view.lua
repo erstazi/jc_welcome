@@ -88,7 +88,7 @@ function jc_welcome_view.build(data)
 
   welcome_message = welcome_message ..
     " " ..
-    S("General Section: Enjoy the server!") ..
+    S("Enjoy the server!") ..
     " " ..
     S("For a complete list of available commands, type @1 into chat.", core.colorize("#FFFF00", "/help") ) ..
     ""
@@ -153,7 +153,7 @@ function jc_welcome_view.build(data)
       "label[%f,%f;%s]",
       notices_x,
       notices_y - 0.35,
-      ESC(S("Notices"))
+      ESC(S("Notices") .. " - " .. S("When you view a notice, it will be translated.") )
     )
     .. string.format(
       "scroll_container[%f,%f;%f,%f;notices_scroll;vertical;1]",
