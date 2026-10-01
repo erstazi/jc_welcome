@@ -59,11 +59,15 @@ function jc_welcome_view.build(data)
     welcome_message = welcome_message ..
       S("Greetings, @1!", core.colorize("#00FF00", pname) ) ..
       " " ..
+      S("Enjoy the server!") ..
+      " " ..
       S("Before starting, please read the rules with the @1 command.", core.colorize("#FFFF00", "/rules") ) ..
       ""
   else
     welcome_message = welcome_message ..
       S("Welcome back, @1!", core.colorize("#00FF00", pname) ) ..
+      " " ..
+      S("Enjoy the server!") ..
       " " ..
       S("You first joined on @1.", core.colorize("#FFFF00", jc_welcome_model.format_date(data.first_join) ) ) ..
       " " ..
@@ -87,8 +91,6 @@ function jc_welcome_view.build(data)
   end
 
   welcome_message = welcome_message ..
-    " " ..
-    S("Enjoy the server!") ..
     " " ..
     S("For a complete list of available commands, type @1 into chat.", core.colorize("#FFFF00", "/help") ) ..
     ""
