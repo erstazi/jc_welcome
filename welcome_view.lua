@@ -165,7 +165,7 @@ function jc_welcome_view.build(data)
 
   if #data.notices > 0 then
     for i, notice in ipairs(data.notices) do
-      local y = 0.1 + ((i - 1) * row_height)
+      local y = 0.1 + ((i - 1) * (row_height * 1.1) )
       local title = notice.title or ""
       local date = os.date("%Y-%m-%d %H:%M", notice.created or 0)
 
