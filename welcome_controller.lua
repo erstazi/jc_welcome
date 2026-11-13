@@ -33,10 +33,12 @@ core.register_on_player_receive_fields(function(player, formname, fields)
 
     local player_name = player:get_player_name()
 
-    core.close_formspec(player_name, "welcome:splash")
-
     if jc_places and jc_places.show_places then
-      jc_places.show_places(player_name)
+      local success = jc_places.show_places(player_name)
+
+      if success then
+        core.close_formspec(player_name, "welcome:splash")
+      end
     end
 
     return true
