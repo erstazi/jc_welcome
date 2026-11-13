@@ -51,10 +51,12 @@ core.register_on_player_receive_fields(function(player, formname, fields)
 
     local player_name = player:get_player_name()
 
-    core.close_formspec(player_name, "welcome:splash")
-
     if jc_special_sounds and jc_special_sounds.show_sounds_formspec then
-      jc_special_sounds.show_sounds_formspec(player)
+      local success = jc_special_sounds.show_sounds_formspec(player)
+
+      if success then
+        core.close_formspec(player_name, "welcome:splash")
+      end
     end
 
     return true
