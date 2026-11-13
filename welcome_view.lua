@@ -21,8 +21,12 @@ end
 function jc_welcome_view.build(data)
   local pname = data.player_name
 
+  local player_info = core.get_player_information(pname)
+  local supports_area_labels = player_info
+    and (player_info.formspec_version or 0) >= 9
+
   local formspec = "" ..
-    "formspec_version[4]" ..
+    "formspec_version[" .. (supports_area_labels and "9" or "4") .. "]" ..
     "size[20,11.3]" ..
     default.gui_bg ..
     default.gui_bg_img ..
@@ -95,15 +99,25 @@ function jc_welcome_view.build(data)
     S("For a complete list of available commands, type @1 into chat.", core.colorize("#FFFF00", "/help") ) ..
     ""
 
-  formspec = formspec ..
-    string.format(
+  if supports_area_labels then
+    formspec = formspec .. string.format(
       "label[%f,%f;%f,%f;%s]",
       text_x,
       text_y_start,
       10.2,
       5,
-      ESC( welcome_message )
+      ESC(welcome_message)
     )
+  else
+    formspec = formspec .. string.format(
+      "textarea[%f,%f;%f,%f;;;%s]",
+      text_x,
+      text_y_start,
+      10.2,
+      5,
+      ESC(welcome_message)
+    )
+  end
 
   formspec = formspec
     -- Dark background behind player
@@ -171,8 +185,17 @@ function jc_welcome_view.build(data)
       local title = notice.title or ""
       local date = os.date("%Y-%m-%d %H:%M", notice.created or 0)
 
+      local notice_text = ESC( core.colorize("#FFFF00", date) .. " - " .. title )
+
+      if supports_area_labels then
+        formspec = formspec ..
+          string.format("label[0.0,%f;8.5,0.7;%s]", y, notice_text)
+      else
+        formspec = formspec ..
+          string.format("label[0.0,%f;%s]", y, notice_text)
+      end
+
       formspec = formspec
-        .. string.format("label[0.0,%f;8.5,0.7;%s]", y, ESC(core.colorize("#FFFF00", date) .. " - " .. title ) )
         .. string.format(
           "button[9.0,%f;2.6,0.6;view_notice_%d;%s]",
           y - 0.08,
