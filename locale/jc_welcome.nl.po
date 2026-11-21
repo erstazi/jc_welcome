@@ -11,6 +11,9 @@ msgstr "Welkomstscherm opnieuw tonen"
 msgid "Join Discord"
 msgstr "Deelnemen aan Discord"
 
+msgid "View Information"
+msgstr "Bekijk informatie"
+
 msgid "Visit Website"
 msgstr "Website bezoeken"
 

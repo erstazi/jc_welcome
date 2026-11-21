@@ -11,6 +11,9 @@ msgstr "Знову показати екран привітання"
 msgid "Join Discord"
 msgstr "Приєднатися до Discord"
 
+msgid "View Information"
+msgstr "Переглянути інформацію"
+
 msgid "Visit Website"
 msgstr "Відвідати вебсайт"
 

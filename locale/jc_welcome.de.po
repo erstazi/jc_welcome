@@ -11,6 +11,9 @@ msgstr "Willkommensbildschirm erneut anzeigen"
 msgid "Join Discord"
 msgstr "Discord beitreten"
 
+msgid "View Information"
+msgstr "Informationen anzeigen"
+
 msgid "Visit Website"
 msgstr "Website besuchen"
 

@@ -10,6 +10,9 @@ msgstr ""
 msgid "Join Discord"
 msgstr ""
 
+msgid "View Information"
+msgstr ""
+
 msgid "Visit Website"
 msgstr ""
 

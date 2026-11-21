@@ -11,6 +11,9 @@ msgstr "再次显示欢迎界面"
 msgid "Join Discord"
 msgstr "加入 Discord"
 
+msgid "View Information"
+msgstr "查看信息"
+
 msgid "Visit Website"
 msgstr "访问网站"
 

@@ -1,6 +1,7 @@
 # textdomain: jc_welcome
 Show the welcome screen again=
 Join Discord=
+View Information=
 Visit Website=
 Visit Forum=
 Notices=

@@ -11,6 +11,9 @@ msgstr "Ponownie wyświetl ekran powitalny"
 msgid "Join Discord"
 msgstr "Dołącz do Discorda"
 
+msgid "View Information"
+msgstr "Zobacz informacje"
+
 msgid "Visit Website"
 msgstr "Odwiedź stronę internetową"
 

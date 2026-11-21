@@ -128,6 +128,7 @@ function jc_welcome_model.get_data(player)
     notices = notices,
     link_server_website = jc_welcome_config.link_server_website,
     link_discord = jc_welcome_config.link_discord,
+    link_info = jc_welcome_config.link_info,
     link_luanti_forum_post = jc_welcome_config.link_luanti_forum_post,
   }
 end

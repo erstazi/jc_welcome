@@ -36,9 +36,10 @@ function jc_welcome_view.build(data)
     string.format("label[3.5,0.9;%s:%s]", ESC(data.server_address), ESC(data.port)) ..
     string.format("label[3.5,1.5;%s]", ESC(S("Local Time: @1", data.local_time))) ..
     "image[0.97,0.0;2,2;welcome_screen_logo.png]" ..
-    "image[14.7,0.2;0.9,0.9;discord_logo.png]" ..
-    "button_url[15.6,0.2;4.1,0.9;discord_link;" .. ESC( S("Join Discord") ) .. ";" .. ESC(data.link_discord) .. "]" ..
-    "button_url[15.6,1.2;4.1,0.9;web_link;" .. ESC( S("Visit Website") ) .. ";" .. ESC(data.link_server_website) .. "]" ..
+    -- "image[14.7,0.2;0.9,0.9;discord_logo.png]" ..
+    -- "button_url[15.6,0.2;4.1,0.9;discord_link;" .. ESC( S("Join Discord") ) .. ";" .. ESC(data.link_discord) .. "]" ..
+    "button_url[15.6,0.2;4.1,0.9;web_link;" .. ESC( S("Visit Website") ) .. ";" .. ESC(data.link_server_website) .. "]" ..
+    "button_url[15.6,1.2;4.1,0.9;info_link;" .. ESC( S("View Information") ) .. ";" .. ESC(data.link_info) .. "]" ..
     "button_url[15.6,2.2;4.1,0.9;forum_link;" .. ESC( S("Visit Forum") ) .. ";" .. ESC(data.link_luanti_forum_post) .. "]" ..
     ""
 
